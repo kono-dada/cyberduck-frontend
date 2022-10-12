@@ -41,6 +41,7 @@ export default {
           "https://sso.forkingpark.cn/api/user-info",
           {withCredentials: true}
       );
+      console.log(this.data);
       this.data.duckHistory = response.data.duckHistory.map(d => d.duck)
     } catch (e) {
       // on 401 error, go to login page
