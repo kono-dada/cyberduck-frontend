@@ -6,7 +6,7 @@
       <h3>鸭子名字：{{ duck.title.cn }}</h3>
       <h4>鸭子图片</h4>
       <div>
-        <img src="{{duck.duckIconUrl}}" alt="鸭子图片">
+        <img :src="duck.duckIconUrl" alt="鸭子图片">
       </div>
       <h4>鸭子故事</h4>
       <p>{{ duck.story.cn }}</p>
