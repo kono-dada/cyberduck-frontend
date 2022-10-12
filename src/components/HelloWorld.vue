@@ -35,7 +35,7 @@ export default {
       duckHistory: [],
     }
   },
-  mounted: async () => {
+  async mounted() {
     try {
       const response = await axios.get(
           "https://sso.forkingpark.cn/api/user-info",
