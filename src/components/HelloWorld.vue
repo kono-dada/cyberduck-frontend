@@ -30,11 +30,7 @@ export default {
     }
   },
   mounted() {
-    try {
-      getUserInfo();
-    } catch (e) {
-      console.log("failed to get user info: " + e);
-    }
+    getUserInfo().then();
   }
 }
 
@@ -47,11 +43,11 @@ async function getUserInfo() {
     this.userState = response.data.json()
   } catch (e) {
     // on 401 error, go to login page
-    if (e.response.status === 401) {
+    if (e.response && e.response.status === 401) {
       const current_url = window.location.href;
       window.location.href = "https://sso.forkingpark.cn/login?redirect_url=" + current_url;
     } else {
-      console.log("unexpected error: " + e)
+      console.error("unexpected error: " + e)
     }
   }
 }
