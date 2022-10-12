@@ -2,7 +2,7 @@
   <div class="hello">
     <h1>{{ msg }}</h1>
     <h2>Ducks Viewed Are Listed Below</h2>
-    <div v-for="duck in this.duckHistory" v-bind:key="duck.id">
+    <div v-for="duck in duckHistory" v-bind:key="duck.id">
       <h3>鸭子名字：{{ duck.title.cn }}</h3>
       <h4>鸭子图片</h4>
       <div>
@@ -41,8 +41,7 @@ export default {
           "https://sso.forkingpark.cn/api/user-info",
           {withCredentials: true}
       );
-      console.log(this.data);
-      this.data.duckHistory = response.data.duckHistory.map(d => d.duck)
+      this.duckHistory = response.data.duckHistory.map(d => d.duck)
     } catch (e) {
       // on 401 error, go to login page
       if (e.response && e.response.status === 401) {
