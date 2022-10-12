@@ -1,15 +1,17 @@
 <template>
-  <h2>This is a duck map</h2>
-  <DuckMap style="z-index: -1"/>
+  <div id="app">
+    <img alt="Vue logo" src="./assets/logo.png">
+    <HelloWorld msg="Welcome to Your Vue.js App"/>
+  </div>
 </template>
 
 <script>
-import DuckMap from './components/DuckMap.vue'
+import HelloWorld from './components/HelloWorld.vue'
 
 export default {
   name: 'App',
   components: {
-    DuckMap
+    HelloWorld
   }
 }
 </script>

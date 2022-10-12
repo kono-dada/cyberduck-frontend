@@ -1,4 +1,4 @@
-# sample-vue
+# cd
 
 ## Project setup
 ```
