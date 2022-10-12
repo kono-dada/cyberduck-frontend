@@ -2,13 +2,21 @@
   <div class="hello">
     <h1>{{ msg }}</h1>
     <h2>Ducks Viewed Are Listed Below</h2>
-    <div v-for="duck in this.userState.duckHistory" v-bind:key="duck.id">
-      <h3>{{ duck.title.cn }}</h3>
+    <div v-for="duck in this.duckHistory" v-bind:key="duck.id">
+      <h3>鸭子名字：{{ duck.title.cn }}</h3>
+      <h4>鸭子图片</h4>
+      <div>
+        <img src={{duck.duckIconUrl}} alt="鸭子图片">
+      </div>
+      <h4>鸭子故事</h4>
       <p>{{ duck.story.cn }}</p>
+      <h4>鸭子位置</h4>
+      <p>位置ID：{{ duck.location.id }}</p>
+      <p>位置描述：{{ duck.location.description.cn }}</p>
       <div v-if="duck.relatedExhibit">
         <h4>相关展品</h4>
-        <div>名称：duck.relatedExhibit.title.cn</div>
-        <div>地点：duck.relatedExhibit.location.cn</div>
+        <p>名称：{{ duck.relatedExhibit.title.cn }}</p>
+        <p>地点：{{ duck.relatedExhibit.location.cn }}</p>
       </div>
     </div>
   </div>
@@ -24,9 +32,7 @@ export default {
   },
   data() {
     return {
-      userState: {
-        duckHistory: []
-      },
+      duckHistory: [],
     }
   },
   mounted() {
@@ -40,7 +46,7 @@ async function getUserInfo() {
         "https://sso.forkingpark.cn/api/user-info",
         {withCredentials: true}
     );
-    this.userState = response.data
+    this.data.duckHistory = response.data.duckHistory.map(d => d.duck)
   } catch (e) {
     // on 401 error, go to login page
     if (e.response && e.response.status === 401) {
