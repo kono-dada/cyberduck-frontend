@@ -35,28 +35,25 @@ export default {
       duckHistory: [],
     }
   },
-  mounted() {
-    getUserInfo().then();
-  }
-}
-
-async function getUserInfo() {
-  try {
-    const response = await axios.get(
-        "https://sso.forkingpark.cn/api/user-info",
-        {withCredentials: true}
-    );
-    this.data.duckHistory = response.data.duckHistory.map(d => d.duck)
-  } catch (e) {
-    // on 401 error, go to login page
-    if (e.response && e.response.status === 401) {
-      const current_url = window.location.href;
-      window.location.href = "https://sso.forkingpark.cn/login?redirect_url=" + current_url;
-    } else {
-      console.error("unexpected error: " + e)
+  mounted: async () => {
+    try {
+      const response = await axios.get(
+          "https://sso.forkingpark.cn/api/user-info",
+          {withCredentials: true}
+      );
+      this.data.duckHistory = response.data.duckHistory.map(d => d.duck)
+    } catch (e) {
+      // on 401 error, go to login page
+      if (e.response && e.response.status === 401) {
+        const current_url = window.location.href;
+        window.location.href = "https://sso.forkingpark.cn/login?redirect_url=" + current_url;
+      } else {
+        console.error("unexpected error: " + e)
+      }
     }
   }
 }
+
 </script>
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->
