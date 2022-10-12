@@ -40,7 +40,7 @@ async function getUserInfo() {
         "https://sso.forkingpark.cn/api/user-info",
         {withCredentials: true}
     );
-    this.userState = response.data.json()
+    this.userState = response.data
   } catch (e) {
     // on 401 error, go to login page
     if (e.response && e.response.status === 401) {
