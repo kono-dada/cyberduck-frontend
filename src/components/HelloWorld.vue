@@ -26,7 +26,7 @@
       style="width: 100vm; height: 100vm; position: fixed; z-index: -1; padding: 0; margin: 0; top: 0; left: 0; bottom: 0; right: 0">
     <!--  <div>-->
     <div id="map" style="height: 2044px; width: 3267px; padding: 0; margin: 0; overflow: clip">
-      <img src="../assets/map.png" alt="map" style="height: 2044px; width: 3267px; padding: 0; margin: 0">
+      <img src="https://parklife-1303545624.cos.ap-guangzhou.myqcloud.com/map.png" alt="map" style="height: 2044px; width: 3267px; padding: 0; margin: 0">
       <img src="../assets/duck.gif" style="position: absolute; left: 1000px; top: 1000px"
            onclick="alert('duck clicked');">
       <img src="../assets/duck.gif" style="position: absolute; left: 500px; top: 500px"
