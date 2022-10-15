@@ -111,7 +111,6 @@ export default {
   height: 100vm;
   position: fixed;
   top: 0;
-  z-index: -1;
   left: 0;
   bottom: 0;
   right: 0;
