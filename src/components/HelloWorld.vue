@@ -15,7 +15,7 @@
             <img v-if="duck.isFound" class="no-whitespace back"
                  :src="duck.info.duckIconUrl" alt="duck"
                  :style="{position: 'absolute', left: duck.coordinate.x, top: duck.coordinate.y}"
-                 onclick="alert('this is duck: ' + duck.info.title.cn);"
+                 v-on:click="alert('this is duck: ' + duck.info.title.cn);"
             >
           </div>
         </div>
