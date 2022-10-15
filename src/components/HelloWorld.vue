@@ -1,7 +1,7 @@
 <template>
   <!--  测试登陆数据代码-->
   <div class="hello">
-    <h1>This is duck-map</h1>
+    <h1 style="z-index: 1">This is duck-map</h1>
     <div style="width: 100vm; height: 100vm; position: fixed;">
       <div class="full-screen no-whitespace unselectable">
         <div id="map" class="no-whitespace unselectable" style="height: max-content; width: max-content;">
@@ -116,7 +116,6 @@ export default {
   width: 100vm;
   height: 100vm;
   position: fixed;
-  z-index: -1;
   top: 0;
   left: 0;
   bottom: 0;
