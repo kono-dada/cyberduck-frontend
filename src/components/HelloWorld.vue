@@ -1,18 +1,18 @@
 <template>
   <!--  测试登陆数据代码-->
   <div class="hello">
-    <h1 style="z-index: 1">This is duck-map</h1>
+    <h1>This is duck-map</h1>
     <div style="width: 100vm; height: 100vm; position: fixed;">
-      <div class="full-screen no-whitespace unselectable">
-        <div id="map" class="no-whitespace unselectable" style="height: max-content; width: max-content;">
-          <img class="no-whitespace" src="https://parklife-1303545624.cos.ap-guangzhou.myqcloud.com/map.png" alt="map"
+      <div class="full-screen back no-whitespace unselectable">
+        <div id="map" class="no-whitespace unselectable back" style="height: max-content; width: max-content;">
+          <img class="no-whitespace back" src="https://parklife-1303545624.cos.ap-guangzhou.myqcloud.com/map.png" alt="map"
                style="scale: 100%">
           <div v-for="duck in duckStates" v-bind:key="duck.id">
-            <img v-if="!duck.isFound && !duck.isHidden" class="no-whitespace"
+            <img v-if="!duck.isFound && !duck.isHidden" class="no-whitespace back"
                  src="https://parklife-1303545624.cos.ap-guangzhou.myqcloud.com/unknown.png" alt="unknown-duck"
                  :style="{position: 'absolute', height: '64px', width: '64px', left: duck.coordinate.x, top: duck.coordinate.y}"
             >
-            <img v-if="duck.isFound" class="no-whitespace"
+            <img v-if="duck.isFound" class="no-whitespace back"
                  :src="duck.info.duckIconUrl" alt="duck"
                  :style="{position: 'absolute', left: duck.coordinate.x, top: duck.coordinate.y}"
                  onclick="alert('this is duck: ' + duck.info.title.cn);"
@@ -101,6 +101,10 @@ export default {
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style scoped>
+.back {
+  z-index: -1;
+}
+
 .no-whitespace {
   margin: 0;
   padding: 0;
