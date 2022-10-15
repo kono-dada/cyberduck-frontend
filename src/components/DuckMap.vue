@@ -2,17 +2,19 @@
   <div class="full-screen no-whitespace unselectable">
     <div id="map" class="no-whitespace unselectable" style="height: max-content; width: max-content;">
       <!--map container fixed size-->
-      <div class="no-whitespace" style="height: 2044px; width: 3267px; overflow: clip">
-        <img class="no-whitespace" src="https://parklife-1303545624.cos.ap-guangzhou.myqcloud.com/map.png" alt="map"
+      <div class="no-whitespace unselectable" style="height: 2044px; width: 3267px; overflow: clip">
+        <img class="no-whitespace unselectable" src="https://parklife-1303545624.cos.ap-guangzhou.myqcloud.com/map.png" alt="map"
              style="scale: 100%">
       </div>
       <!--ducks container-->
-      <div v-for="duck in duckStates" v-bind:key="duck.id">
+      <div class="unselectable" v-for="duck in duckStates" v-bind:key="duck.id">
         <img v-if="!duck.isFound && !duck.isHidden"
+             class="unselectable"
              src="https://parklife-1303545624.cos.ap-guangzhou.myqcloud.com/unknown.png" alt="unknown-duck"
              :style="{position: 'absolute', height: '64px', width: '64px', left: duck.coordinate.x, top: duck.coordinate.y}"
         >
         <img v-if="duck.isFound"
+             class="unselectable"
              :src="duck.info.duckIconUrl" alt="duck"
              :style="{position: 'absolute', left: duck.coordinate.x, top: duck.coordinate.y}"
              v-on:click="showDuckInfo(duck.info);"
