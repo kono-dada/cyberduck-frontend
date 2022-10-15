@@ -61,14 +61,16 @@ export default {
 
     // init duck states
     const duckList = await axios.get("https://sso.forkingpark.cn/api/preview-ducks");
-    for (const duck in duckList.data) {
-      this.duckStates[duck.location.id] = {
-        isFound: false,
-        idHidden: duck.isHidden,
-        coordinate: duck.location.coordinate,
-        info: null,
-      }
-    }
+    duckList.data.forEach(
+        (duck) => {
+          this.duckStates[duck.location.id] = {
+            isFound: false,
+            idHidden: duck.isHidden,
+            coordinate: duck.location.coordinate,
+            info: null,
+          }
+        }
+    );
 
     // 登陆代码
     try {
@@ -76,14 +78,14 @@ export default {
           "https://sso.forkingpark.cn/api/user-info",
           {withCredentials: true}
       );
-      for (const duck in response.data.duckHistory.map(d => d.duck)) {
+      response.data.duckHistory.map(d => d.duck).forEach((duck) => {
         this.duckStates[duck.location.id] = {
           isFound: true,
           idHidden: false,
           coordinate: duck.location.coordinate,
           info: duck,
         }
-      }
+      });
     } catch (e) {
       // on 401 error, go to login page
       if (e.response && e.response.status === 401) {
