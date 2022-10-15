@@ -11,7 +11,7 @@
         <img v-if="duck.isFound" class="no-whitespace back"
              :src="duck.info.duckIconUrl" alt="duck"
              :style="{position: 'absolute', left: duck.coordinate.x, top: duck.coordinate.y}"
-             v-on:click="window.alert('this is duck: ' + duck.info.title.cn);"
+             v-on:click="showDuckInfo(duck.info);"
         >
       </div>
     </div>
@@ -29,6 +29,12 @@ export default {
   name: 'DuckMap',
   props: {
     msg: String
+  },
+  methods: {
+    // HERE DEFINE POP UP
+    showDuckInfo(info) {
+      alert('this is duck: ' + info.title.cn);
+    }
   },
   data() {
     return {
