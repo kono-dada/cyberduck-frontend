@@ -10,7 +10,7 @@
           <div v-for="duck in duckStates" v-bind:key="duck.id">
             <img v-if="!duck.isFound && !duck.isHidden" class="no-whitespace"
                  src="https://parklife-1303545624.cos.ap-guangzhou.myqcloud.com/unknown.png" alt="unknown-duck"
-                 :style="{position: 'absolute', left: duck.coordinate.x, top: duck.coordinate.y}"
+                 :style="{position: 'absolute', height: '64px', width: '64px', left: duck.coordinate.x, top: duck.coordinate.y}"
             >
             <img v-if="duck.isFound" class="no-whitespace"
                  :src="duck.info.duckIconUrl" alt="duck"
@@ -52,9 +52,9 @@ export default {
       panOnlyWhenZoomed: false,
       minScale: 0.3,
       maxScale: 1.0,
-      startX: -2000,
-      startY: -1000,
-      startScale: 0.5,
+      startX: -1000,
+      startY: -500,
+      startScale: 0.8,
     });
     // 电脑zoom in
     document.addEventListener('wheel', this.panzoom.zoomWithWheel)
