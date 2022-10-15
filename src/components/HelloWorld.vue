@@ -6,7 +6,7 @@
       <div class="full-screen no-whitespace unselectable">
         <div id="map" class="no-whitespace unselectable" style="height: max-content; width: max-content;">
           <img class="no-whitespace" src="https://parklife-1303545624.cos.ap-guangzhou.myqcloud.com/map.png" alt="map"
-               style="scale: 100%; z-index: -2">
+               style="position: absolute; scale: 100%; z-index: -2">
           <div v-for="duck in duckStates" v-bind:key="duck.id">
             <img v-if="!duck.isFound && !duck.isHidden" class="no-whitespace back"
                  src="https://parklife-1303545624.cos.ap-guangzhou.myqcloud.com/unknown.png" alt="unknown-duck"
