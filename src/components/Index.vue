@@ -77,7 +77,7 @@
     </v-dialog>
     <div id="map" class="no-whitespace unselectable" style="height: max-content; width: max-content;">
       <div class="no-whitespace unselectable" style="height: 2044px; width: 3267px;">
-        <v-img src="https://parklife-1303545624.cos.ap-guangzhou.myqcloud.com/map.png)" alt="map"
+        <v-img src="https://parklife-1303545624.cos.ap-guangzhou.myqcloud.com/map.png" alt="map"
                style="height: 2044px; width: 3267px; padding: 0; margin: 0"></v-img>
       </div>
       <v-img
