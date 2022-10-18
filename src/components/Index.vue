@@ -1,7 +1,5 @@
 <template>
-  <div
-      class="no-whitespace unselectable full-screen"
-  >
+  <div>
     <v-row style="position: absolute; top: 5%;z-index: 5;left: 0;padding: 0; width: 90%" class="mx-5">
       <v-btn id="language"
              elevation="10"
@@ -75,22 +73,23 @@
 
       </div>
     </v-dialog>
-    <div id="map" class="no-whitespace unselectable" style="height: max-content; width: max-content;">
-      <div class="no-whitespace unselectable" style="height: 2044px; width: 3267px;">
-        <v-img src="https://parklife-1303545624.cos.ap-guangzhou.myqcloud.com/map.png)" alt="map"
-               style="height: 2044px; width: 3267px; padding: 0; margin: 0"></v-img>
+    <div
+        class="no-whitespace unselectable full-screen"
+    >
+      <div id="map" class="no-whitespace unselectable" style="height: max-content; width: max-content;">
+        <div class="no-whitespace unselectable" style="height: 2044px; width: 3267px;">
+          <v-img src="https://parklife-1303545624.cos.ap-guangzhou.myqcloud.com/map.png)" alt="map"
+                 style="height: 2044px; width: 3267px; padding: 0; margin: 0"></v-img>
+        </div>
+        <v-img
+            :src="duck.duckIconUrl"
+            @click="duckClicked(duck)"
+            :style="{'position': 'absolute', 'left': duck.coordinate.x, 'top': duck.coordinate.y}"
+            v-for="duck in Object.values(duckStates).filter(_ => !_.isHidden)"
+            :key="duck.id"
+            width="100"
+        ></v-img>
       </div>
-
-      <!--      `https://parklife-1303545624.cos.ap-guangzhou.myqcloud.com/${duck.id}.gif`-->
-
-      <v-img
-          :src="`https://parklife-1303545624.cos.ap-guangzhou.myqcloud.com/${duck.id}.gif`"
-          @click="duckClicked(duck)"
-          :style="{'position': 'absolute', 'left': duck.coordinate.x, 'top': duck.coordinate.y}"
-          v-for="duck in Object.values(duckStates).filter(_ => !_.isHidden)"
-          :key="duck.id"
-          width="100"
-      ></v-img>
     </div>
   </div>
 </template>
