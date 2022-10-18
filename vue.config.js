@@ -8,7 +8,7 @@ module.exports = {
       "clownfish-app-iez76.ondigitalocean.app"
     ],
     client: {
-      webSocketURL: 'auto://0.0.0.0:0/ws'
+      webSocketURL: 'wss://0.0.0.0:0/ws'
     }
   }
 }
