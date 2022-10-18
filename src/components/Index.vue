@@ -1,78 +1,80 @@
 <template>
   <div>
-    <v-row style="position: absolute; top: 5%;z-index: 5;left: 0;padding: 0; width: 90%" class="mx-5">
-      <v-btn id="language"
-             elevation="10"
-             style="background: #ffffff;text-align: center; font-family: Chinese_pixel,serif; width: 90px;font-size: small"
-             class="nes-container is-rounded"
-             @click="language = language==='cn'?'en':'cn'; languagePrompt = language==='cn'?'English':'中文'"
-      >
-        {{ languagePrompt }}
-      </v-btn>
-      <v-spacer></v-spacer>
-      <v-btn icon color="#eebb00" fab x-small dark elevation="10" style="" class="mt-1">
-        <v-icon x-large>
-          mdi-help-circle
-        </v-icon>
-      </v-btn>
-    </v-row>
-
-    <div id="collection_progress"
-         style="position: fixed; right: 5%; top:85%;z-index: 5;background: #ffffff;text-align: center; font-family: Chinese_pixel,serif;padding: 0.2rem 1.5rem;"
-         class="nes-container is-rounded elevation-10"
-    >
-      <p>1/10</p>
-    </div>
-    <v-dialog
-        v-model="dialog"
-        width="80vm"
-        style="background: transparent"
-        hide-overlay
-        v-if="shownDuck != null"
-        persistent
-    >
-      <div style="max-height: 490px">
-        <v-row style="height: 81px"></v-row>
-        <v-card
-            class="mx-2 nes-container is-rounded"
-            color="#ffffffff"
-            height="400px"
-            max-height="400px"
-            elevation="10"
-            align="center"
+    <div class="no-whitespace unselectable full-screen" style="z-index: 1">
+      <v-row style="position: absolute; top: 5%;z-index: 5;left: 0;padding: 0; width: 90%" class="mx-5">
+        <v-btn id="language"
+               elevation="10"
+               style="background: #ffffff;text-align: center; font-family: Chinese_pixel,serif; width: 90px;font-size: small"
+               class="nes-container is-rounded"
+               @click="language = language==='cn'?'en':'cn'; languagePrompt = language==='cn'?'English':'中文'"
         >
-          <v-row style="height: 81px;position:absolute;width: 100%;padding: 0;left: 0" align="center" class="ma-0">
-            <v-col>
-              <v-img :src="bigImage(shownDuck.duckIconUrl)"
-                     style=" top: -100px;" width="150px" :aspect-ratio="1"></v-img>
-            </v-col>
-          </v-row>
-          <v-card-title>
-            <v-spacer></v-spacer>
-            <v-btn
-                icon
-                text
-                x-small
-                @click="dialog=false"
-                class="mt-0"
-            >
-              <v-img :src="require('../assets/close_button.png')"></v-img>
-            </v-btn>
+          {{ languagePrompt }}
+        </v-btn>
+        <v-spacer></v-spacer>
+        <v-btn icon color="#eebb00" fab x-small dark elevation="10" style="" class="mt-1">
+          <v-icon x-large>
+            mdi-help-circle
+          </v-icon>
+        </v-btn>
+      </v-row>
 
-          </v-card-title>
-          <v-container class="text-center">
-            <h2>{{ shownDuck.title[language] }}</h2>
-            <h3>Subtitle</h3>
-          </v-container>
-
-          <v-card-text class="font-weight-bold overflow-y-auto text-left"
-                       style="height: 200px; background: #d9d9d9; width: 100%;font-size: large">
-            {{ shownDuck.story[language] }}
-          </v-card-text>
-        </v-card>
-
+      <div id="collection_progress"
+           style="position: fixed; right: 5%; top:85%;z-index: 5;background: #ffffff;text-align: center; font-family: Chinese_pixel,serif;padding: 0.2rem 1.5rem;"
+           class="nes-container is-rounded elevation-10"
+      >
+        <p>1/10</p>
       </div>
-    </v-dialog>
+      <v-dialog
+          v-model="dialog"
+          width="80vm"
+          style="background: transparent"
+          hide-overlay
+          v-if="shownDuck != null"
+          persistent
+      >
+        <div style="max-height: 490px">
+          <v-row style="height: 81px"></v-row>
+          <v-card
+              class="mx-2 nes-container is-rounded"
+              color="#ffffffff"
+              height="400px"
+              max-height="400px"
+              elevation="10"
+              align="center"
+          >
+            <v-row style="height: 81px;position:absolute;width: 100%;padding: 0;left: 0" align="center" class="ma-0">
+              <v-col>
+                <v-img :src="bigImage(shownDuck.duckIconUrl)"
+                       style=" top: -100px;" width="150px" :aspect-ratio="1"></v-img>
+              </v-col>
+            </v-row>
+            <v-card-title>
+              <v-spacer></v-spacer>
+              <v-btn
+                  icon
+                  text
+                  x-small
+                  @click="dialog=false"
+                  class="mt-0"
+              >
+                <v-img :src="require('../assets/close_button.png')"></v-img>
+              </v-btn>
+
+            </v-card-title>
+            <v-container class="text-center">
+              <h2>{{ shownDuck.title[language] }}</h2>
+              <h3>Subtitle</h3>
+            </v-container>
+
+            <v-card-text class="font-weight-bold overflow-y-auto text-left"
+                         style="height: 200px; background: #d9d9d9; width: 100%;font-size: large">
+              {{ shownDuck.story[language] }}
+            </v-card-text>
+          </v-card>
+
+        </div>
+      </v-dialog>
+    </div>
     <div
         class="no-whitespace unselectable full-screen"
     >
