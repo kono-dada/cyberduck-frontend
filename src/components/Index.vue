@@ -83,10 +83,11 @@
       <v-img
           :src="duck.duckIconUrl"
           @click="duckClicked(duck)"
-          :style="{'position': 'absolute', 'height': '64px', 'width': '64px', 'left': duck.coordinate.x, 'top': duck.coordinate.y}"
-          v-for="duck in Object.values(duckStates).filter(_ => !_.isHidden || _.isFound)"
+          :style="{'position': 'absolute', 'left': duck.coordinate.x, 'top': duck.coordinate.y}"
+          v-for="duck in Object.values(duckStates).filter(_ => (!_.isHidden) || _.isFound)"
           :key="duck.id"
-          width="100"
+          height="64px"
+          width="64px"
       ></v-img>
     </div>
   </div>
@@ -160,7 +161,6 @@ export default {
       response.data.duckHistory.map(d => d.duck).forEach((duck) => {
         this.duckStates[duck.location.id].isFound = true
         this.duckStates[duck.location.id].info = duck
-        this.duckStates[duck.location.id].id = duck.id
       });
     } catch (e) {
       // on 401 error, go to login page
@@ -174,7 +174,6 @@ export default {
 
     // 电脑zoom in
     // document.addEventListener('wheel', this.panzoom.zoomWithWheel)
-    this.$forceUpdate()
     console.log("log", this.duckStates)
 
   },
