@@ -45,7 +45,7 @@
         >
           <v-row style="height: 81px;position:absolute;width: 100%;padding: 0;left: 0" align="center" class="ma-0">
             <v-col>
-              <v-img :src="shownDuck.duckIconUrl"
+              <v-img :src="bigImage(shownDuck.duckIconUrl)"
                      style=" top: -100px;" width="150px" :aspect-ratio="1"></v-img>
             </v-col>
           </v-row>
@@ -191,6 +191,12 @@ export default {
       this.dialog = true
       this.shownDuck = duck.info
     },
+    bigImage(url) {
+      const splits = url.split("/");
+      const name = "3x-" + splits.pop();
+      splits.push(name);
+      return splits.join("/");
+    }
   }
 }
 </script>
