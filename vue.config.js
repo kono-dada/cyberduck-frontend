@@ -3,9 +3,8 @@ module.exports = {
     'vuetify'
   ],
   devServer: {
-    disableHostCheck: true,
-    client: {
-      webSocketURL: 'wss://0.0.0.0:0/ws'
-    }
+    allowedHosts: [
+      "duck.forkingpark.cn"
+    ]
   }
 }
