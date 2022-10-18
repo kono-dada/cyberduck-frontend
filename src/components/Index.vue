@@ -83,8 +83,8 @@
       <v-img
           :src="duck.duckIconUrl"
           @click="duckClicked(duck)"
-          :style="{'position': 'absolute', 'left': duck.coordinate.x, 'top': duck.coordinate.y}"
-          v-for="duck in Object.values(duckStates).filter(_ => !_.isHidden)"
+          :style="{'position': 'absolute', 'height': '64px', 'width': '64px', 'left': duck.coordinate.x, 'top': duck.coordinate.y}"
+          v-for="duck in Object.values(duckStates).filter(_ => !_.isHidden || _.isFound)"
           :key="duck.id"
           width="100"
       ></v-img>
@@ -107,7 +107,6 @@ export default {
       dialog: false,
       shownDuck: null,
       duckStates: {},
-      duckInfo: {},
       duckId: this.$route.params.id,
       language: 'cn',
       languagePrompt: 'English'
@@ -127,28 +126,10 @@ export default {
       startScale: 0.4,
       contain: 'outside'
     });
-    const duckList = (await axios.get("https://sso.forkingpark.cn/api/preview-ducks")).data
-
-    let duckInformation = {}
-    // 登陆代码
-    try {
-      const response = await axios.get(
-          "https://sso.forkingpark.cn/api/user-info",
-          {withCredentials: true}
-      )
-      duckInformation = response.data
-    } catch (e) {
-      // on 401 error, go to login page
-      if (e.response && e.response.status === 401) {
-        const current_url = window.location.href;
-        window.location.href = "https://sso.forkingpark.cn/login?redirect_url=" + current_url;
-      } else {
-        console.error("unexpected error: " + e)
-      }
-    }
+    const duckList = await axios.get("https://sso.forkingpark.cn/api/preview-ducks");
 
     // load ducks from the preview-duck, only the found ducks have detailed info
-    duckList.forEach(
+    duckList.data.forEach(
         (duck) => {
           this.duckStates[duck.location.id] = {
             id: duck.location.id,
@@ -170,12 +151,26 @@ export default {
         }
     )
 
-    // load info of found ducks
-    duckInformation.duckHistory.map(d => d.duck).forEach((duck) => {
-      this.duckStates[duck.location.id].isFound = true
-      this.duckStates[duck.location.id].info = duck
-      this.duckStates[duck.location.id].id = duck.id
-    })
+    // 登陆代码
+    try {
+      const response = await axios.get(
+          "https://sso.forkingpark.cn/api/user-info",
+          {withCredentials: true}
+      );
+      response.data.duckHistory.map(d => d.duck).forEach((duck) => {
+        this.duckStates[duck.location.id].isFound = true
+        this.duckStates[duck.location.id].info = duck
+        this.duckStates[duck.location.id].id = duck.id
+      });
+    } catch (e) {
+      // on 401 error, go to login page
+      if (e.response && e.response.status === 401) {
+        const current_url = window.location.href;
+        window.location.href = "https://sso.forkingpark.cn/login?redirect_url=" + current_url;
+      } else {
+        console.error("unexpected error: " + e)
+      }
+    }
 
     // 电脑zoom in
     // document.addEventListener('wheel', this.panzoom.zoomWithWheel)
@@ -226,6 +221,6 @@ html * {
 
 @font-face {
   font-family: "Chinese_pixel";
-  src: url("../assets/Chinese_pixel.ttf")
+  src: url("https://parklife-1303545624.cos.ap-guangzhou.myqcloud.com/Chinese_pixel.ttf");
 }
 </style>
