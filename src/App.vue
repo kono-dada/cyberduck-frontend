@@ -1,22 +1,23 @@
 <template>
   <v-app id="index">
-    <index style="overflow: hidden"/>
+    <router-view></router-view>
   </v-app>
 </template>
 
 <script>
-import Index from './components/Index'
 
 export default {
   name: 'App',
 
   components: {
-    Index,
   },
 
   data: () => ({
     //
   }),
+  mounted() {
+    console.log(this.$route.params)
+  }
 };
 </script>
 
