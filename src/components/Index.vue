@@ -45,7 +45,7 @@
         >
           <v-row style="height: 81px;position:absolute;width: 100%;padding: 0;left: 0" align="center" class="ma-0">
             <v-col>
-              <v-img :src="bigImage(shownDuck.duckIconUrl)"
+              <v-img src={{bigImage(shownDuck.duckIconUrl)}}
                      style=" top: -100px;" width="150px" :aspect-ratio="1"></v-img>
             </v-col>
           </v-row>
@@ -81,7 +81,7 @@
                style="height: 2044px; width: 3267px; padding: 0; margin: 0"></v-img>
       </div>
       <v-img
-          :src="duck.duckIconUrl"
+          src={{duck.duckIconUrl}}
           @click="duckClicked(duck)"
           :style="{'position': 'absolute', 'left': duck.coordinate.x, 'top': duck.coordinate.y}"
           v-for="duck in Object.values(duckStates).filter(_ => (!_.isHidden) || _.isFound)"
@@ -103,7 +103,6 @@ export default {
   props: {},
   data() {
     return {
-      duckHistory: [],
       panzoom: null,
       dialog: false,
       shownDuck: null,
