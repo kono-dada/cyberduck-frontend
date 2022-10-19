@@ -119,12 +119,12 @@ export default {
             info: {
               duckIconUrl: 'https://parklife-1303545624.cos.ap-guangzhou.myqcloud.com/unknown.png',
               story: {
-                cn: '还没发现这只鸭子，也许在...',
-                en: ''
+                cn: '来找我玩鸭，我在：' + duck.location.description.cn,
+                en: 'Come and see me. I am at ' + duck.location.description.en
               },
               title: {
                 cn: '未知鸭子',
-                en: ''
+                en: 'unknown duck'
               }
             }
           }
