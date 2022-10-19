@@ -11,7 +11,7 @@
     <v-col style="position: absolute; z-index: 5; top: 3%; right: 5%; width: 48px; margin: 0; padding: 0">
       <img src="../assets/help-circle.png" alt="help"
            class="switches"
-           onclick="">
+           @click="showHelp = true;">
       <img class="switches" alt="languages" @click="language = language==='cn'?'en':'cn'"
            :src="this.getLanguageIcon()" style="padding: 5px">
       <img class="switches" alt="mute" @click="switchMute()"
@@ -35,6 +35,36 @@
       <img class="switches" alt="mute" @click="scanning=false" src="../assets/close.png"
            style="position: absolute; right: 5%; top: 3%; z-index: 5">
       <qrcode-stream :key="_uid" @decode="onDecode"></qrcode-stream>
+    </v-dialog>
+
+    <!--    help-->
+    <v-dialog
+        v-model="showHelp"
+        hide-overlay
+        style="background: transparent"
+        fullscreen
+        transition="dialog-bottom-transition"
+    >
+      <v-card
+          class="mx-2 nes-container is-rounded"
+          color="#ffffffff"
+          height="95%"
+          width="95%"
+          style="padding: 5%; margin: 3%"
+          elevation="10"
+          alignment="center"
+      >
+        <img class="switches" alt="mute" @click="showHelp=false" src="../assets/close.png"
+             style="position: absolute; right: 5%; top: 3%; z-index: 5">
+        <v-card-title>
+          <h3 style="font-family: Chinese_pixel, serif; margin-top: 5px">
+            {{ helpText.title[language] }}
+          </h3>
+        </v-card-title>
+        <v-card-text class="font-weight-bold text-left"
+                     v-html="buildHelpText()"
+                     style="background: #ffffff; width: 100%;height: 72%;font-size: medium;font-family: Chinese_pixel, serif; overflow-y: scroll;"></v-card-text>
+      </v-card>
     </v-dialog>
 
     <!--    duck card-->
@@ -95,6 +125,7 @@ const china = require("@/assets/china.png");
 const uk = require("@/assets/united-kingdom.png");
 const sound = require("@/assets/sound.png");
 const mute = require("@/assets/mute.png");
+const help = require("@/assets/help.json");
 const bgm = [
   "https://parklife-1303545624.cos.ap-guangzhou.myqcloud.com/bgm2.mp3",
   "https://parklife-1303545624.cos.ap-guangzhou.myqcloud.com/bgm1.mp3",
@@ -120,10 +151,12 @@ export default {
     return {
       panzoom: null,
       dialog: false,
+      showHelp: false,
       shownDuck: null,
       duckStates: {},
       scanning: false,
       language: 'cn',
+      helpText: help,
       mute: false,
     }
   },
@@ -286,6 +319,15 @@ export default {
         this.scanning = false;
         await this.scanDuck(duckId);
       }
+    },
+
+    buildHelpText() {
+      let text = "";
+      text += this.language === "cn" ? "<h3>怎么玩</h3>" : "<h3>How to play</h3>"
+      text += help.abstract[this.language]
+      text += this.language === "cn" ? "<h3>展览介绍</h3>" : "<h3>Intro</h3>"
+      text += help.sign[this.language]
+      return text;
     },
 
     // compose the story html based on database content
