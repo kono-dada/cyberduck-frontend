@@ -2,6 +2,16 @@
   <div
       class="no-whitespace unselectable full-screen"
   >
+    <audio
+        id="unknown-duck-sound"
+        src="https://parklife-1303545624.cos.ap-guangzhou.myqcloud.com/unknown-duck.m4a"
+        preload="auto"
+    ></audio>
+    <audio
+        id="found-duck-sound"
+        src="https://parklife-1303545624.cos.ap-guangzhou.myqcloud.com/found-duck.m4a"
+        preload="auto"
+    ></audio>
     <v-row style="position: absolute; top: 5%;z-index: 5;left: 0;padding: 0; width: 90%" class="mx-5">
       <p id="language"
          class="language-button"
@@ -110,9 +120,6 @@ export default {
     } else {
       await this.fetchBackendApi("https://sso.forkingpark.cn/api/user-info");
     }
-
-    // 电脑zoom in
-    // document.addEventListener('wheel', this.panzoom.zoomWithWheel)
   },
   methods: {
     duckClicked(duck) {
@@ -120,10 +127,10 @@ export default {
       this.shownDuck = duck.info
       if (!this.mute) {
         if (duck.isFound) {
-          const sound = new Audio("https://parklife-1303545624.cos.ap-guangzhou.myqcloud.com/found-duck.m4a");
+          const sound = document.getElementById("found-duck-sound");
           sound.play();
         } else {
-          const sound = new Audio("https://parklife-1303545624.cos.ap-guangzhou.myqcloud.com/unknown-duck.m4a");
+          const sound = document.getElementById("unknown-duck-sound");
           sound.play();
         }
       }
