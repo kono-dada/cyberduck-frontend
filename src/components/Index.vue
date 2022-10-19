@@ -8,6 +8,8 @@
            onclick="">
       <img class="switches" alt="languages" @click="language = language==='cn'?'en':'cn'"
              :src="this.getLanguageIcon()" style="padding: 5px">
+      <img class="switches" alt="mute" @click="mute = !mute"
+           :src="this.getMuteIcon()" style="padding: 5px">
     </v-col>
 
     <div id="collection_progress"
@@ -71,6 +73,8 @@ const unknownDuck = require("@/assets/unknown-duck.mp3");
 const foundDuck = require("@/assets/found-duck.mp3");
 const china = require("@/assets/china.png");
 const uk = require("@/assets/united-kingdom.png");
+const sound = require("@/assets/sound.png");
+const mute = require("@/assets/mute.png");
 
 export default {
   name: 'HelloWorld',
@@ -191,6 +195,18 @@ export default {
         return uk;
       } else {
         return china;
+      }
+    },
+
+    getMuteIcon() {
+      return this.mute ? mute : sound;
+    },
+
+    async onDecode(decodeString) {
+      const prefix = "https://duck.forkingpark.cn/duck/";
+      if (decodeString.startsWith(prefix)) {
+        const duckId = decodeString.substring(prefix.length);
+        await this.scanDuck(duckId);
       }
     },
 
