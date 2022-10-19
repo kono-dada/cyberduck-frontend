@@ -2,6 +2,11 @@
   <div
       class="no-whitespace unselectable full-screen"
   >
+    <audio id="bgm" hidden>
+      <source src="https://parklife-1303545624.cos.ap-guangzhou.myqcloud.com/bgm1.mp3" type="audio/mpeg">
+      <source src="https://parklife-1303545624.cos.ap-guangzhou.myqcloud.com/bgm2.mp3" type="audio/mpeg">
+      <source src="https://parklife-1303545624.cos.ap-guangzhou.myqcloud.com/bgm3.mp3" type="audio/mpeg">
+    </audio>
     <img src="../assets/scan.png" alt="help"
          style="position: absolute; z-index: 5; top: 3%; left: 5%;"
          class="switches"
@@ -14,7 +19,7 @@
            onclick="">
       <img class="switches" alt="languages" @click="language = language==='cn'?'en':'cn'"
            :src="this.getLanguageIcon()" style="padding: 5px">
-      <img class="switches" alt="mute" @click="mute = !mute"
+      <img class="switches" alt="mute" @click="switchMute()"
            :src="this.getMuteIcon()" style="padding: 5px">
     </v-col>
 
@@ -156,6 +161,16 @@ export default {
           const sound = new Audio("https://parklife-1303545624.cos.ap-guangzhou.myqcloud.com/unknown-duck.m4a");
           sound.play();
         }
+      }
+    },
+
+    switchMute() {
+      this.mute = !this.mute;
+      const bgm = document.getElementById("bgm");
+      if (this.mute) {
+        bgm.pause();
+      } else {
+        bgm.play();
       }
     },
 
