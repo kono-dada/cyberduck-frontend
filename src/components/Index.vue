@@ -38,10 +38,12 @@
           elevation="10"
           alignment="center"
       >
-        <div style="position: absolute; alignment: center; top: -150px">
-          <v-img :src="bigImage(shownDuck.duckIconUrl)"
-                 style="position: absolute; alignment: center; top: -150px;" width="192px" :aspect-ratio="1"></v-img>
-        </div>
+        <v-row style="height: 150px;position:absolute;width: 100%;padding: 0;left: 0" align="center" class="ma-0">
+          <v-col>
+            <v-img :src="bigImage(shownDuck.duckIconUrl)"
+                   style="position: absolute; alignment: center; top: -150px;" width="192px" :aspect-ratio="1"></v-img>
+          </v-col>
+        </v-row>
         <i @click="dialog=false" class="nes-icon close" style="position: absolute; right: 10px; top: 10px"></i>
         <v-card-title>
           <h3 style="font-family: Chinese_pixel, serif; margin-top: 10px">
