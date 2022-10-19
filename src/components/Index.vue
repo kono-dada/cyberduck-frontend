@@ -4,8 +4,8 @@
   >
     <v-row style="position: absolute; top: 5%;z-index: 5;left: 0;padding: 0; width: 90%" class="mx-5">
       <v-btn id="language"
-             elevation="10"
-             style="background: #ffffff;text-align: center; font-family: Chinese_pixel,serif; padding: 0; margin: 0; font-size: small;border-style: none"
+             elevation="0"
+             style="background: #ffffff;text-align: center; font-family: Chinese_pixel,serif; padding: 0; margin: 0; font-size: small;border-style: none;background: transparent"
              @click="language = language==='cn'?'en':'cn'; languagePrompt = language==='cn'?'🇬🇧':'🇨🇳'"
       >
         {{ languagePrompt }}
@@ -22,7 +22,7 @@
          style="position: fixed; right: 5%; top:85%;z-index: 5;background: #ffffff;text-align: center; font-family: Chinese_pixel,serif;padding: 0.2rem 1.5rem;"
          class="nes-container is-rounded elevation-10"
     >
-      <p>{{Object.values(duckStates).filter(_ => _.isFound).length}}/10</p>
+      <p>{{ Object.values(duckStates).filter(_ => _.isFound).length }}/10</p>
     </div>
     <v-dialog
         v-model="dialog"
