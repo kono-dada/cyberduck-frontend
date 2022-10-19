@@ -48,15 +48,7 @@
           </v-row>
           <v-card-title>
             <v-spacer></v-spacer>
-            <v-btn
-                icon
-                text
-                x-small
-                @click="dialog=false"
-                class="mt-0"
-            >
-              <v-img :src="require('../assets/close_button.png')"></v-img>
-            </v-btn>
+            <i @click="dialog=false" class="nes-icon close"></i>
 
           </v-card-title>
           <v-container class="text-center">
@@ -215,9 +207,9 @@ html * {
 .language-button {
   text-align: center;
   font-family: Chinese_pixel, serif;
-  padding: 0;
-  margin: 0;
-  font-size: large;
+  padding: 20px;
+  margin: 20px;
+  font-size: xx-large;
   border-style: none;
   background: transparent
 }
