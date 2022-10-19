@@ -39,8 +39,10 @@
           elevation="10"
           alignment="center"
       >
-        <v-img :src="bigImage(shownDuck.duckIconUrl)"
-               style="position: absolute; alignment: center; top: -120px; left: 30%" width="150px" :aspect-ratio="1"></v-img>
+        <div style="text-align: center">
+          <v-img :src="bigImage(shownDuck.duckIconUrl)"
+                 style="position: absolute; alignment: center; top: -120px;" width="150px" :aspect-ratio="1"></v-img>
+        </div>
         <i @click="dialog=false" class="nes-icon close" style="position: absolute; right: 10px; top: 10px"></i>
         <v-card-title>
           <h3 style="font-family: Chinese_pixel, serif; margin-top: 10px">
@@ -48,7 +50,7 @@
           </h3>
         </v-card-title>
         <v-card-text class="font-weight-bold text-left"
-                     style="background: #ffffff; width: 100%;height: 75%;font-size: medium;font-family: Chinese_pixel, serif; overflow-y: scroll;">
+                     style="background: #ffffff; width: 100%;height: 72%;font-size: medium;font-family: Chinese_pixel, serif; overflow-y: scroll;">
           {{ shownDuck.story[language] }}
         </v-card-text>
       </v-card>
