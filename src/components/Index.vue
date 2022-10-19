@@ -10,9 +10,7 @@
         {{ languagePrompt }}
       </p>
       <v-spacer></v-spacer>
-      <v-btn icon color="#eebb00" fab x-small dark elevation="10" style="" class="mt-1">
-        <img src="../assets/help-circle.svg" alt="help" style="image-rendering: pixelated">
-      </v-btn>
+      <img src="../assets/help-circle.png" alt="help" style="elevation: above; image-rendering: pixelated" onclick="">
     </v-row>
 
     <div id="collection_progress"
@@ -190,6 +188,7 @@ export default {
       splits.push(name);
       return splits.join("/");
     },
+
     getStory(shownDuck) {
       let story = shownDuck.story[this.language];
       // hint next location
@@ -250,7 +249,8 @@ html * {
   font-family: Chinese_pixel, serif;
   font-size: xx-large;
   border-style: none;
-  background: transparent
+  background: transparent;
+  elevation: above;
 }
 
 @font-face {
