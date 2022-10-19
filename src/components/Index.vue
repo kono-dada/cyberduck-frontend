@@ -171,13 +171,13 @@ export default {
       let story = shownDuck.story[this.language];
       // hint next location
       const nextDuckStory = shownDuck.nextDuckStory;
-      if (nextDuckStory !== null) {
+      if (nextDuckStory) {
         const nextLocation = nextDuckStory.location.description[this.language];
         story = story.replace("xxx", nextLocation);
       }
       // add exhibit info
       const relatedExhibit = shownDuck.relatedExhibit;
-      if (relatedExhibit !== null) {
+      if (relatedExhibit) {
         if (this.language === "cn") {
           story += "<br><br>相关展品：";
           story += relatedExhibit.title[this.language];
