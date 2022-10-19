@@ -50,9 +50,8 @@
           </h3>
         </v-card-title>
         <v-card-text class="font-weight-bold text-left"
-                     style="background: #ffffff; width: 100%;height: 72%;font-size: medium;font-family: Chinese_pixel, serif; overflow-y: scroll;">
-          {{ getStory(shownDuck) }}
-        </v-card-text>
+                     v-html="getStory(shownDuck)"
+                     style="background: #ffffff; width: 100%;height: 72%;font-size: medium;font-family: Chinese_pixel, serif; overflow-y: scroll;"></v-card-text>
       </v-card>
     </v-dialog>
     <div id="map" class="no-whitespace unselectable" style="height: max-content; width: max-content;">
@@ -179,14 +178,14 @@ export default {
       const relatedExhibit = shownDuck.relatedExhibit;
       if (relatedExhibit) {
         if (this.language === "cn") {
-          story += "<br><br>相关展品：";
+          story += "<br /><br />相关展品：";
           story += relatedExhibit.title[this.language];
-          story += "<br>展品位置：";
+          story += "<br />展品位置：";
           story += relatedExhibit.location[this.language];
         } else {
-          story += "<br><br>Related Exhibit：";
+          story += "<br /><br />Related Exhibit：";
           story += relatedExhibit.title[this.language];
-          story += "<br>Exhibit Location：";
+          story += "<br />Exhibit Location：";
           story += relatedExhibit.location[this.language];
         }
       }
