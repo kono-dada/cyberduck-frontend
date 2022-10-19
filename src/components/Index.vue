@@ -2,11 +2,6 @@
   <div
       class="no-whitespace unselectable full-screen"
   >
-    <audio id="bgm" autoplay hidden>
-      <source src="https://parklife-1303545624.cos.ap-guangzhou.myqcloud.com/bgm2.mp3" type="audio/mpeg">
-      <source src="https://parklife-1303545624.cos.ap-guangzhou.myqcloud.com/bgm1.mp3" type="audio/mpeg">
-      <source src="https://parklife-1303545624.cos.ap-guangzhou.myqcloud.com/bgm3.mp3" type="audio/mpeg">
-    </audio>
     <img src="../assets/scan.png" alt="help"
          style="position: absolute; z-index: 5; top: 3%; left: 5%;"
          class="switches"
@@ -100,6 +95,20 @@ const china = require("@/assets/china.png");
 const uk = require("@/assets/united-kingdom.png");
 const sound = require("@/assets/sound.png");
 const mute = require("@/assets/mute.png");
+const bgm = [
+  "https://parklife-1303545624.cos.ap-guangzhou.myqcloud.com/bgm2.mp3",
+  "https://parklife-1303545624.cos.ap-guangzhou.myqcloud.com/bgm1.mp3",
+  "https://parklife-1303545624.cos.ap-guangzhou.myqcloud.com/bgm3.mp3",
+];
+let current_bgm = 0;
+const bgmPlayer = new Audio(bgm[current_bgm]);
+bgmPlayer.addEventListener("ended", () => {
+  // load next bgm
+  current_bgm = (current_bgm + 1) % bgm.length;
+  bgmPlayer.src = bgm[current_bgm];
+  bgmPlayer.load();
+  bgmPlayer.play();
+})
 
 export default {
   name: 'HelloWorld',
@@ -135,6 +144,19 @@ export default {
 
     await this.loadPreview();
 
+    // auto play attempt
+    let playAttempt = setInterval(() => {
+      if (this.mute) {
+        clearInterval(playAttempt)
+      } else {
+        bgmPlayer.play().then(() => {
+          clearInterval(playAttempt)
+        }).catch(() => {
+          console.log("Unable to play bgm, User has not interacted yet.");
+        });
+      }
+    }, 1000);
+
     const params = this.$route.params;
     if ("id" in params) {
       await this.scanDuck(params.id);
@@ -166,11 +188,10 @@ export default {
 
     switchMute() {
       this.mute = !this.mute;
-      const bgm = document.getElementById("bgm");
       if (this.mute) {
-        bgm.pause();
+        bgmPlayer.pause();
       } else {
-        bgm.play();
+        bgmPlayer.play();
       }
     },
 
