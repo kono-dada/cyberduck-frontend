@@ -91,8 +91,6 @@ import Panzoom from "@panzoom/panzoom"
 import axios from "axios"
 import {QrcodeStream} from 'vue-qrcode-reader'
 
-const unknownDuck = require("@/assets/unknown-duck.mp3");
-const foundDuck = require("@/assets/found-duck.mp3");
 const china = require("@/assets/china.png");
 const uk = require("@/assets/united-kingdom.png");
 const sound = require("@/assets/sound.png");
@@ -152,10 +150,10 @@ export default {
       this.shownDuck = duck.info
       if (!this.mute) {
         if (duck.isFound) {
-          const sound = new Audio(foundDuck);
+          const sound = new Audio("https://parklife-1303545624.cos.ap-guangzhou.myqcloud.com/found-duck.m4a");
           sound.play();
         } else {
-          const sound = new Audio(unknownDuck);
+          const sound = new Audio("https://parklife-1303545624.cos.ap-guangzhou.myqcloud.com/unknown-duck.m4a");
           sound.play();
         }
       }
