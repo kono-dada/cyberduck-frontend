@@ -79,7 +79,7 @@
           class="nes-container is-rounded"
           color="#ffffffff"
           elevation="10"
-          alignment="center"
+          style="left: 50%; transform: translateX(-50%); width: 300px; padding: 5px"
       >
         <v-card-title style="font-family: Chinese_pixel,serif"
                       v-html="language === 'cn' ? '<h3>重启游戏</h3>' : '<h3>Restart game</h3>'">
