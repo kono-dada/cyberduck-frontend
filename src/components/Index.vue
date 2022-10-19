@@ -22,7 +22,7 @@
          style="position: fixed; right: 5%; top:85%;z-index: 5;background: #ffffff;text-align: center; font-family: Chinese_pixel,serif;padding: 0.2rem 1.5rem;"
          class="nes-container is-rounded elevation-10"
     >
-      <p>1/10</p>
+      <p>{{Object.values(duckStates).filter(_ => _.isFound).length}}/10</p>
     </div>
     <v-dialog
         v-model="dialog"
