@@ -91,7 +91,6 @@ export default {
       dialog: false,
       shownDuck: null,
       duckStates: {},
-      duckId: this.$route.params.id,
       language: 'cn',
       mute: false,
       languagePrompt: '🇬🇧'
@@ -117,6 +116,7 @@ export default {
     const params = this.$route.params;
     if ("id" in params) {
       await this.fetchBackendApi("https://sso.forkingpark.cn/api/find-duck/" + params.id);
+      this.duckClicked(Object.values(this.duckStates).find(d => d.info.id === params.id));
     } else {
       await this.fetchBackendApi("https://sso.forkingpark.cn/api/user-info");
     }
