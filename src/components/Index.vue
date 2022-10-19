@@ -27,7 +27,7 @@
         v-model="dialog"
         style="background: transparent"
         hide-overlay
-        height="80%"
+        height="90%"
         v-if="shownDuck != null"
     >
       <v-card
@@ -39,10 +39,10 @@
           elevation="10"
           alignment="center"
       >
-        <v-row style="height: 150px;position:absolute;width: 100%;padding: 0;left: 0" align="center" class="ma-0">
+        <v-row style="height: 120px;position:absolute;width: 100%;padding: 0;left: 0" align="center" class="ma-0">
           <v-col>
             <v-img :src="bigImage(shownDuck.duckIconUrl)"
-                   style="position: absolute; alignment: center; top: -150px;" width="192px" :aspect-ratio="1"></v-img>
+                   style="position: absolute; alignment: center; top: -120px;" width="150px" :aspect-ratio="1"></v-img>
           </v-col>
         </v-row>
         <i @click="dialog=false" class="nes-icon close" style="position: absolute; right: 10px; top: 10px"></i>
