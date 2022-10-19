@@ -39,10 +39,9 @@
           elevation="10"
           alignment="center"
       >
-        <div style="text-align: center">
-          <v-img :src="bigImage(shownDuck.duckIconUrl)"
-                 style="position: absolute; alignment: center; top: -120px;" width="150px" :aspect-ratio="1"></v-img>
-        </div>
+        <v-img :src="bigImage(shownDuck.duckIconUrl)"
+               style="position: absolute; left: 50%; transform: translateX(-50%); top: -120px;" width="150px"
+               :aspect-ratio="1"></v-img>
         <i @click="dialog=false" class="nes-icon close" style="position: absolute; right: 10px; top: 10px"></i>
         <v-card-title>
           <h3 style="font-family: Chinese_pixel, serif; margin-top: 10px">
