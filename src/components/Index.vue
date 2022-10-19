@@ -20,7 +20,7 @@
         {{ languagePrompt }}
       </p>
       <v-spacer></v-spacer>
-      <img src="../assets/help-circle.png" alt="help" style="elevation: above; image-rendering: pixelated" onclick="">
+      <img src="../assets/help-circle.png" alt="help" style="height: 64px; width: 64px; elevation: above; image-rendering: pixelated" onclick="">
     </v-row>
 
     <div id="collection_progress"
