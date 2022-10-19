@@ -30,7 +30,7 @@
         hide-overlay
         v-if="shownDuck != null"
     >
-      <div style="max-height: 490px">
+      <div style="max-height: 550px">
         <v-row style="height: 81px"></v-row>
         <v-card
             class="mx-2 nes-container is-rounded"
@@ -47,14 +47,12 @@
             </v-col>
           </v-row>
           <v-card-title>
+            <h3 style="font-family: Chinese_pixel, serif; margin-top: 20px">
+              {{ shownDuck.title[language] }}
+            </h3>
             <v-spacer></v-spacer>
             <i @click="dialog=false" class="nes-icon close"></i>
-
           </v-card-title>
-          <v-container class="text-center">
-            <h3 style="font-family: Chinese_pixel, serif;">{{ shownDuck.title[language] }}</h3>
-          </v-container>
-
           <v-card-text class="font-weight-bold overflow-y-auto text-left"
                        style="height: 200px; background: #ffffff; width: 100%;font-size: medium;font-family: Chinese_pixel, serif;">
             {{ shownDuck.story[language] }}
