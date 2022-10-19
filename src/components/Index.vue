@@ -26,35 +26,33 @@
     <v-dialog
         v-model="dialog"
         width="80%"
+        height="80%"
         style="background: transparent"
         hide-overlay
         v-if="shownDuck != null"
     >
-      <div style="max-height: 550px">
-        <v-card
-            class="mx-2 nes-container is-rounded"
-            color="#ffffffff"
-            height="400px"
-            max-height="400px"
-            style="margin-top: 150px"
-            elevation="10"
-            align="center"
-        >
-          <v-img :src="bigImage(shownDuck.duckIconUrl)"
-                 style="position: absolute; alignment: center; top: -150px;" width="192px" :aspect-ratio="1"></v-img>
-          <i @click="dialog=false" class="nes-icon close" style="position: absolute; right: 10px; top: 10px"></i>
-          <v-card-title>
-            <h3 style="font-family: Chinese_pixel, serif; margin-top: 20px">
-              {{ shownDuck.title[language] }}
-            </h3>
-          </v-card-title>
-          <v-card-text class="font-weight-bold text-left"
-                       style="background: #ffffff; width: 100%;height: 100%;font-size: medium;font-family: Chinese_pixel, serif; overflow-y: scroll;">
-            {{ shownDuck.story[language] }}
-          </v-card-text>
-        </v-card>
-
-      </div>
+      <v-card
+          class="mx-2 nes-container is-rounded"
+          color="#ffffffff"
+          height="400px"
+          max-height="400px"
+          style="margin-top: 150px"
+          elevation="10"
+          align="center"
+      >
+        <v-img :src="bigImage(shownDuck.duckIconUrl)"
+               style="position: absolute; alignment: center; top: -150px;" width="192px" :aspect-ratio="1"></v-img>
+        <i @click="dialog=false" class="nes-icon close" style="position: absolute; right: 10px; top: 10px"></i>
+        <v-card-title>
+          <h3 style="font-family: Chinese_pixel, serif; margin-top: 10px">
+            {{ shownDuck.title[language] }}
+          </h3>
+        </v-card-title>
+        <v-card-text class="font-weight-bold text-left"
+                     style="background: #ffffff; width: 100%;height: 80%;font-size: medium;font-family: Chinese_pixel, serif; overflow-y: scroll;">
+          {{ shownDuck.story[language] }}
+        </v-card-text>
+      </v-card>
     </v-dialog>
     <div id="map" class="no-whitespace unselectable" style="height: max-content; width: max-content;">
       <div class="no-whitespace unselectable" style="height: 2044px; width: 3267px;">
