@@ -42,15 +42,14 @@
         >
           <v-img :src="bigImage(shownDuck.duckIconUrl)"
                  style="position: absolute; alignment: center; top: -150px;" width="192px" :aspect-ratio="1"></v-img>
+          <i @click="dialog=false" class="nes-icon close" style="position: absolute; right: 10px; top: 10px"></i>
           <v-card-title>
             <h3 style="font-family: Chinese_pixel, serif; margin-top: 20px">
               {{ shownDuck.title[language] }}
             </h3>
-            <v-spacer></v-spacer>
-            <i @click="dialog=false" class="nes-icon close"></i>
           </v-card-title>
           <v-card-text class="font-weight-bold text-left"
-                       style="background: #ffffff; width: 100%;font-size: medium;font-family: Chinese_pixel, serif; overflow-y: scroll;">
+                       style="background: #ffffff; width: 100%;height: 100%;font-size: medium;font-family: Chinese_pixel, serif; overflow-y: scroll;">
             {{ shownDuck.story[language] }}
           </v-card-text>
         </v-card>
