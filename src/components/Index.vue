@@ -2,6 +2,11 @@
   <div
       class="no-whitespace unselectable full-screen"
   >
+    <qrcode-capture id="qr-scan" :multiple="false" @decode="onDecode" hidden></qrcode-capture>
+    <img src="../assets/scan.png" alt="help"
+         style="position: absolute; z-index: 5; top: 3%; left: 5%;"
+         class="switches"
+         onclick="document.getElementById('qr-scan').click()">
     <v-col style="position: absolute; z-index: 5; top: 3%; right: 5%; width: 48px; margin: 0; padding: 0">
       <img src="../assets/help-circle.png" alt="help"
            class="switches"
@@ -69,6 +74,7 @@
 <script>
 import Panzoom from "@panzoom/panzoom"
 import axios from "axios"
+import { QrcodeCapture } from 'vue-qrcode-reader'
 const unknownDuck = require("@/assets/unknown-duck.mp3");
 const foundDuck = require("@/assets/found-duck.mp3");
 const china = require("@/assets/china.png");
@@ -78,7 +84,9 @@ const mute = require("@/assets/mute.png");
 
 export default {
   name: 'HelloWorld',
-  components: {},
+  components: {
+    QrcodeCapture
+  },
   props: {},
   data() {
     return {
@@ -109,13 +117,17 @@ export default {
 
     const params = this.$route.params;
     if ("id" in params) {
-      await this.fetchBackendApi("https://sso.forkingpark.cn/api/find-duck/" + params.id);
-      this.duckClicked(Object.values(this.duckStates).find(d => d.info.id === params.id));
+      await this.scanDuck(params.id);
     } else {
       await this.fetchBackendApi("https://sso.forkingpark.cn/api/user-info");
     }
   },
   methods: {
+    async scanDuck(duckId) {
+      await this.fetchBackendApi("https://sso.forkingpark.cn/api/find-duck/" + duckId);
+      this.duckClicked(Object.values(this.duckStates).find(d => d.info.id === duckId));
+    },
+
     duckClicked(duck) {
       this.dialog = true
       this.shownDuck = duck.info
@@ -191,11 +203,7 @@ export default {
     },
 
     getLanguageIcon() {
-      if (this.language === 'cn') {
-        return uk;
-      } else {
-        return china;
-      }
+      return this.language === 'cn' ? china : uk;
     },
 
     getMuteIcon() {
