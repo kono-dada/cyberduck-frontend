@@ -31,12 +31,12 @@
         v-if="shownDuck != null"
     >
       <div style="max-height: 550px">
-        <v-row style="height: 81px"></v-row>
         <v-card
             class="mx-2 nes-container is-rounded"
             color="#ffffffff"
             height="400px"
             max-height="400px"
+            style="margin-top: 150px"
             elevation="10"
             align="center"
         >
