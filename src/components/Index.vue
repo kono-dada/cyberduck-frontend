@@ -11,9 +11,7 @@
       </p>
       <v-spacer></v-spacer>
       <v-btn icon color="#eebb00" fab x-small dark elevation="10" style="" class="mt-1">
-        <v-icon x-large>
-          mdi-help-circle
-        </v-icon>
+        <img src="../assets/help-circle.svg" alt="help" style="image-rendering: pixelated">
       </v-btn>
     </v-row>
 
@@ -160,7 +158,7 @@ export default {
       this.dialog = true
       this.shownDuck = duck.info
       if (!this.mute) {
-        if (this.shownDuck.isFound) {
+        if (duck.isFound) {
           const sound = new Audio("https://parklife-1303545624.cos.ap-guangzhou.myqcloud.com/found-duck.m4a");
           sound.play();
         } else {
