@@ -2,14 +2,13 @@
   <div
       class="no-whitespace unselectable full-screen"
   >
-    <v-row style="position: absolute; z-index: 5; top: 5%; left: 0; right: 0" class="mx-5">
-      <img class="switches" alt="languages" @click="language = language==='cn'?'en':'cn'"
-             :src="this.getLanguageIcon()" style="padding: 5px">
-      <v-spacer></v-spacer>
+    <v-col style="position: absolute; z-index: 5; top: 3%; right: 5%; width: 48px; margin: 0; padding: 0">
       <img src="../assets/help-circle.png" alt="help"
            class="switches"
            onclick="">
-    </v-row>
+      <img class="switches" alt="languages" @click="language = language==='cn'?'en':'cn'"
+             :src="this.getLanguageIcon()" style="padding: 5px">
+    </v-col>
 
     <div id="collection_progress"
          style="position: fixed; right: 5%; top:85%;z-index: 5;background: #ffffff;text-align: center; font-family: Chinese_pixel,serif;padding: 0.2rem 1.5rem;"
