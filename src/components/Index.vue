@@ -43,7 +43,7 @@
           <v-row style="height: 81px;position:absolute;width: 100%;padding: 0;left: 0" align="center" class="ma-0">
             <v-col>
               <v-img :src="bigImage(shownDuck.duckIconUrl)"
-                     style=" top: -100px;" width="192px" :aspect-ratio="1"></v-img>
+                     style=" top: -150px;" width="192px" :aspect-ratio="1"></v-img>
             </v-col>
           </v-row>
           <v-card-title>
@@ -52,12 +52,11 @@
 
           </v-card-title>
           <v-container class="text-center">
-            <h2>{{ shownDuck.title[language] }}</h2>
-            <h3>Subtitle</h3>
+            <h3 style="font-family: Chinese_pixel, serif;">{{ shownDuck.title[language] }}</h3>
           </v-container>
 
           <v-card-text class="font-weight-bold overflow-y-auto text-left"
-                       style="height: 200px; background: #d9d9d9; width: 100%;font-size: large">
+                       style="height: 200px; background: #ffffff; width: 100%;font-size: medium;font-family: Chinese_pixel, serif;">
             {{ shownDuck.story[language] }}
           </v-card-text>
         </v-card>
@@ -207,19 +206,7 @@ html * {
 .language-button {
   text-align: center;
   font-family: Chinese_pixel, serif;
-  padding: 20px;
-  margin: 20px;
   font-size: xx-large;
-  border-style: none;
-  background: transparent
-}
-
-.language-button:hover {
-  text-align: center;
-  font-family: Chinese_pixel, serif;
-  padding: 0;
-  margin: 0;
-  font-size: large;
   border-style: none;
   background: transparent
 }
