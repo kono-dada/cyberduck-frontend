@@ -3,12 +3,9 @@
       class="no-whitespace unselectable full-screen"
   >
     <v-row style="position: absolute; top: 5%;z-index: 5;left: 0;padding: 0; width: 90%" class="mx-5">
-      <p id="language"
-         class="language-button"
-         @click="language = language==='cn'?'en':'cn'; languagePrompt = language==='cn'?'🇬🇧':'🇨🇳'"
-      >
-        {{ languagePrompt }}
-      </p>
+      <img id="language" class="language-button" alt="languages"
+           @click="language = language==='cn'?'en':'cn'; languagePrompt = language==='cn'?'../assets/united-kingdom.png':'../assets/china.png'"
+           :src="languagePrompt">
       <v-spacer></v-spacer>
       <img src="../assets/help-circle.png" alt="help"
            style="height: 48px; width: 48px; filter: drop-shadow(2px 2px 2px gray); elevation: above; image-rendering: pixelated"
@@ -244,13 +241,9 @@ html * {
 }
 
 .language-button {
-  text-align: center;
-  font-family: Chinese_pixel, serif;
-  font-size: xx-large;
   border-style: none;
-  background: transparent;
   elevation: above;
-  text-shadow: gray;
+  filter: drop-shadow(2px 2px 2px gray)
 }
 
 @font-face {
