@@ -68,6 +68,8 @@
 <script>
 import Panzoom from "@panzoom/panzoom"
 import axios from "axios"
+const unknownDuck = require("@/assets/unknown-duck.m4a");
+const foundDuck = require("@/assets/found-duck.m4a");
 
 export default {
   name: 'HelloWorld',
@@ -114,10 +116,10 @@ export default {
       this.shownDuck = duck.info
       if (!this.mute) {
         if (duck.isFound) {
-          const sound = new Audio("https://parklife-1303545624.cos.ap-guangzhou.myqcloud.com/found-duck.m4a");
+          const sound = new Audio(foundDuck);
           sound.play();
         } else {
-          const sound = new Audio("https://parklife-1303545624.cos.ap-guangzhou.myqcloud.com/unknown-duck.m4a");
+          const sound = new Audio(unknownDuck);
           sound.play();
         }
       }
