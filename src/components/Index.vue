@@ -74,12 +74,13 @@
         v-model="restartDialog"
         style="background: transparent"
         hide-overlay
-        class="nes-container is-rounded"
-        color="#ffffffff"
-        elevation="10"
-        alignment="center"
     >
-      <v-card>
+      <v-card
+          class="nes-container is-rounded"
+          color="#ffffffff"
+          elevation="10"
+          alignment="center"
+      >
         <v-card-title style="font-family: Chinese_pixel,serif"
                       v-html="language === 'cn' ? '<h3>重启游戏</h3>' : '<h3>Restart game</h3>'">
         </v-card-title>
