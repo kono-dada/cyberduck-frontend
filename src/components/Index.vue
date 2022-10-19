@@ -80,7 +80,7 @@
                style="height: 2044px; width: 3267px; padding: 0; margin: 0"></v-img>
       </div>
       <v-img
-          :src="duck.duckIconUrl"
+          :src="duck.info.duckIconUrl"
           @click="duckClicked(duck)"
           :style="{'position': 'absolute', 'left': duck.coordinate.x, 'top': duck.coordinate.y}"
           v-for="duck in Object.values(duckStates).filter(_ => (!_.isHidden) || _.isFound)"
