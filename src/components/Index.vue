@@ -179,14 +179,14 @@ export default {
       const relatedExhibit = shownDuck.relatedExhibit;
       if (relatedExhibit !== null) {
         if (this.language === "cn") {
-          story += "\n\n相关展品：";
+          story += "<br><br>相关展品：";
           story += relatedExhibit.title[this.language];
-          story += "\n展品位置：";
+          story += "<br>展品位置：";
           story += relatedExhibit.location[this.language];
         } else {
-          story += "\n\nRelated Exhibit：";
+          story += "<br><br>Related Exhibit：";
           story += relatedExhibit.title[this.language];
-          story += "\nExhibit Location：";
+          story += "<br>Exhibit Location：";
           story += relatedExhibit.location[this.language];
         }
       }
