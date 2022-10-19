@@ -32,7 +32,8 @@
         fullscreen
         transition="dialog-bottom-transition"
     >
-      <i @click="scanning=false" class="nes-icon close" style="position: absolute; right: 10px; top: 10px; z-index: 5"></i>
+      <img class="switches" alt="mute" @click="scanning=false" src="../assets/close.png"
+           style="position: absolute; right: 5%; top: 3%; z-index: 5">
       <qrcode-stream :key="_uid" @decode="onDecode"></qrcode-stream>
     </v-dialog>
 
