@@ -76,11 +76,11 @@
         hide-overlay
     >
       <v-card>
-        <v-card-title class="text-h3">
+        <v-card-title class="text-h3" style="font-family: Chinese_pixel,serif">
           {{ language === "cn" ? "重启游戏" : "Restart game" }}
         </v-card-title>
 
-        <v-card-text>
+        <v-card-text style="font-family: Chinese_pixel,serif">
           {{
             language === "cn" ?
                 "你希望清除记录，重启游戏吗？不可恢复" :
@@ -91,12 +91,15 @@
         <v-card-actions>
           <v-btn
               class="nes-btn primary"
+              style="font-family: Chinese_pixel,serif"
               @click="restartDialog = false"
           >Cancel
           </v-btn>
+          <v-spacer></v-spacer>
           <v-btn
               class="nes-btn error"
-              @click="restartGame"
+              style="font-family: Chinese_pixel,serif"
+              @click="restartGame()"
           >Confirm
           </v-btn>
         </v-card-actions>
