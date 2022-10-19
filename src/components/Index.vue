@@ -3,8 +3,8 @@
       class="no-whitespace unselectable full-screen"
   >
     <v-row style="position: absolute; z-index: 5; top: 5%; left: 0; right: 0" class="mx-5">
-      <v-img class="switches" alt="languages" @click="language = language==='cn'?'en':'cn'"
-             :src="this.getLanguageIcon()"></v-img>
+      <img class="switches" alt="languages" @click="language = language==='cn'?'en':'cn'"
+             :src="this.getLanguageIcon()">
       <v-spacer></v-spacer>
       <img src="../assets/help-circle.png" alt="help"
            class="switches"
