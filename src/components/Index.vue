@@ -2,9 +2,9 @@
   <div
       class="no-whitespace unselectable full-screen"
   >
-    <audio id="bgm" hidden>
-      <source src="https://parklife-1303545624.cos.ap-guangzhou.myqcloud.com/bgm1.mp3" type="audio/mpeg">
+    <audio id="bgm" autoplay hidden>
       <source src="https://parklife-1303545624.cos.ap-guangzhou.myqcloud.com/bgm2.mp3" type="audio/mpeg">
+      <source src="https://parklife-1303545624.cos.ap-guangzhou.myqcloud.com/bgm1.mp3" type="audio/mpeg">
       <source src="https://parklife-1303545624.cos.ap-guangzhou.myqcloud.com/bgm3.mp3" type="audio/mpeg">
     </audio>
     <img src="../assets/scan.png" alt="help"
