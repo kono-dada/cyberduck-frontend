@@ -2,14 +2,11 @@
   <div
       class="no-whitespace unselectable full-screen"
   >
-    <v-row style="position: absolute; top: 5%;z-index: 5;left: 0;padding: 0; width: 100%" class="mx-5">
-      <img id="language" class="switches" alt="languages"
-           @click="language = language==='cn'?'en':'cn'"
-           style="position: absolute; left: 15px; top: 15px"
-           :src="language==='cn'?'../assets/united-kingdom.png':'../assets/china.png'">
+    <v-row style="position: absolute; z-index: 5; top: 5%; left: 0; right: 0" class="mx-5">
+      <v-img class="switches" alt="languages" @click="language = language==='cn'?'en':'cn'"
+             :src="this.getLanguageIcon()"></v-img>
       <v-spacer></v-spacer>
       <img src="../assets/help-circle.png" alt="help"
-           style="position: absolute; right: 15px; top: 15px"
            class="switches"
            onclick="">
     </v-row>
@@ -184,6 +181,14 @@ export default {
       const name = "3x-" + splits.pop();
       splits.push(name);
       return splits.join("/");
+    },
+
+    getLanguageIcon() {
+      if (this.language === 'cn') {
+        return "../assets/united-kingdom.png";
+      } else {
+        return '../assets/china.png';
+      }
     },
 
     getStory(shownDuck) {
