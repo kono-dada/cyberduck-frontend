@@ -7,7 +7,7 @@
              elevation="10"
              style="background: #ffffff;text-align: center; font-family: Chinese_pixel,serif; width: 90px;font-size: small"
              class="nes-container is-rounded"
-             @click="language = language==='cn'?'en':'cn'; languagePrompt = language==='cn'?'English':'中文'"
+             @click="language = language==='cn'?'en':'cn'; languagePrompt = language==='cn'?'🇬🇧':'🇨🇳'"
       >
         {{ languagePrompt }}
       </v-btn>
@@ -108,7 +108,7 @@ export default {
       duckStates: {},
       duckId: this.$route.params.id,
       language: 'cn',
-      languagePrompt: 'English'
+      languagePrompt: '🇬🇧'
     }
   },
   async mounted() {
@@ -120,9 +120,7 @@ export default {
       panOnlyWhenZoomed: false,
       minScale: 0.3,
       maxScale: 1.5,
-      startX: -2500,
-      startY: -1500,
-      startScale: 0.4,
+      startScale: 0.8,
       contain: 'outside'
     });
     const duckList = await axios.get("https://sso.forkingpark.cn/api/preview-ducks");
