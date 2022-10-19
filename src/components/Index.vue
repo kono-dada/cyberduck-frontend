@@ -130,9 +130,11 @@ export default {
       if (!this.mute) {
         if (duck.isFound) {
           const sound = document.getElementById("found-duck-sound");
+          sound.currentTime = 0;
           sound.play();
         } else {
           const sound = document.getElementById("unknown-duck-sound");
+          sound.currentTime = 0;
           sound.play();
         }
       }
