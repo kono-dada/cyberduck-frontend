@@ -68,8 +68,8 @@
 <script>
 import Panzoom from "@panzoom/panzoom"
 import axios from "axios"
-const unknownDuck = require("@/assets/unknown-duck.m4a");
-const foundDuck = require("@/assets/found-duck.m4a");
+const unknownDuck = require("@/assets/unknown-duck.mp3");
+const foundDuck = require("@/assets/found-duck.mp3");
 
 export default {
   name: 'HelloWorld',
