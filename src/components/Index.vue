@@ -53,8 +53,8 @@
             <v-spacer></v-spacer>
             <i @click="dialog=false" class="nes-icon close"></i>
           </v-card-title>
-          <v-card-text class="font-weight-bold overflow-y-auto text-left"
-                       style="background: #ffffff; width: 100%;font-size: medium;font-family: Chinese_pixel, serif;">
+          <v-card-text class="font-weight-bold text-left"
+                       style="background: #ffffff; width: 100%;font-size: medium;font-family: Chinese_pixel, serif; overflow-y: scroll;">
             {{ shownDuck.story[language] }}
           </v-card-text>
         </v-card>
