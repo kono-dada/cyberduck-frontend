@@ -103,51 +103,14 @@ export default {
       startY: -300,
       contain: 'outside'
     });
-    const duckList = await axios.get("https://sso.forkingpark.cn/api/preview-ducks");
 
-    // load ducks from the preview-duck, only the found ducks have detailed info
-    duckList.data.forEach(
-        (duck) => {
-          this.duckStates[duck.location.id] = {
-            id: duck.location.id,
-            isFound: false,
-            isHidden: duck.isHidden,
-            coordinate: duck.location.coordinate,
-            info: {
-              duckIconUrl: 'https://parklife-1303545624.cos.ap-guangzhou.myqcloud.com/unknown.png',
-              story: {
-                cn: '来找我玩鸭，我在：' + duck.location.description.cn,
-                en: 'Come and see me. I am at ' + duck.location.description.en
-              },
-              title: {
-                cn: '未知鸭子',
-                en: 'unknown duck'
-              }
-            }
-          }
-        }
-    );
-    this.$forceUpdate();
+    await this.loadPreview();
 
-    // 登陆代码
-    try {
-      const response = await axios.get(
-          "https://sso.forkingpark.cn/api/user-info",
-          {withCredentials: true}
-      );
-      response.data.duckHistory.map(d => d.duck).forEach((duck) => {
-        this.duckStates[duck.location.id].isFound = true;
-        this.duckStates[duck.location.id].info = duck;
-      });
-      this.$forceUpdate();
-    } catch (e) {
-      // on 401 error, go to login page
-      if (e.response && e.response.status === 401) {
-        const current_url = window.location.href;
-        window.location.href = "https://sso.forkingpark.cn/login?redirect_url=" + current_url;
-      } else {
-        console.error("unexpected error: " + e)
-      }
+    const params = this.$route.params;
+    if ("id" in params) {
+      await this.fetchBackendApi("https://sso.forkingpark.cn/api/find-duck/" + params.id);
+    } else {
+      await this.fetchBackendApi("https://sso.forkingpark.cn/api/user-info");
     }
 
     // 电脑zoom in
@@ -167,6 +130,60 @@ export default {
         }
       }
     },
+
+    async loadPreview() {
+      const duckList = await axios.get("https://sso.forkingpark.cn/api/preview-ducks");
+
+      // load ducks from the preview-duck, only the found ducks have detailed info
+      duckList.data.forEach(
+          (duck) => {
+            this.duckStates[duck.location.id] = {
+              id: duck.location.id,
+              isFound: false,
+              isHidden: duck.isHidden,
+              coordinate: duck.location.coordinate,
+              info: {
+                duckIconUrl: 'https://parklife-1303545624.cos.ap-guangzhou.myqcloud.com/unknown.png',
+                story: {
+                  cn: '来找我玩鸭，我在：' + duck.location.description.cn,
+                  en: 'Come and see me. I am at ' + duck.location.description.en
+                },
+                title: {
+                  cn: '未知鸭子',
+                  en: 'unknown duck'
+                }
+              }
+            }
+          }
+      );
+      this.$forceUpdate();
+    },
+
+    async fetchBackendApi(url) {
+      try {
+        const response = await axios.get(
+            url,
+            {withCredentials: true}
+        );
+        response.data.duckHistory.map(d => d.duck).forEach((duck) => {
+          this.duckStates[duck.location.id].isFound = true;
+          this.duckStates[duck.location.id].info = duck;
+        });
+        this.$forceUpdate();
+      } catch (e) {
+        // on 401 error, go to login page
+        if (e.response && e.response.status === 401) {
+          const current_url = window.location.href;
+          window.location.href = "https://sso.forkingpark.cn/login?redirect_url=" + current_url;
+        } else if (e.response && e.response.status === 404) {
+          console.error("404 not found: " + e);
+          window.location.href = "https://duck.forkingpark.cn";
+        } else {
+          console.error("unexpected error: " + e);
+        }
+      }
+    },
+
     bigImage(url) {
       const splits = url.split("/");
       const name = "3x-" + splits.pop();
