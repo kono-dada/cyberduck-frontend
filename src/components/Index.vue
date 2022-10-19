@@ -51,7 +51,7 @@
         </v-card-title>
         <v-card-text class="font-weight-bold text-left"
                      style="background: #ffffff; width: 100%;height: 72%;font-size: medium;font-family: Chinese_pixel, serif; overflow-y: scroll;">
-          {{ shownDuck.story[language] }}
+          {{ getStory(shownDuck) }}
         </v-card-text>
       </v-card>
     </v-dialog>
@@ -166,6 +166,31 @@ export default {
       const name = "3x-" + splits.pop();
       splits.push(name);
       return splits.join("/");
+    },
+    getStory(shownDuck) {
+      let story = shownDuck.story[this.language];
+      // hint next location
+      const nextDuckStory = shownDuck.nextDuckStory;
+      if (nextDuckStory !== null) {
+        const nextLocation = nextDuckStory.location.description[this.language];
+        story = story.replace("xxx", nextLocation);
+      }
+      // add exhibit info
+      const relatedExhibit = shownDuck.relatedExhibit;
+      if (relatedExhibit !== null) {
+        if (this.language === "cn") {
+          story += "\n\n相关展品：";
+          story += relatedExhibit.title[this.language];
+          story += "\n展品位置：";
+          story += relatedExhibit.location[this.language];
+        } else {
+          story += "\n\nRelated Exhibit：";
+          story += relatedExhibit.title[this.language];
+          story += "\nExhibit Location：";
+          story += relatedExhibit.location[this.language];
+        }
+      }
+      return story;
     }
   }
 }
