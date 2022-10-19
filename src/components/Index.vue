@@ -2,13 +2,15 @@
   <div
       class="no-whitespace unselectable full-screen"
   >
-    <v-row style="position: absolute; top: 5%;z-index: 5;left: 0;padding: 0; width: 90%" class="mx-5">
-      <img id="language" class="language-button" alt="languages"
-           @click="language = language==='cn'?'en':'cn'; languagePrompt = language==='cn'?'../assets/united-kingdom.png':'../assets/china.png'"
-           :src="languagePrompt">
+    <v-row style="position: absolute; top: 5%;z-index: 5;left: 0;padding: 0; width: 100%" class="mx-5">
+      <img id="language" class="switches" alt="languages"
+           @click="language = language==='cn'?'en':'cn'"
+           style="position: absolute; left: 15px; top: 15px"
+           :src="language==='cn'?'../assets/united-kingdom.png':'../assets/china.png'">
       <v-spacer></v-spacer>
       <img src="../assets/help-circle.png" alt="help"
-           style="height: 48px; width: 48px; filter: drop-shadow(2px 2px 2px gray); elevation: above; image-rendering: pixelated"
+           style="position: absolute; right: 15px; top: 15px"
+           class="switches"
            onclick="">
     </v-row>
 
@@ -82,7 +84,6 @@ export default {
       duckStates: {},
       language: 'cn',
       mute: false,
-      languagePrompt: '🇬🇧'
     }
   },
   async mounted() {
@@ -240,10 +241,12 @@ html * {
   right: 0;
 }
 
-.language-button {
-  border-style: none;
+.switches {
+  height: 48px;
+  width: 48px;
+  filter: drop-shadow(2px 2px 2px gray);
   elevation: above;
-  filter: drop-shadow(2px 2px 2px gray)
+  image-rendering: pixelated
 }
 
 @font-face {
