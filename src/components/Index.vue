@@ -27,6 +27,7 @@
         v-model="dialog"
         style="background: transparent"
         hide-overlay
+        height="80%"
         v-if="shownDuck != null"
     >
       <v-card
