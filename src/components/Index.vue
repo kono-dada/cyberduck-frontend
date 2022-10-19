@@ -108,6 +108,8 @@ export default {
       minScale: 0.5,
       maxScale: 1.0,
       startScale: 0.8,
+      startX: -900,
+      startY: -300,
       contain: 'outside'
     });
     const duckList = await axios.get("https://sso.forkingpark.cn/api/preview-ducks");
