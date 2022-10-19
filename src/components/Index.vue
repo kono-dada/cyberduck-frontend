@@ -4,8 +4,8 @@
   >
     <v-row style="position: absolute; top: 5%;z-index: 5;left: 0;padding: 0; width: 90%" class="mx-5">
       <p id="language"
-             class="language-button"
-             @click="language = language==='cn'?'en':'cn'; languagePrompt = language==='cn'?'🇬🇧':'🇨🇳'"
+         class="language-button"
+         @click="language = language==='cn'?'en':'cn'; languagePrompt = language==='cn'?'🇬🇧':'🇨🇳'"
       >
         {{ languagePrompt }}
       </p>
@@ -126,28 +126,26 @@ export default {
     // load ducks from the preview-duck, only the found ducks have detailed info
     duckList.data.forEach(
         (duck) => {
-          this.duckStates = {
-            ...this.duckStates,
-            [duck.location.id]: {
-              id: duck.location.id,
-              isFound: false,
-              isHidden: duck.isHidden,
-              coordinate: duck.location.coordinate,
-              info: {
-                duckIconUrl: 'https://parklife-1303545624.cos.ap-guangzhou.myqcloud.com/unknown.png',
-                story: {
-                  cn: '还没发现这只鸭子，也许在...',
-                  en: ''
-                },
-                title: {
-                  cn: '未知鸭子',
-                  en: ''
-                }
+          this.duckStates[duck.location.id] = {
+            id: duck.location.id,
+            isFound: false,
+            isHidden: duck.isHidden,
+            coordinate: duck.location.coordinate,
+            info: {
+              duckIconUrl: 'https://parklife-1303545624.cos.ap-guangzhou.myqcloud.com/unknown.png',
+              story: {
+                cn: '还没发现这只鸭子，也许在...',
+                en: ''
+              },
+              title: {
+                cn: '未知鸭子',
+                en: ''
               }
             }
           }
         }
-    )
+    );
+    this.$forceUpdate();
 
     // 登陆代码
     try {
@@ -156,17 +154,10 @@ export default {
           {withCredentials: true}
       );
       response.data.duckHistory.map(d => d.duck).forEach((duck) => {
-        this.duckStates = {
-          ...this.duckStates[duck.location.id],
-          [duck.location.id]: {
-            id: duck.location.id,
-            isHidden: duck.isHidden,
-            coordinate: duck.location.coordinate,
-            isFound: true,
-            info: duck,
-          }
-        };
+        this.duckStates[duck.location.id].isFound = true;
+        this.duckStates[duck.location.id].info = duck;
       });
+      this.$forceUpdate();
     } catch (e) {
       // on 401 error, go to login page
       if (e.response && e.response.status === 401) {
