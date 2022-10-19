@@ -31,7 +31,6 @@
         style="background: transparent"
         hide-overlay
         v-if="shownDuck != null"
-        persistent
     >
       <div style="max-height: 490px">
         <v-row style="height: 81px"></v-row>
@@ -41,11 +40,11 @@
             height="400px"
             max-height="400px"
             elevation="10"
-            align="center"
+            text-align="center"
         >
           <v-row style="height: 81px;position:absolute;width: 100%;padding: 0;left: 0" align="center" class="ma-0">
             <v-col>
-              <v-img src="{{bigImage(shownDuck.duckIconUrl)}}"
+              <v-img :src="bigImage(shownDuck.duckIconUrl)"
                      style=" top: -100px;" width="150px" :aspect-ratio="1"></v-img>
             </v-col>
           </v-row>
@@ -81,7 +80,7 @@
                style="height: 2044px; width: 3267px; padding: 0; margin: 0"></v-img>
       </div>
       <v-img
-          src="{{duck.duckIconUrl}}"
+          :src="duck.duckIconUrl"
           @click="duckClicked(duck)"
           :style="{'position': 'absolute', 'left': duck.coordinate.x, 'top': duck.coordinate.y}"
           v-for="duck in Object.values(duckStates).filter(_ => (!_.isHidden) || _.isFound)"
@@ -173,8 +172,6 @@ export default {
 
     // 电脑zoom in
     // document.addEventListener('wheel', this.panzoom.zoomWithWheel)
-    console.log("log", this.duckStates)
-
   },
   methods: {
     duckClicked(duck) {
