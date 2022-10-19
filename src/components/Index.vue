@@ -39,12 +39,12 @@
             height="400px"
             max-height="400px"
             elevation="10"
-            text-align="center"
+            align="center"
         >
           <v-row style="height: 81px;position:absolute;width: 100%;padding: 0;left: 0" align="center" class="ma-0">
             <v-col>
               <v-img :src="bigImage(shownDuck.duckIconUrl)"
-                     style=" top: -100px;" width="150px" :aspect-ratio="1"></v-img>
+                     style=" top: -100px;" width="192px" :aspect-ratio="1"></v-img>
             </v-col>
           </v-row>
           <v-card-title>
