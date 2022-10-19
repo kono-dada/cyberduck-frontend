@@ -35,7 +35,7 @@
           color="#ffffffff"
           height="380px"
           width="95%"
-          style="margin-top: 150px"
+          style="margin-top: 150px; padding: 0"
           elevation="10"
           alignment="center"
       >
@@ -87,6 +87,7 @@ export default {
       duckStates: {},
       duckId: this.$route.params.id,
       language: 'cn',
+      mute: false,
       languagePrompt: '🇬🇧'
     }
   },
@@ -158,6 +159,15 @@ export default {
     duckClicked(duck) {
       this.dialog = true
       this.shownDuck = duck.info
+      if (!this.mute) {
+        if (this.shownDuck.isFound) {
+          const sound = Audio("https://parklife-1303545624.cos.ap-guangzhou.myqcloud.com/found-duck.m4a");
+          sound.play();
+        } else {
+          const sound = Audio("https://parklife-1303545624.cos.ap-guangzhou.myqcloud.com/unknown-duck.m4a");
+          sound.play();
+        }
+      }
     },
     bigImage(url) {
       const splits = url.split("/");
