@@ -70,6 +70,8 @@ import Panzoom from "@panzoom/panzoom"
 import axios from "axios"
 const unknownDuck = require("@/assets/unknown-duck.mp3");
 const foundDuck = require("@/assets/found-duck.mp3");
+const china = require("@/assets/china.png");
+const uk = require("@/assets/united-kingdom.png");
 
 export default {
   name: 'HelloWorld',
@@ -187,9 +189,9 @@ export default {
 
     getLanguageIcon() {
       if (this.language === 'cn') {
-        return "../assets/united-kingdom.png";
+        return uk;
       } else {
-        return '../assets/china.png';
+        return china;
       }
     },
 
