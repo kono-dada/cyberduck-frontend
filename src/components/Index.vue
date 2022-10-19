@@ -72,14 +72,14 @@
     <!--    restart game dialog-->
     <v-dialog
         v-model="restartDialog"
-        style="background: transparent"
+        style="background: transparent; padding: 10px; margin: 0px"
         hide-overlay
     >
       <v-card
           class="nes-container is-rounded"
           color="#ffffffff"
           elevation="10"
-          style="left: 50%; transform: translateX(-50%); width: 280px; padding: 5px; margin: 5px"
+          style="left: 50%; transform: translateX(-50%); width: 260px; padding: 5px; margin: 5px"
       >
         <v-card-title style="font-family: Chinese_pixel,serif"
                       v-html="language === 'cn' ? '<h3>重启游戏</h3>' : '<h3>Restart game</h3>'">
