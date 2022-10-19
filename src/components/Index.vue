@@ -158,7 +158,7 @@ export default {
       );
       response.data.duckHistory.map(d => d.duck).forEach((duck) => {
         this.duckStates = {
-          ...this.duckStates,
+          ...this.duckStates[duck.location.id],
           [duck.location.id]: {
             id: duck.location.id,
             isHidden: duck.isHidden,
@@ -167,8 +167,6 @@ export default {
             info: duck,
           }
         };
-        this.duckStates.isFound = true
-        this.duckStates[duck.location.id].info = duck
       });
     } catch (e) {
       // on 401 error, go to login page
