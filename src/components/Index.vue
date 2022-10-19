@@ -5,7 +5,7 @@
     <img src="../assets/scan.png" alt="help"
          style="position: absolute; z-index: 5; top: 3%; left: 5%;"
          class="switches"
-         @onclick="scanning = true">
+         @click="scanning = true">
     <v-col style="position: absolute; z-index: 5; top: 3%; right: 5%; width: 48px; margin: 0; padding: 0">
       <img src="../assets/help-circle.png" alt="help"
            class="switches"
@@ -27,9 +27,11 @@
     <v-dialog
         v-model="scanning"
         hide-overlay
+        fullscreen
+        transition="dialog-bottom-transition"
     >
       <i @click="scanning=false" class="nes-icon close" style="position: absolute; right: 10px; top: 10px"></i>
-      <qrcode-stream :key="_uid" :track="paintOutline" />
+      <qrcode-stream :key="_uid" :track="onDetect"></qrcode-stream>>
     </v-dialog>
 
 <!--    duck card-->
@@ -134,11 +136,13 @@ export default {
     }
   },
   methods: {
+    // scanning duck in two ways
     async scanDuck(duckId) {
       await this.fetchBackendApi("https://sso.forkingpark.cn/api/find-duck/" + duckId);
       this.duckClicked(Object.values(this.duckStates).find(d => d.info.id === duckId));
     },
 
+    // when duck gets clicked
     duckClicked(duck) {
       this.dialog = true
       this.shownDuck = duck.info
@@ -153,6 +157,7 @@ export default {
       }
     },
 
+    // loading preview before fetching user info
     async loadPreview() {
       const duckList = await axios.get("https://sso.forkingpark.cn/api/preview-ducks");
 
@@ -181,6 +186,7 @@ export default {
       this.$forceUpdate();
     },
 
+    // fetch backend api or redirect to login
     async fetchBackendApi(url) {
       try {
         const response = await axios.get(
@@ -206,6 +212,7 @@ export default {
       }
     },
 
+    // helper function to rename icon with '3x-' prefix
     bigImage(url) {
       const splits = url.split("/");
       const name = "3x-" + splits.pop();
@@ -213,15 +220,18 @@ export default {
       return splits.join("/");
     },
 
+    //  get language icon based on language state
     getLanguageIcon() {
       return this.language === 'cn' ? china : uk;
     },
 
+    // get mut icon based on mute state
     getMuteIcon() {
       return this.mute ? mute : sound;
     },
 
-    async paintOutline(detectedCodes, ctx) {
+    // on QR-code detection
+    async onDetect(detectedCodes, ctx) {
       for (const detectedCode of detectedCodes) {
         const prefix = "https://duck.forkingpark.cn/duck/";
 
@@ -249,6 +259,7 @@ export default {
       }
     },
 
+    // compose the story html based on database content
     getStory(shownDuck) {
       let story = shownDuck.story[this.language];
       // hint next location
