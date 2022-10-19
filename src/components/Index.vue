@@ -16,6 +16,8 @@
            :src="this.getLanguageIcon()" style="padding: 5px">
       <img class="switches" alt="mute" @click="switchMute()"
            :src="this.getMuteIcon()" style="padding: 5px">
+      <img class="switches" alt="restart" @click="restartDialog=true;"
+           src="../assets/refresh.png" style="padding: 5px">
     </v-col>
 
     <div id="collection_progress"
@@ -67,9 +69,43 @@
       </v-card>
     </v-dialog>
 
+    <!--    restart game dialog-->
+    <v-dialog
+        v-model="restartDialog"
+        style="background: transparent"
+        hide-overlay
+    >
+      <v-card>
+        <v-card-title class="text-h3">
+          {{ language === "cn" ? "重启游戏" : "Restart game" }}
+        </v-card-title>
+
+        <v-card-text>
+          {{
+            language === "cn" ?
+                "你希望清除记录，重启游戏吗？不可恢复" :
+                "Do you wish to restart game and clear your data? This is irrevocable."
+          }}
+        </v-card-text>
+        <v-divider></v-divider>
+        <v-card-actions>
+          <v-btn
+              class="nes-btn primary"
+              @click="restartDialog = false"
+          >Cancel
+          </v-btn>
+          <v-btn
+              class="nes-btn error"
+              @click="restartGame"
+          >Confirm
+          </v-btn>
+        </v-card-actions>
+      </v-card>
+    </v-dialog>
+
     <!--    duck card-->
     <v-dialog
-        v-model="dialog"
+        v-model="duckCardDialog"
         style="background: transparent"
         hide-overlay
         height="90%"
@@ -87,7 +123,7 @@
         <v-img :src="bigImage(shownDuck.duckIconUrl)"
                style="position: absolute; left: 50%; transform: translateX(-50%); top: -120px;" width="150px"
                :aspect-ratio="1"></v-img>
-        <i @click="dialog=false" class="nes-icon close" style="position: absolute; right: 10px; top: 10px"></i>
+        <i @click="duckCardDialog=false" class="nes-icon close" style="position: absolute; right: 10px; top: 10px"></i>
         <v-card-title>
           <h3 style="font-family: Chinese_pixel, serif; margin-top: 10px">
             {{ shownDuck.title[language] }}
@@ -150,12 +186,13 @@ export default {
   data() {
     return {
       panzoom: null,
-      dialog: false,
+      duckCardDialog: false,
       showHelp: false,
       shownDuck: null,
       duckStates: {},
       scanning: false,
       language: 'cn',
+      restartDialog: false,
       helpText: help,
       mute: false,
     }
@@ -204,9 +241,21 @@ export default {
       this.duckClicked(Object.values(this.duckStates).find(d => d.info.id === duckId));
     },
 
+    async restartGame() {
+      try {
+        await axios.delete(
+            "https://sso.forkingpark.cn/api/user-info",
+            {withCredentials: true}
+        );
+        await this.fetchBackendApi("https://sso.forkingpark.cn/api/user-info");
+      } finally {
+        this.restartDialog = false;
+      }
+    },
+
     // when duck gets clicked
     duckClicked(duck) {
-      this.dialog = true
+      this.duckCardDialog = true
       this.shownDuck = duck.info
       if (!this.mute) {
         if (duck.isFound) {
