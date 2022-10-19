@@ -5,7 +5,7 @@
     <v-row style="position: absolute; top: 5%;z-index: 5;left: 0;padding: 0; width: 90%" class="mx-5">
       <v-btn id="language"
              elevation="0"
-             style="background: #ffffff;text-align: center; font-family: Chinese_pixel,serif; padding: 0; margin: 0; font-size: small;border-style: none;background: transparent"
+             style="text-align: center; font-family: Chinese_pixel,serif; padding: 0; margin: 0; font-size: small;border-style: none;background: transparent"
              @click="language = language==='cn'?'en':'cn'; languagePrompt = language==='cn'?'🇬🇧':'🇨🇳'"
       >
         {{ languagePrompt }}
