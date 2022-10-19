@@ -3,13 +3,12 @@
       class="no-whitespace unselectable full-screen"
   >
     <v-row style="position: absolute; top: 5%;z-index: 5;left: 0;padding: 0; width: 90%" class="mx-5">
-      <v-btn id="language"
-             elevation="0"
-             style="text-align: center; font-family: Chinese_pixel,serif; padding: 0; margin: 0; font-size: small;border-style: none;background: transparent"
+      <p id="language"
+             class="language-button"
              @click="language = language==='cn'?'en':'cn'; languagePrompt = language==='cn'?'🇬🇧':'🇨🇳'"
       >
         {{ languagePrompt }}
-      </v-btn>
+      </p>
       <v-spacer></v-spacer>
       <v-btn icon color="#eebb00" fab x-small dark elevation="10" style="" class="mt-1">
         <v-icon x-large>
@@ -220,6 +219,26 @@ html * {
   left: 0;
   bottom: 0;
   right: 0;
+}
+
+.language-button {
+  text-align: center;
+  font-family: Chinese_pixel, serif;
+  padding: 0;
+  margin: 0;
+  font-size: large;
+  border-style: none;
+  background: transparent
+}
+
+.language-button:hover {
+  text-align: center;
+  font-family: Chinese_pixel, serif;
+  padding: 0;
+  margin: 0;
+  font-size: large;
+  border-style: none;
+  background: transparent
 }
 
 @font-face {
