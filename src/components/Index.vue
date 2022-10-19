@@ -1,42 +1,41 @@
 <template>
-  <v-container>
-    <div
-        class="no-whitespace unselectable full-screen"
-    >
-      <v-row style="position: absolute; top: 5%;z-index: 5;left: 0;padding: 0; width: 90%" class="mx-5">
-        <p id="language"
-           class="language-button"
-           @click="language = language==='cn'?'en':'cn'; languagePrompt = language==='cn'?'🇬🇧':'🇨🇳'"
-        >
-          {{ languagePrompt }}
-        </p>
-        <v-spacer></v-spacer>
-        <v-btn icon color="#eebb00" fab x-small dark elevation="10" style="" class="mt-1">
-          <v-icon x-large>
-            mdi-help-circle
-          </v-icon>
-        </v-btn>
-      </v-row>
+  <div
+      class="no-whitespace unselectable full-screen"
+  >
+    <v-row style="position: absolute; top: 5%;z-index: 5;left: 0;padding: 0; width: 90%" class="mx-5">
+      <p id="language"
+         class="language-button"
+         @click="language = language==='cn'?'en':'cn'; languagePrompt = language==='cn'?'🇬🇧':'🇨🇳'"
+      >
+        {{ languagePrompt }}
+      </p>
+      <v-spacer></v-spacer>
+      <v-btn icon color="#eebb00" fab x-small dark elevation="10" style="" class="mt-1">
+        <v-icon x-large>
+          mdi-help-circle
+        </v-icon>
+      </v-btn>
+    </v-row>
 
-      <div id="collection_progress"
-           style="position: fixed; right: 5%; top:85%;z-index: 5;background: #ffffff;text-align: center; font-family: Chinese_pixel,serif;padding: 0.2rem 1.5rem;"
-           class="nes-container is-rounded elevation-10"
-      >
-        <p>{{ Object.values(duckStates).filter(_ => _.isFound).length }}/10</p>
-      </div>
-      <v-dialog
-          v-model="dialog"
-          width="80%"
-          height="80%"
-          style="background: transparent"
-          hide-overlay
-          v-if="shownDuck != null"
-      >
+    <div id="collection_progress"
+         style="position: fixed; right: 5%; top:85%;z-index: 5;background: #ffffff;text-align: center; font-family: Chinese_pixel,serif;padding: 0.2rem 1.5rem;"
+         class="nes-container is-rounded elevation-10"
+    >
+      <p>{{ Object.values(duckStates).filter(_ => _.isFound).length }}/10</p>
+    </div>
+    <v-dialog
+        v-model="dialog"
+        width="80%"
+        style="background: transparent"
+        hide-overlay
+        v-if="shownDuck != null"
+    >
+      <div style="max-height: 550px">
         <v-card
             class="mx-2 nes-container is-rounded"
             color="#ffffffff"
-            height="80%"
-            max-height="80%"
+            height="400px"
+            max-height="400px"
             style="margin-top: 150px"
             elevation="10"
             align="center"
@@ -50,12 +49,13 @@
             </h3>
           </v-card-title>
           <v-card-text class="font-weight-bold text-left"
-                       style="background: #ffffff; width: 100%;height: 80%;font-size: medium;font-family: Chinese_pixel, serif; overflow-y: scroll;">
+                       style="background: #ffffff; width: 100%;height: 100%;font-size: medium;font-family: Chinese_pixel, serif; overflow-y: scroll;">
             {{ shownDuck.story[language] }}
           </v-card-text>
         </v-card>
-      </v-dialog>
-    </div>
+
+      </div>
+    </v-dialog>
     <div id="map" class="no-whitespace unselectable" style="height: max-content; width: max-content;">
       <div class="no-whitespace unselectable" style="height: 2044px; width: 3267px;">
         <v-img src="https://parklife-1303545624.cos.ap-guangzhou.myqcloud.com/map.png" alt="map"
@@ -71,7 +71,7 @@
           width="64px"
       ></v-img>
     </div>
-  </v-container>
+  </div>
 </template>
 
 <script>
