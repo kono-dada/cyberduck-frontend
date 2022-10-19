@@ -2,11 +2,10 @@
   <div
       class="no-whitespace unselectable full-screen"
   >
-    <qrcode-capture id="qr-scan" :multiple="false" @decode="onDecode" hidden></qrcode-capture>
     <img src="../assets/scan.png" alt="help"
          style="position: absolute; z-index: 5; top: 3%; left: 5%;"
          class="switches"
-         onclick="document.getElementById('qr-scan').click()">
+         @click="this.scanning = true">
     <v-col style="position: absolute; z-index: 5; top: 3%; right: 5%; width: 48px; margin: 0; padding: 0">
       <img src="../assets/help-circle.png" alt="help"
            class="switches"
@@ -23,6 +22,17 @@
     >
       <p>{{ Object.values(duckStates).filter(_ => _.isFound).length }}/10</p>
     </div>
+
+<!--    qr scanner-->
+    <v-dialog
+        v-model="scanning"
+        hide-overlay
+    >
+      <i @click="scanning=false" class="nes-icon close" style="position: absolute; right: 10px; top: 10px"></i>
+      <qrcode-stream :key="_uid" :track="paintOutline" />
+    </v-dialog>
+
+<!--    duck card-->
     <v-dialog
         v-model="dialog"
         style="background: transparent"
@@ -74,7 +84,7 @@
 <script>
 import Panzoom from "@panzoom/panzoom"
 import axios from "axios"
-import { QrcodeCapture } from 'vue-qrcode-reader'
+import { QrcodeStream } from 'vue-qrcode-reader'
 const unknownDuck = require("@/assets/unknown-duck.mp3");
 const foundDuck = require("@/assets/found-duck.mp3");
 const china = require("@/assets/china.png");
@@ -85,7 +95,7 @@ const mute = require("@/assets/mute.png");
 export default {
   name: 'HelloWorld',
   components: {
-    QrcodeCapture
+    QrcodeStream
   },
   props: {},
   data() {
@@ -94,6 +104,7 @@ export default {
       dialog: false,
       shownDuck: null,
       duckStates: {},
+      scanning: false,
       language: 'cn',
       mute: false,
     }
@@ -210,11 +221,31 @@ export default {
       return this.mute ? mute : sound;
     },
 
-    async onDecode(decodeString) {
-      const prefix = "https://duck.forkingpark.cn/duck/";
-      if (decodeString.startsWith(prefix)) {
-        const duckId = decodeString.substring(prefix.length);
-        await this.scanDuck(duckId);
+    async paintOutline(detectedCodes, ctx) {
+      for (const detectedCode of detectedCodes) {
+        const prefix = "https://duck.forkingpark.cn/duck/";
+
+        const [ firstPoint, ...otherPoints ] = detectedCode.cornerPoints
+
+        ctx.strokeStyle = "red";
+
+        ctx.beginPath();
+        ctx.moveTo(firstPoint.x, firstPoint.y);
+        for (const { x, y } of otherPoints) {
+          ctx.lineTo(x, y);
+        }
+        ctx.lineTo(firstPoint.x, firstPoint.y);
+        ctx.closePath();
+        ctx.stroke();
+
+        const code = detectedCode.rawValue;
+
+        if (code.startsWith(prefix)) {
+          const duckId = code.substring(prefix.length);
+          this.scanning = false;
+          await this.scanDuck(duckId);
+          break;
+        }
       }
     },
 
