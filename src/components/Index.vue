@@ -118,8 +118,8 @@ export default {
       canvas: true,
       animate: true,
       panOnlyWhenZoomed: false,
-      minScale: 0.3,
-      maxScale: 1.5,
+      minScale: 0.5,
+      maxScale: 1.0,
       startScale: 0.8,
       contain: 'outside'
     });
