@@ -161,10 +161,10 @@ export default {
       this.shownDuck = duck.info
       if (!this.mute) {
         if (this.shownDuck.isFound) {
-          const sound = Audio("https://parklife-1303545624.cos.ap-guangzhou.myqcloud.com/found-duck.m4a");
+          const sound = new Audio("https://parklife-1303545624.cos.ap-guangzhou.myqcloud.com/found-duck.m4a");
           sound.play();
         } else {
-          const sound = Audio("https://parklife-1303545624.cos.ap-guangzhou.myqcloud.com/unknown-duck.m4a");
+          const sound = new Audio("https://parklife-1303545624.cos.ap-guangzhou.myqcloud.com/unknown-duck.m4a");
           sound.play();
         }
       }
