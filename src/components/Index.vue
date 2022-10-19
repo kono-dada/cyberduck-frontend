@@ -127,20 +127,23 @@ export default {
     // load ducks from the preview-duck, only the found ducks have detailed info
     duckList.data.forEach(
         (duck) => {
-          this.duckStates[duck.location.id] = {
-            id: duck.location.id,
-            isFound: false,
-            isHidden: duck.isHidden,
-            coordinate: duck.location.coordinate,
-            info: {
-              duckIconUrl: 'https://parklife-1303545624.cos.ap-guangzhou.myqcloud.com/unknown.png',
-              story: {
-                cn: '还没发现这只鸭子，也许在...',
-                en: ''
-              },
-              title: {
-                cn: '未知鸭子',
-                en: ''
+          this.duckStates = {
+            ...this.duckStates,
+            [duck.location.id]: {
+              id: duck.location.id,
+              isFound: false,
+              isHidden: duck.isHidden,
+              coordinate: duck.location.coordinate,
+              info: {
+                duckIconUrl: 'https://parklife-1303545624.cos.ap-guangzhou.myqcloud.com/unknown.png',
+                story: {
+                  cn: '还没发现这只鸭子，也许在...',
+                  en: ''
+                },
+                title: {
+                  cn: '未知鸭子',
+                  en: ''
+                }
               }
             }
           }
@@ -154,7 +157,17 @@ export default {
           {withCredentials: true}
       );
       response.data.duckHistory.map(d => d.duck).forEach((duck) => {
-        this.duckStates[duck.location.id].isFound = true
+        this.duckStates = {
+          ...this.duckStates,
+          [duck.location.id]: {
+            id: duck.location.id,
+            isHidden: duck.isHidden,
+            coordinate: duck.location.coordinate,
+            isFound: true,
+            info: duck,
+          }
+        };
+        this.duckStates.isFound = true
         this.duckStates[duck.location.id].info = duck
       });
     } catch (e) {
