@@ -57,7 +57,7 @@
         <img class="switches" alt="mute" @click="showHelp=false" src="../assets/close.png"
              style="position: absolute; right: 5%; top: 3%; z-index: 5">
         <v-card-title>
-          <h3 style="font-family: Chinese_pixel, serif; margin-top: 5px">
+          <h3 style="font-family: Chinese_pixel, serif; margin-top: 50px; margin-right: 80px;">
             {{ helpText.title[language] }}
           </h3>
         </v-card-title>
