@@ -4,7 +4,7 @@
   >
     <v-row style="position: absolute; z-index: 5; top: 5%; left: 0; right: 0" class="mx-5">
       <img class="switches" alt="languages" @click="language = language==='cn'?'en':'cn'"
-             :src="this.getLanguageIcon()">
+             :src="this.getLanguageIcon()" style="padding: 5px">
       <v-spacer></v-spacer>
       <img src="../assets/help-circle.png" alt="help"
            class="switches"
