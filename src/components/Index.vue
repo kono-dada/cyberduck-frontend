@@ -5,7 +5,9 @@
     <img src="../assets/scan.png" alt="help"
          style="position: absolute; z-index: 5; top: 3%; left: 5%;"
          class="switches"
-         @click="scanning = true">
+         @click="scanning = true"
+         @init="onInit"
+    >
     <v-col style="position: absolute; z-index: 5; top: 3%; right: 5%; width: 48px; margin: 0; padding: 0">
       <img src="../assets/help-circle.png" alt="help"
            class="switches"
@@ -185,6 +187,16 @@ export default {
           }
       );
       this.$forceUpdate();
+    },
+
+    async onInit(promise) {
+      try {
+        await promise
+        // successfully initialized
+      } finally {
+        // close scanner on error
+        this.scanning = false;
+      }
     },
 
     // fetch backend api or redirect to login
