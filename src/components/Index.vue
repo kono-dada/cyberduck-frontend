@@ -76,8 +76,8 @@
         hide-overlay
     >
       <v-card>
-        <v-card-title class="text-h3" style="font-family: Chinese_pixel,serif">
-          {{ language === "cn" ? "重启游戏" : "Restart game" }}
+        <v-card-title style="font-family: Chinese_pixel,serif"
+                      v-html="language === 'cn' ? '<h3>重启游戏</h3>' : '<h3>Restart game</h3>'">
         </v-card-title>
 
         <v-card-text style="font-family: Chinese_pixel,serif">
@@ -250,6 +250,8 @@ export default {
             "https://sso.forkingpark.cn/api/user-info",
             {withCredentials: true}
         );
+        this.duckStates = {};
+        await this.loadPreview();
         await this.fetchBackendApi("https://sso.forkingpark.cn/api/user-info");
       } finally {
         this.restartDialog = false;
