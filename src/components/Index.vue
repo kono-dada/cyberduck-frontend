@@ -25,8 +25,6 @@
     </div>
     <v-dialog
         v-model="dialog"
-        width="80%"
-        height="80%"
         style="background: transparent"
         hide-overlay
         v-if="shownDuck != null"
@@ -35,13 +33,15 @@
           class="mx-2 nes-container is-rounded"
           color="#ffffffff"
           height="400px"
-          max-height="400px"
+          width="95%"
           style="margin-top: 150px"
           elevation="10"
-          align="center"
+          alignment="center"
       >
-        <v-img :src="bigImage(shownDuck.duckIconUrl)"
-               style="position: absolute; alignment: center; top: -150px;" width="192px" :aspect-ratio="1"></v-img>
+        <div style="position: absolute; alignment: center; top: -150px">
+          <v-img :src="bigImage(shownDuck.duckIconUrl)"
+                 style="position: absolute; alignment: center; top: -150px;" width="192px" :aspect-ratio="1"></v-img>
+        </div>
         <i @click="dialog=false" class="nes-icon close" style="position: absolute; right: 10px; top: 10px"></i>
         <v-card-title>
           <h3 style="font-family: Chinese_pixel, serif; margin-top: 10px">
@@ -49,7 +49,7 @@
           </h3>
         </v-card-title>
         <v-card-text class="font-weight-bold text-left"
-                     style="background: #ffffff; width: 100%;height: 80%;font-size: medium;font-family: Chinese_pixel, serif; overflow-y: scroll;">
+                     style="background: #ffffff; width: 100%;height: 75%;font-size: medium;font-family: Chinese_pixel, serif; overflow-y: scroll;">
           {{ shownDuck.story[language] }}
         </v-card-text>
       </v-card>
