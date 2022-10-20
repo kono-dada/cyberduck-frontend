@@ -189,7 +189,7 @@
         <v-card-text class="font-weight-bold text-left"
                      v-html="getStory(shownDuck)"
                      style="background: #ffffff; width: 100%;font-size: medium;font-family: Chinese_pixel, serif; overflow-y: scroll;"
-                     :style="shownDuck.title.cn === '未知鸭鸭' ? 'height: 50%' : 'height: 72%'"
+                     :style="shownDuck.title.cn === '未知鸭子' ? 'height: 50%' : 'height: 72%'"
         ></v-card-text>
       </v-card>
     </v-dialog>
