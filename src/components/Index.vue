@@ -77,7 +77,7 @@
         transition="dialog-bottom-transition"
         style="margin: 0; padding: 0"
     >
-      <v-container class="fill-height unselectable">
+      <v-container class="fill-height unselectable no-whitespace">
         <v-layout column class="fill-height unselectable" style="padding:0;background-color:white;">
           <v-flex class="flex shrink unselectable">
             <h3 class="col-10 unselectable"
@@ -104,7 +104,7 @@
                       :key="'duck-profile' + duck.id"
                       style="image-rendering: pixelated"
                       aspect-ratio="1"
-                      height="64px"
+                      height="50px"
                   ></v-img>
                 </v-col>
                 <v-col class="col-9"
