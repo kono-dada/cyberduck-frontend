@@ -78,39 +78,43 @@
         fullscreen
         transition="dialog-bottom-transition"
     >
-      <img class="switches" alt="mute" @click="showDuckList=false" src="../assets/close.png"
-           style="position: absolute; right: 5%; top: 3%; z-index: 5">
-      <h3 style="font-family: Chinese_pixel, serif; margin-top: 50px; margin-right: 80px;">
-        {{ language === 'cn' ? "鸭鸭家族" : "The Duck Family" }}
-      </h3>
-      <v-img
-          :src="duck.info.duckIconUrl"
-          @click="duckClicked(duck)"
-          :style="{'position': 'absolute', 'left': duck.coordinate.x, 'top': duck.coordinate.y}"
-          v-for="duck in Object.values(duckStates).filter(_ => (!_.isHidden) || _.isFound)"
-          :key="duck.id"
-          height="80px"
-          width="80px"
-      ></v-img>
-      <div style="overflow-y: scroll">
-        <v-row
-            class="nes-container"
-            v-for="duck in Object.values(duckStates)"
-            :key="'duck-list-item' + duck.id"
-        >
-          <v-col class="col-3">
-            <v-img
-                :src="bigImage(duck.info.duckIconUrl)"
-                :key="'duck-profile' + duck.id"
-                height="80px"
-                width="80px"
-            ></v-img>
-          </v-col>
-          <v-col class="col-9" style="text-align: left; padding: 15px">
-            {{duck.info.title[language]}}
-          </v-col>
-        </v-row>
-      </div>
+      <v-card
+          class="mx-2 nes-container is-rounded"
+          color="#ffffffff"
+          height="95%"
+          width="95%"
+          style="padding: 5%; margin: 3%"
+          elevation="10"
+          alignment="center"
+      >
+        <img class="switches" alt="mute" @click="showDuckList=false" src="../assets/close.png"
+             style="position: absolute; right: 5%; top: 3%; z-index: 5">
+        <v-card-title>
+          <h3 style="font-family: Chinese_pixel, serif; margin-top: 50px; margin-right: 80px;">
+            {{ language === 'cn' ? "鸭鸭家族" : "The Duck Family" }}
+          </h3>
+        </v-card-title>
+        <div style="overflow-y: scroll; width: 100%">
+          <v-row
+              class="nes-container"
+              v-for="duck in Object.values(duckStates)"
+              :key="'duck-list-item' + duck.id"
+              style="margin: 5px"
+          >
+            <v-col class="col-3">
+              <v-img
+                  :src="bigImage(duck.info.duckIconUrl)"
+                  :key="'duck-profile' + duck.id"
+                  height="80px"
+                  width="80px"
+              ></v-img>
+            </v-col>
+            <v-col class="col-9" style="text-align: left; padding: 15px">
+              {{duck.info.title[language]}}
+            </v-col>
+          </v-row>
+        </div>
+      </v-card>
     </v-dialog>
 
     <!--    restart game dialog-->
