@@ -93,20 +93,23 @@
             {{ language === 'cn' ? "鸭鸭家族" : "The Duck Family" }}
           </h3>
         </v-card-title>
-        <div style="overflow-y: scroll; left: 0; bottom: 0; top: 0; right: 0">
+        <v-card-text
+            style="text-align: center"
+        >
           <v-container
-              class="nes-container is-rounded col-12 col-md-6"
+              class="nes-container is-rounded col-12 col-sm-6"
               v-for="duck in Object.values(duckStates)"
               :key="'duck-list-item' + duck.id"
-              style="margin: 5px; padding: 0"
+              style="margin: 5px; padding: 5px"
           >
-            <v-row>
+            <v-row style="height: 85px">
               <v-col class="col-3">
                 <v-img
                     :src="bigImage(duck.info.duckIconUrl)"
                     :key="'duck-profile' + duck.id"
                     style="image-rendering: pixelated"
                     aspect-ratio="1"
+                    height="70px"
                 ></v-img>
               </v-col>
               <v-col class="col-9" style="text-align: left; padding: 15px; font-family: Chinese_pixel, serif">
@@ -114,7 +117,7 @@
               </v-col>
             </v-row>
           </v-container>
-        </div>
+        </v-card-text>
       </v-card>
     </v-dialog>
 
