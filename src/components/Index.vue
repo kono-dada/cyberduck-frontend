@@ -216,7 +216,6 @@
 import Panzoom from "@panzoom/panzoom"
 import axios from "axios"
 import {QrcodeStream} from 'vue-qrcode-reader'
-import {getDimensions} from "@panzoom/panzoom/src/css";
 
 const china = require("@/assets/china.png");
 const uk = require("@/assets/united-kingdom.png");
@@ -334,7 +333,7 @@ export default {
     },
 
     zoomToPoint(scale, point) {
-      const dims = getDimensions(document.getElementById("map"))
+      const dims = this.getDimensions(document.getElementById("map"))
 
       // Instead of thinking of operating on the panzoom element,
       // think of operating on the area inside the panzoom
@@ -557,10 +556,42 @@ export default {
       text += this.language === "cn" ? "<h3>展览介绍</h3>" : "<h3>Intro</h3>"
       text += help.sign[this.language]
       return text;
-    }
-    ,
+    },
 
-// compose the story html based on database content
+    getDimensions(elem) {
+      const parent = elem.parentNode
+      const style = window.getComputedStyle(elem)
+      const parentStyle = window.getComputedStyle(parent)
+      const rectElem = elem.getBoundingClientRect()
+      const rectParent = parent.getBoundingClientRect()
+
+      return {
+        elem: {
+          style,
+          width: rectElem.width,
+          height: rectElem.height,
+          top: rectElem.top,
+          bottom: rectElem.bottom,
+          left: rectElem.left,
+          right: rectElem.right,
+          margin: getBoxStyle(elem, 'margin', style),
+          border: getBoxStyle(elem, 'border', style)
+        },
+        parent: {
+          style: parentStyle,
+          width: rectParent.width,
+          height: rectParent.height,
+          top: rectParent.top,
+          bottom: rectParent.bottom,
+          left: rectParent.left,
+          right: rectParent.right,
+          padding: getBoxStyle(parent, 'padding', parentStyle),
+          border: getBoxStyle(parent, 'border', parentStyle)
+        }
+      }
+    },
+
+    // compose the story html based on database content
     getStory(shownDuck) {
       let story = shownDuck.story[this.language];
       // hint next location
