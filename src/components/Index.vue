@@ -34,8 +34,8 @@
         fullscreen
         transition="dialog-bottom-transition"
     >
-      <img class="switches" alt="mute" @click="scanning=false" src="../assets/close.png"
-           style="position: absolute; right: 5%; top: 3%; z-index: 5">
+      <img class="switches" alt="mute" @click="scanning=false" src="../assets/close.svg"
+           style="position: absolute; right: 5%; top: 3%; z-index: 5; padding: 5px">
       <qrcode-stream :key="_uid" @decode="onDecode"></qrcode-stream>
     </v-dialog>
 
@@ -56,8 +56,8 @@
           elevation="10"
           alignment="center"
       >
-        <img class="switches" alt="mute" @click="showHelp=false" src="../assets/close.png"
-             style="position: absolute; right: 5%; top: 3%; z-index: 5">
+        <img class="switches" alt="mute" @click="showHelp=false" src="../assets/close.svg"
+             style="position: absolute; right: 5%; top: 3%; z-index: 5; padding: 5px">
         <v-card-title>
           <h3 style="font-family: Chinese_pixel, serif; margin-top: 50px; margin-right: 80px;">
             {{ helpText.title[language] }}
@@ -83,8 +83,8 @@
                 style="font-family: Chinese_pixel, serif; font-size: xx-large; margin-left: 10px; margin-top: 30px; margin-right: 50px;">
               {{ language === 'cn' ? "鸭鸭家族" : "The Duck Family" }}
             </h3>
-            <img class="switches" alt="mute" @click="showDuckList=false" src="../assets/close.png"
-                 style="position: absolute; right: 5%; top: 3%; z-index: 5">
+            <img class="switches" alt="mute" @click="showDuckList=false" src="../assets/close.svg"
+                 style="position: absolute; right: 5%; top: 3%; z-index: 5; padding: 5px">
           </v-flex>
           <v-flex
               class="white flex"
@@ -356,8 +356,8 @@ export default {
     },
 
     moveMapToDuck(duck) {
-      const mapX = parseInt(duck.coordinate.x.substring(0, -2));
-      const mapY = parseInt(duck.coordinate.y.substring(0, -2));
+      const mapX = parseInt(duck.coordinate.x.slice(0, -2));
+      const mapY = parseInt(duck.coordinate.y.slice(0, -2));
       const panPosition = computePan(mapX, mapY, zoomScale);
       this.panzoom.pan(panPosition.x, panPosition.y);
     },
