@@ -207,6 +207,15 @@ export default {
   },
   async mounted() {
     const elem = document.getElementById('map');
+    let defaultStart = {
+      x: -300,
+      y: -900,
+      scale: 0.8,
+    };
+    const map_transform = localStorage.getItem("PANZOOM");
+    if (map_transform) {
+      defaultStart = JSON.parse(map_transform);
+    }
     this.panzoom = Panzoom(elem, {
       // disableZoom: true,
       canvas: true,
@@ -214,20 +223,13 @@ export default {
       panOnlyWhenZoomed: false,
       minScale: 0.5,
       maxScale: 1.0,
-      startScale: 0.8,
-      startX: -900,
-      startY: -300,
+      startScale: defaultStart.scale,
+      startX: defaultStart.x,
+      startY: defaultStart.y,
       contain: 'outside'
     });
 
     // remember last time position
-    const map_transform = localStorage.getItem("PANZOOM");
-    if (map_transform) {
-      const panzoomData = JSON.parse(map_transform);
-      console.log("got panzoom data: " + panzoomData);
-      this.panzoom.zoom(panzoomData.scale);
-      this.panzoom.pan(panzoomData.x, panzoomData.y);
-    }
 
     await this.loadPreview();
 
