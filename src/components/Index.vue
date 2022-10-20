@@ -271,16 +271,15 @@ export default {
       defaultStart = JSON.parse(map_transform);
     }
     this.panzoom = Panzoom(elem, {
-      // disableZoom: true,
       canvas: true,
       animate: true,
       panOnlyWhenZoomed: false,
-      minScale: 0.5,
-      maxScale: 1.0,
+      minScale: 0.8,
+      maxScale: 0.8,
       startScale: 0.8,
       startX: defaultStart.x,
       startY: defaultStart.y,
-      disableZoom: true,
+      // disableZoom: true,
       contain: 'outside'
     });
 
