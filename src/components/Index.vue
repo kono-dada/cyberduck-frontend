@@ -212,7 +212,7 @@ export default {
       canvas: true,
       animate: true,
       panOnlyWhenZoomed: false,
-      minScale: 0.5,
+      minScale: 0.2,
       maxScale: 1.0,
       startScale: 0.8,
       startX: -900,
