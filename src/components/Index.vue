@@ -88,8 +88,8 @@
                  style="position: absolute; right: 5%; top: 3%; z-index: 5">
           </v-flex>
           <v-flex
-              class="white overflow-auto flex-fill"
-              style="padding-left: 10px; padding-right: 10px; text-align: center"
+              class="white flex-fill"
+              style="padding-left: 10px; padding-right: 10px; text-align: center; overflow-y: scroll"
           >
             <v-container
                 class="nes-container is-rounded col-12 col-sm-5"
