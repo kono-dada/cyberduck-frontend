@@ -221,11 +221,12 @@ export default {
     });
 
     // remember last time position
-    const map_transform = localStorage.getItem("MAP_TRANSFORM");
+    const map_transform = localStorage.getItem("PANZOOM");
     if (map_transform) {
-      const mapStyle = document.getElementById("map").style;
-      mapStyle.transform = map_transform;
-      console.log("map transform restored to: " + mapStyle.transform);
+      const panzoomData = JSON.parse(map_transform);
+      console.log("got panzoom data: " + panzoomData);
+      this.panzoom.zoom(panzoomData.scale);
+      this.panzoom.pan(panzoomData.x, panzoomData.y);
     }
 
     await this.loadPreview();
@@ -292,9 +293,14 @@ export default {
     },
 
     queryMapTransform() {
-      const map = document.getElementById("map");
-      const transform = window.getComputedStyle(map).transform;
-      localStorage.setItem("MAP_TRANSFORM", transform);
+      const {x, y} = this.panzoom.getPan();
+      const scale = this.panzoom.getScale();
+      const panzoomData = {
+        x: x,
+        y: y,
+        scale: scale,
+      };
+      localStorage.setItem("PANZOOM", JSON.stringify(panzoomData));
     },
 
     switchMute() {
