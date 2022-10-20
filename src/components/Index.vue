@@ -223,9 +223,10 @@ export default {
       panOnlyWhenZoomed: false,
       minScale: 0.5,
       maxScale: 1.0,
-      startScale: defaultStart.scale < 0.8 ? 0.8 : defaultStart.scale,
+      startScale: 0.8,
       startX: defaultStart.x,
       startY: defaultStart.y,
+      disableZoom: true,
       contain: 'outside'
     });
 
