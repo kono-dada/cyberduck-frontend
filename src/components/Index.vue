@@ -195,7 +195,7 @@
     </v-dialog>
     <div id="map" class="no-whitespace unselectable" style="height: max-content; width: max-content;">
       <div class="no-whitespace unselectable" style="height: 2044px; width: 3267px;">
-        <v-img src="https://parklife-1303545624.cos.ap-guangzhou.myqcloud.com/map.png" alt="map"
+        <v-img src="https://parklife-1303545624.cos.ap-guangzhou.myqcloud.com/map.jpg" alt="map"
                style="height: 2044px; width: 3267px; padding: 0; margin: 0; position: absolute; left: 0; top: 0"></v-img>
       </div>
       <v-img
@@ -241,32 +241,11 @@ bgmPlayer.addEventListener("ended", () => {
 })
 
 function computePan(mapX, mapY, scale) {
-  // get window size
-  const windowWidth = window.innerWidth;
-  const windowHeight = window.innerHeight;
-
-  // target position: center of screen
-  const target = [windowWidth / 2, windowHeight / 2];
-
-  // computation
-  const oldOrigin = [mapWidth / 2, mapHeight / 2];
-
-  // Equations:
-  // 1. target - newOrigin ==  (newMapPos - newOrigin) * scale
-  // 2. newOrigin - oldOrigin == newMapPos - oldMapPos
-
-  // Solution to newOrigin:
-  // target == scale * newMapPos + (1 - scale) * newOrigin
-  // newMapPos = oldMapPos + newOrigin - oldOrigin
-  // target == scale * (oldMapPos + newOrigin - oldOrigin) + (1 - scale) * newOrigin
-  // target == scale * (oldMapPos - oldOrigin) + newOrigin
-  // newOrigin == target - scale * (oldMapPos - oldOrigin)
-  // pan = newOrigin - oldOrigin
-  // pan = target - scale * (oldMapPos - oldOrigin) - oldOrigin
-  // pan = target - scale * oldMapPos - (1 - scale) * oldOrigin
+  const halfWindowSize = [window.innerWidth / 2, window.innerHeight / 2];
+  const halfMapSize = [mapWidth / 2, mapHeight / 2];
   return {
-    x: target[0] - scale * mapX - (1 - scale) * oldOrigin[0],
-    y: target[1] - scale * mapY - (1 - scale) * oldOrigin[1],
+    x: - halfMapSize[0] / scale * (1 - scale) + halfWindowSize[0] / scale - mapX,
+    y: - halfMapSize[1] / scale * (1 - scale) + halfWindowSize[1] / scale - mapY,
   }
 }
 
