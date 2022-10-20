@@ -77,48 +77,43 @@
         fullscreen
         transition="dialog-bottom-transition"
     >
-      <v-card
-          class="mx-2 nes-container is-rounded"
-          color="#ffffffff"
-          height="95%"
-          width="95%"
-          style="padding: 5%; margin: 3%"
-          elevation="10"
-          alignment="center"
-      >
-        <img class="switches" alt="mute" @click="showDuckList=false" src="../assets/close.png"
-             style="position: absolute; right: 5%; top: 3%; z-index: 5">
-        <v-card-title>
-          <h3 style="font-family: Chinese_pixel, serif; margin-top: 50px; margin-right: 80px;">
-            {{ language === 'cn' ? "鸭鸭家族" : "The Duck Family" }}
-          </h3>
-        </v-card-title>
-        <v-card-text
-            style="text-align: center"
-        >
-          <v-container
-              class="nes-container is-rounded col-12 col-sm-6"
-              v-for="duck in Object.values(duckStates)"
-              :key="'duck-list-item' + duck.id"
-              style="margin: 5px; padding: 5px"
+      <v-container class="fill-height">
+        <v-layout column class="fill-height">
+          <v-flex class="white--text blue flex shrink darken-3">
+            <h3 class="col-10" style="font-family: Chinese_pixel, serif; margin-top: 50px; margin-right: 80px;">
+              {{ language === 'cn' ? "鸭鸭家族" : "The Duck Family" }}
+            </h3>
+            <img class="switches col-2" alt="mute" @click="showDuckList=false" src="../assets/close.png"
+                 style="position: absolute; right: 5%; top: 3%; z-index: 5">
+          </v-flex>
+          <v-flex
+              class="white flex overflow-auto"
           >
-            <v-row style="height: 85px">
-              <v-col class="col-3">
-                <v-img
-                    :src="bigImage(duck.info.duckIconUrl)"
-                    :key="'duck-profile' + duck.id"
-                    style="image-rendering: pixelated"
-                    aspect-ratio="1"
-                    height="70px"
-                ></v-img>
-              </v-col>
-              <v-col class="col-9" style="text-align: left; padding: 15px; font-family: Chinese_pixel, serif">
-                {{duck.info.title[language]}}
-              </v-col>
-            </v-row>
-          </v-container>
-        </v-card-text>
-      </v-card>
+            <v-container
+                class="nes-container is-rounded col-12 col-sm-6"
+                v-for="duck in Object.values(duckStates)"
+                :key="'duck-list-item' + duck.id"
+                style="margin: 5px; padding: 5px"
+            >
+              <v-row style="height: 60px">
+                <v-col class="col-3">
+                  <v-img
+                      :src="bigImage(duck.info.duckIconUrl)"
+                      :key="'duck-profile' + duck.id"
+                      style="image-rendering: pixelated"
+                      aspect-ratio="1"
+                      height="64px"
+                  ></v-img>
+                </v-col>
+                <v-col class="col-9"
+                       style="text-align: left; padding: 15px; font-family: Chinese_pixel, serif; font-size: large">
+                  {{ duck.info.title[language] }}
+                </v-col>
+              </v-row>
+            </v-container>
+          </v-flex>
+        </v-layout>
+      </v-container>
     </v-dialog>
 
     <!--    restart game dialog-->
@@ -181,7 +176,8 @@
           alignment="center"
       >
         <v-img :src="bigImage(shownDuck.duckIconUrl)"
-               style="position: absolute; left: 50%; transform: translateX(-50%); top: -120px; image-rendering: pixelated" width="150px"
+               style="position: absolute; left: 50%; transform: translateX(-50%); top: -120px; image-rendering: pixelated"
+               width="150px"
                :aspect-ratio="1"></v-img>
         <i @click="duckCardDialog=false" class="nes-icon close" style="position: absolute; right: 10px; top: 10px"></i>
         <v-card-title>
