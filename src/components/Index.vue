@@ -153,8 +153,8 @@
           :style="{'position': 'absolute', 'left': duck.coordinate.x, 'top': duck.coordinate.y}"
           v-for="duck in Object.values(duckStates).filter(_ => (!_.isHidden) || _.isFound)"
           :key="duck.id"
-          height="64px"
-          width="64px"
+          height="80px"
+          width="80px"
       ></v-img>
     </div>
   </div>
