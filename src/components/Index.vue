@@ -63,9 +63,7 @@
             {{ helpText.title[language] }}
           </h3>
         </v-card-title>
-        <v-card-text class="font-weight-bold text-left"
-                     v-html="buildHelpText()"
-                     style="background: #ffffff; width: 100%;height: 72%;font-size: medium;font-family: Chinese_pixel, serif; overflow-y: scroll;"></v-card-text>
+        <v-card-text class="font-weight-bold text-left help" v-html="buildHelpText()"></v-card-text>
       </v-card>
     </v-dialog>
 
@@ -188,7 +186,11 @@
             {{ shownDuck.title[language] }}
           </h3>
         </v-card-title>
-        <v-card-text class="font-weight-bold text-left help" v-html="getStory(shownDuck)"></v-card-text>
+        <v-card-text class="font-weight-bold text-left"
+                     v-html="getStory(shownDuck)"
+                     style="background: #ffffff; width: 100%;font-size: medium;font-family: Chinese_pixel, serif; overflow-y: scroll;"
+                     :style="shownDuck.title.cn === '未知鸭鸭' ? 'height: 50%' : 'height: 72%'"
+        ></v-card-text>
       </v-card>
     </v-dialog>
     <div id="map" class="no-whitespace unselectable" style="height: max-content; width: max-content;">
