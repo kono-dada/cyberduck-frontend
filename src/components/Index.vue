@@ -507,6 +507,9 @@ export default {
 <style scoped>
 html * {
   font-family: Chinese_pixel, !important;
+  -webkit-touch-callout: none;
+  -webkit-user-select: none;
+  user-select: none;
 }
 
 .no-whitespace {
