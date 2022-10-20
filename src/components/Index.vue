@@ -144,20 +144,22 @@
     </v-dialog>
 
     <!--    map-->
-    <div id="map" class="unselectable" style="height: max-content; width: max-content; margin: 500px">
-      <div class="no-whitespace unselectable" style="height: 2044px; width: 3267px;">
-        <v-img src="https://parklife-1303545624.cos.ap-guangzhou.myqcloud.com/map.png" alt="map"
-               style="height: 2044px; width: 3267px; padding: 0; margin: 0"></v-img>
+    <div id="map" class="no-whitespace unselectable" style="height: max-content; width: max-content;">
+      <div class="no-whitespace unselectable" style="height: 2044px; width: 3267px; margin: 200px">
+        <div class="no-whitespace unselectable" style="height: 2044px; width: 3267px;">
+          <v-img src="https://parklife-1303545624.cos.ap-guangzhou.myqcloud.com/map.png" alt="map"
+                 style="height: 2044px; width: 3267px; padding: 0; margin: 0"></v-img>
+        </div>
+        <v-img
+            :src="duck.info.duckIconUrl"
+            @click="duckClicked(duck)"
+            :style="{'position': 'absolute', 'left': duck.coordinate.x, 'top': duck.coordinate.y}"
+            v-for="duck in Object.values(duckStates).filter(_ => (!_.isHidden) || _.isFound)"
+            :key="duck.id"
+            height="64px"
+            width="64px"
+        ></v-img>
       </div>
-      <v-img
-          :src="duck.info.duckIconUrl"
-          @click="duckClicked(duck)"
-          :style="{'position': 'absolute', 'left': duck.coordinate.x, 'top': duck.coordinate.y}"
-          v-for="duck in Object.values(duckStates).filter(_ => (!_.isHidden) || _.isFound)"
-          :key="duck.id"
-          height="64px"
-          width="64px"
-      ></v-img>
     </div>
   </div>
 </template>
