@@ -180,7 +180,7 @@
                style="position: absolute; left: 50%; transform: translateX(-50%); top: -120px; image-rendering: pixelated"
                width="150px"
                :aspect-ratio="1"></v-img>
-        <i @click="duckCardDialog=false" class="nes-icon close" style="position: absolute; right: 10px; top: 10px"></i>
+        <i @click="closeDuckDialogue()" class="nes-icon close" style="position: absolute; right: 10px; top: 10px"></i>
         <v-card-title>
           <h3 style="font-family: Chinese_pixel, serif; margin-top: 10px">
             {{ shownDuck.title[language] }}
@@ -256,6 +256,7 @@ export default {
       restartDialog: false,
       helpText: help,
       mute: false,
+      zoomToOnDialogClose: null,
     }
   },
   async mounted() {
@@ -321,14 +322,24 @@ export default {
         clientX: parseInt(duck.coordinate.x.slice(0, -2)),
         clientY: parseInt(duck.coordinate.y.slice(0, -2)),
       }
-      setTimeout(() => {
+      this.zoomToOnDialogClose = () => {
         this.panzoom.zoomToPoint(
             0.8,
             point,
             {force: true}
         );
-      });
+        console.log("zoom to point: (x: " + point.clientX + ", y: " + point.clientY + ")");
+      };
       this.duckClicked(duck);
+    },
+
+    closeDuckDialogue() {
+      this.duckCardDialog = false;
+      if (this.zoomToOnDialogClose) {
+        const zoomAction = this.zoomToOnDialogClose;
+        this.zoomToOnDialogClose = null;
+        zoomAction();
+      }
     },
 
     async restartGame() {
