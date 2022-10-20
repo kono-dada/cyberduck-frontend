@@ -328,6 +328,7 @@ export default {
             {withCredentials: true}
         );
         this.duckStates = {};
+        localStorage.clear();
         await this.loadPreview();
         await this.fetchBackendApi("https://sso.forkingpark.cn/api/user-info");
       } finally {
