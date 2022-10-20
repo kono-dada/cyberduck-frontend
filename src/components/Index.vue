@@ -77,7 +77,7 @@
         transition="dialog-bottom-transition"
         style="margin: 0; padding: 0"
     >
-      <v-container class="fill-height unselectable no-whitespace">
+      <div class="fill-height unselectable no-whitespace">
         <v-layout column class="fill-height unselectable" style="background-color:white;padding: 0 0 10px;">
           <v-flex class="flex shrink unselectable">
             <h3 class="col-10 unselectable"
@@ -115,7 +115,7 @@
             </v-container>
           </v-flex>
         </v-layout>
-      </v-container>
+      </div>
     </v-dialog>
 
     <!--    restart game dialog-->
