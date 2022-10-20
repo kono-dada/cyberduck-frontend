@@ -317,7 +317,7 @@ export default {
     async scanDuck(duckId) {
       await this.fetchBackendApi("https://sso.forkingpark.cn/api/find-duck/" + duckId);
       const duck = Object.values(this.duckStates).find(d => d.info.id === duckId);
-      this.panzoom.zoom(0.8, { focal: { x: duck.coordinate.x, y: duck.coordinate.y } });
+      this.panzoom.pan(duck.coordinate.x, duck.coordinate.y);
       this.duckClicked(duck);
     },
 
