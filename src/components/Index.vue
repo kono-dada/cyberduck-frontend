@@ -109,7 +109,7 @@
                   width="80px"
               ></v-img>
             </v-col>
-            <v-col class="col-9" style="text-align: left; padding: 15px">
+            <v-col class="col-9" style="text-align: left; padding: 15px; font-family: Chinese_pixel, serif">
               {{duck.info.title[language]}}
             </v-col>
           </v-row>
