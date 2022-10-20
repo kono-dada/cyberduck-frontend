@@ -96,7 +96,7 @@
                 :key="'duck-list-item' + duck.id"
                 style="margin: 5px; padding: 5px; display:inline-block"
             >
-              <v-row style="height: 60px">
+              <v-row style="height: 60px" @click="showDuckList=false;moveMapToDuck(duck);">
                 <v-col class="col-3">
                   <v-img
                       :src="bigImage(duck.info.duckIconUrl)"
@@ -201,12 +201,12 @@
       <v-img
           :src="duck.info.duckIconUrl"
           @click="duckClicked(duck)"
-          style="image-rendering: pixelated; position: absolute"
           :style="{'left': duck.coordinate.x, 'top': duck.coordinate.y}"
           v-for="duck in Object.values(duckStates).filter(_ => (!_.isHidden) || _.isFound)"
           :key="duck.id"
-          height="80px"
-          width="80px"
+          :height="Math.round(64 / panzoom.getScale()).toString() + 'px'"
+          :width="Math.round(64 / panzoom.getScale()).toString() + 'px'"
+          style="image-rendering: pixelated; position: absolute; transform: translate(-50%, -50%)"
       ></v-img>
     </div>
   </div>
@@ -229,6 +229,9 @@ const bgm = [
 ];
 let current_bgm = 0;
 const bgmPlayer = new Audio(bgm[current_bgm]);
+const [mapWidth, mapHeight] = [3267, 2044];
+const [startX, startY] = [2705, 1046];
+const zoomScale = 0.6;
 bgmPlayer.addEventListener("ended", () => {
   // load next bgm
   current_bgm = (current_bgm + 1) % bgm.length;
@@ -236,6 +239,36 @@ bgmPlayer.addEventListener("ended", () => {
   bgmPlayer.load();
   bgmPlayer.play();
 })
+
+function computePan(mapX, mapY, scale) {
+  // get window size
+  const windowWidth = window.innerWidth;
+  const windowHeight = window.innerHeight;
+
+  // target position: center of screen
+  const target = [windowWidth / 2, windowHeight / 2];
+
+  // computation
+  const oldOrigin = [mapWidth / 2, mapHeight / 2];
+
+  // Equations:
+  // 1. target - newOrigin ==  (newMapPos - newOrigin) * scale
+  // 2. newOrigin - oldOrigin == newMapPos - oldMapPos
+
+  // Solution to newOrigin:
+  // target == scale * newMapPos + (1 - scale) * newOrigin
+  // newMapPos = oldMapPos + newOrigin - oldOrigin
+  // target == scale * (oldMapPos + newOrigin - oldOrigin) + (1 - scale) * newOrigin
+  // target == scale * (oldMapPos - oldOrigin) + newOrigin
+  // newOrigin == target - scale * (oldMapPos - oldOrigin)
+  // pan = newOrigin - oldOrigin
+  // pan = target - scale * (oldMapPos - oldOrigin) - oldOrigin
+  // pan = target - scale * oldMapPos - (1 - scale) * oldOrigin
+  return {
+    x: target[0] - scale * mapX - (1 - scale) * oldOrigin[0],
+    y: target[1] - scale * mapY - (1 - scale) * oldOrigin[1],
+  }
+}
 
 export default {
   name: 'HelloWorld',
@@ -260,10 +293,11 @@ export default {
   },
   async mounted() {
     const elem = document.getElementById('map');
+    const startPos = computePan(startX, startY, zoomScale);
     let defaultStart = {
-      x: -300,
-      y: -900,
-      scale: 0.8,
+      x: startPos.x,
+      y: startPos.y,
+      scale: zoomScale,
     };
     const map_transform = localStorage.getItem("PANZOOM");
     if (map_transform) {
@@ -276,7 +310,7 @@ export default {
       panOnlyWhenZoomed: false,
       minScale: 0.5,
       maxScale: 1.0,
-      startScale: 0.8,
+      startScale: zoomScale,
       startX: defaultStart.x,
       startY: defaultStart.y,
       disableZoom: true,
@@ -316,7 +350,16 @@ export default {
     // scanning duck in two ways
     async scanDuck(duckId) {
       await this.fetchBackendApi("https://sso.forkingpark.cn/api/find-duck/" + duckId);
-      this.duckClicked(Object.values(this.duckStates).find(d => d.info.id === duckId));
+      const duck = Object.values(this.duckStates).find(d => d.info.id === duckId);
+      this.moveMapToDuck(duck);
+      this.duckClicked(duck);
+    },
+
+    moveMapToDuck(duck) {
+      const mapX = parseInt(duck.coordinate.x.substring(0, -2));
+      const mapY = parseInt(duck.coordinate.y.substring(0, -2));
+      const panPosition = computePan(mapX, mapY, zoomScale);
+      this.panzoom.pan(panPosition.x, panPosition.y);
     },
 
     async restartGame() {
@@ -333,10 +376,6 @@ export default {
         this.restartDialog = false;
       }
     },
-
-    // moveMapTo(x, y) {
-    //   this.panzoom.zoomToPoint();
-    // },
 
     // when duck gets clicked
     duckClicked(duck) {
