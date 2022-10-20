@@ -89,7 +89,7 @@
           </v-flex>
           <v-flex
               class="white overflow-auto flex-fill"
-              style="padding-left: 10px; padding-right: 20px; text-align: center"
+              style="padding-left: 10px; padding-right: 10px; text-align: center"
           >
             <v-container
                 class="nes-container is-rounded col-12 col-sm-5"
@@ -171,7 +171,7 @@
       <v-card
           class="mx-2 nes-container is-rounded"
           color="#ffffffff"
-          height="380px"
+          :height="shownDuck.isFound ? '150px' : '380px'"
           width="95%"
           style="margin-top: 150px; padding: 0"
           elevation="10"
