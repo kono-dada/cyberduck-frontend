@@ -74,7 +74,6 @@
     <v-dialog
         v-model="showDuckList"
         hide-overlay
-        style="background: #ffffff"
         fullscreen
         transition="dialog-bottom-transition"
     >
@@ -94,25 +93,27 @@
             {{ language === 'cn' ? "鸭鸭家族" : "The Duck Family" }}
           </h3>
         </v-card-title>
-        <div style="overflow-y: scroll; width: 100%">
-          <v-row
-              class="nes-container"
+        <div style="overflow-y: scroll; left: 0; bottom: 0; top: 0; right: 0">
+          <v-container
+              class="nes-container is-rounded col-12 col-md-6"
               v-for="duck in Object.values(duckStates)"
               :key="'duck-list-item' + duck.id"
-              style="margin: 5px"
+              style="margin: 5px; padding: 0"
           >
-            <v-col class="col-3">
-              <v-img
-                  :src="bigImage(duck.info.duckIconUrl)"
-                  :key="'duck-profile' + duck.id"
-                  height="80px"
-                  width="80px"
-              ></v-img>
-            </v-col>
-            <v-col class="col-9" style="text-align: left; padding: 15px; font-family: Chinese_pixel, serif">
-              {{duck.info.title[language]}}
-            </v-col>
-          </v-row>
+            <v-row>
+              <v-col class="col-3">
+                <v-img
+                    :src="bigImage(duck.info.duckIconUrl)"
+                    :key="'duck-profile' + duck.id"
+                    style="image-rendering: pixelated"
+                    aspect-ratio="1"
+                ></v-img>
+              </v-col>
+              <v-col class="col-9" style="text-align: left; padding: 15px; font-family: Chinese_pixel, serif">
+                {{duck.info.title[language]}}
+              </v-col>
+            </v-row>
+          </v-container>
         </div>
       </v-card>
     </v-dialog>
@@ -177,7 +178,7 @@
           alignment="center"
       >
         <v-img :src="bigImage(shownDuck.duckIconUrl)"
-               style="position: absolute; left: 50%; transform: translateX(-50%); top: -120px;" width="150px"
+               style="position: absolute; left: 50%; transform: translateX(-50%); top: -120px; image-rendering: pixelated" width="150px"
                :aspect-ratio="1"></v-img>
         <i @click="duckCardDialog=false" class="nes-icon close" style="position: absolute; right: 10px; top: 10px"></i>
         <v-card-title>
@@ -198,7 +199,8 @@
       <v-img
           :src="duck.info.duckIconUrl"
           @click="duckClicked(duck)"
-          :style="{'position': 'absolute', 'left': duck.coordinate.x, 'top': duck.coordinate.y}"
+          style="image-rendering: pixelated; position: absolute"
+          :style="{'left': duck.coordinate.x, 'top': duck.coordinate.y}"
           v-for="duck in Object.values(duckStates).filter(_ => (!_.isHidden) || _.isFound)"
           :key="duck.id"
           height="80px"
