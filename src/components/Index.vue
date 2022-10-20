@@ -171,7 +171,7 @@
       <v-card
           class="mx-2 nes-container is-rounded"
           color="#ffffffff"
-          :height="shownDuck.isFound ? '150px' : '380px'"
+          :height="shownDuck.title.cn === '未知鸭子' ? '150px' : '380px'"
           width="95%"
           style="margin-top: 150px; padding: 0"
           elevation="10"
