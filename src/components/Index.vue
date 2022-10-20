@@ -81,7 +81,7 @@
         <v-layout column class="fill-height unselectable" style="background-color:white;padding: 0 0 10px;">
           <v-flex class="flex shrink unselectable">
             <h3 class="col-10 unselectable"
-                style="font-family: Chinese_pixel, serif; margin-left: 10px; margin-top: 30px; margin-right: 50px;">
+                style="font-family: Chinese_pixel, serif; font-size: xx-large; margin-left: 10px; margin-top: 30px; margin-right: 50px;">
               {{ language === 'cn' ? "鸭鸭家族" : "The Duck Family" }}
             </h3>
             <img class="switches" alt="mute" @click="showDuckList=false" src="../assets/close.png"
@@ -89,7 +89,7 @@
           </v-flex>
           <v-flex
               class="white overflow-auto flex-fill"
-              style="padding-left: 20px; padding-right: 20px; text-align: center"
+              style="padding-left: 10px; padding-right: 20px; text-align: center"
           >
             <v-container
                 class="nes-container is-rounded col-12 col-sm-5"
