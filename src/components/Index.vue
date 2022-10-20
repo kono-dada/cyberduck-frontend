@@ -144,7 +144,7 @@
     </v-dialog>
 
     <!--    map-->
-    <div id="map" class="no-whitespace unselectable" style="height: 2444px; width: 3667px;">
+    <div id="map" class="no-whitespace unselectable" style="height: max-content; width: max-content;">
       <div class="no-whitespace unselectable" style="height: 2044px; width: 3267px; margin: 200px">
         <div class="no-whitespace unselectable" style="height: 2044px; width: 3267px;">
           <v-img src="https://parklife-1303545624.cos.ap-guangzhou.myqcloud.com/map.png" alt="map"
