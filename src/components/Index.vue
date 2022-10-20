@@ -21,11 +21,10 @@
     </v-col>
 
     <div id="collection_progress"
-         style="position: fixed; right: 5%; top:85%;z-index: 5;background: #ffffff;text-align: center; font-family: Chinese_pixel,serif;padding: 0.2rem 1.5rem;"
-         class="nes-container is-rounded elevation-10"
+         class="nes-container is-rounded elevation-10 collection-progress"
          @click="showDuckList=true"
     >
-      <p>{{ Object.values(duckStates).filter(_ => _.isFound).length }}/10</p>
+      <p>{{ Object.values(duckStates).filter(_ => _.isFound).length }}/{{ Object.values(duckStates).length }}</p>
     </div>
 
     <!--    qr scanner-->
@@ -81,7 +80,8 @@
       <v-container class="fill-height unselectable">
         <v-layout column class="fill-height unselectable" style="padding:0;background-color:white;">
           <v-flex class="flex shrink unselectable">
-            <h3 class="col-10 unselectable" style="font-family: Chinese_pixel, serif; margin-left: 10px; margin-top: 30px; margin-right: 50px;">
+            <h3 class="col-10 unselectable"
+                style="font-family: Chinese_pixel, serif; margin-left: 10px; margin-top: 30px; margin-right: 50px;">
               {{ language === 'cn' ? "鸭鸭家族" : "The Duck Family" }}
             </h3>
             <img class="switches" alt="mute" @click="showDuckList=false" src="../assets/close.png"
@@ -531,6 +531,18 @@ html * {
   filter: drop-shadow(2px 2px 2px gray);
   elevation: above;
   image-rendering: pixelated
+}
+
+.collection-progress {
+  position: fixed;
+  right: 5%;
+  top:85%;
+  z-index: 5;
+  background: #ffffff;
+  text-align: center;
+  font-family: Chinese_pixel, serif;
+  font-weight: bolder;
+  padding: 0.2rem 1.5rem;
 }
 
 @font-face {
