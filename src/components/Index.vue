@@ -220,6 +220,12 @@ export default {
       contain: 'outside'
     });
 
+    // remember last time position
+    const map_transform = localStorage.getItem("MAP_TRANSFORM");
+    if (map_transform) {
+      document.getElementById("map").style.transform = map_transform;
+    }
+
     await this.loadPreview();
 
     // auto play attempt
@@ -241,6 +247,11 @@ export default {
     } else {
       await this.fetchBackendApi("https://sso.forkingpark.cn/api/user-info");
     }
+
+    // log transform string
+    setInterval(() => {
+      this.queryMapTransform();
+    }, 500);
   },
   methods: {
     // scanning duck in two ways
@@ -276,6 +287,12 @@ export default {
           sound.play();
         }
       }
+    },
+
+    queryMapTransform() {
+      const map = document.getElementById("map");
+      const transform = window.getComputedStyle(map).transform;
+      localStorage.setItem("MAP_TRANSFORM", transform);
     },
 
     switchMute() {
