@@ -142,7 +142,9 @@
                      style="background: #ffffff; width: 100%;height: 72%;font-size: medium;font-family: Chinese_pixel, serif; overflow-y: scroll;"></v-card-text>
       </v-card>
     </v-dialog>
-    <div id="map" class="no-whitespace unselectable" style="height: max-content; width: max-content;">
+
+    <!--    map-->
+    <div id="map" class="unselectable" style="height: max-content; width: max-content; margin: 500px">
       <div class="no-whitespace unselectable" style="height: 2044px; width: 3267px;">
         <v-img src="https://parklife-1303545624.cos.ap-guangzhou.myqcloud.com/map.png" alt="map"
                style="height: 2044px; width: 3267px; padding: 0; margin: 0"></v-img>
