@@ -216,6 +216,7 @@
 import Panzoom from "@panzoom/panzoom"
 import axios from "axios"
 import {QrcodeStream} from 'vue-qrcode-reader'
+import {getDimensions} from "@panzoom/panzoom/src/css";
 
 const china = require("@/assets/china.png");
 const uk = require("@/assets/united-kingdom.png");
@@ -323,15 +324,67 @@ export default {
         clientY: parseInt(duck.coordinate.y.slice(0, -2)),
       }
       this.zoomToOnDialogClose = () => {
-        this.panzoom.zoomToPoint(
+        this.zoomToPoint(
             0.8,
             point,
-            {force: true}
         );
         console.log("zoom to point: (x: " + point.clientX + ", y: " + point.clientY + ")");
       };
       this.duckClicked(duck);
     },
+
+    zoomToPoint(scale, point) {
+      const dims = getDimensions(document.getElementById("map"))
+
+      // Instead of thinking of operating on the panzoom element,
+      // think of operating on the area inside the panzoom
+      // element's parent
+      // Subtract padding and border
+      const effectiveArea = {
+        width:
+            dims.parent.width -
+            dims.parent.padding.left -
+            dims.parent.padding.right -
+            dims.parent.border.left -
+            dims.parent.border.right,
+        height:
+            dims.parent.height -
+            dims.parent.padding.top -
+            dims.parent.padding.bottom -
+            dims.parent.border.top -
+            dims.parent.border.bottom
+      }
+
+      // Adjust the clientX/clientY to ignore the area
+      // outside the effective area
+      let clientX =
+          point.clientX -
+          dims.parent.left -
+          dims.parent.padding.left -
+          dims.parent.border.left -
+          dims.elem.margin.left
+      let clientY =
+          point.clientY -
+          dims.parent.top -
+          dims.parent.padding.top -
+          dims.parent.border.top -
+          dims.elem.margin.top
+
+      // Adjust the clientX/clientY for HTML elements,
+      // because they have a transform-origin of 50% 50%
+      clientX -= dims.elem.width / scale / 2
+      clientY -= dims.elem.height / scale / 2
+
+      // Convert the mouse point from it's position over the
+      // effective area before the scale to the position
+      // over the effective area after the scale.
+      const focal = {
+        x: (clientX / effectiveArea.width) * (effectiveArea.width * scale),
+        y: (clientY / effectiveArea.height) * (effectiveArea.height * scale)
+      }
+      this.panzoom.pan(focal.x, focal.y);
+    }
+    ,
 
     closeDuckDialogue() {
       this.duckCardDialog = false;
@@ -340,7 +393,8 @@ export default {
         this.zoomToOnDialogClose = null;
         zoomAction();
       }
-    },
+    }
+    ,
 
     async restartGame() {
       try {
@@ -355,9 +409,10 @@ export default {
       } finally {
         this.restartDialog = false;
       }
-    },
+    }
+    ,
 
-    // when duck gets clicked
+// when duck gets clicked
     duckClicked(duck) {
       this.duckCardDialog = true
       this.shownDuck = duck.info
@@ -370,7 +425,8 @@ export default {
           sound.play();
         }
       }
-    },
+    }
+    ,
 
     queryMapTransform() {
       const {x, y} = this.panzoom.getPan();
@@ -381,7 +437,8 @@ export default {
         scale: scale,
       };
       localStorage.setItem("PANZOOM", JSON.stringify(panzoomData));
-    },
+    }
+    ,
 
     switchMute() {
       this.mute = !this.mute;
@@ -390,9 +447,10 @@ export default {
       } else {
         bgmPlayer.play();
       }
-    },
+    }
+    ,
 
-    // loading preview before fetching user info
+// loading preview before fetching user info
     async loadPreview() {
       const duckList = await axios.get("https://sso.forkingpark.cn/api/preview-ducks");
 
@@ -419,7 +477,8 @@ export default {
           }
       );
       this.$forceUpdate();
-    },
+    }
+    ,
 
     async onInit(promise) {
       try {
@@ -429,9 +488,10 @@ export default {
         // close scanner on error
         this.scanning = false;
       }
-    },
+    }
+    ,
 
-    // fetch backend api or redirect to login
+// fetch backend api or redirect to login
     async fetchBackendApi(url) {
       try {
         const response = await axios.get(
@@ -455,27 +515,31 @@ export default {
           console.error("unexpected error: " + e);
         }
       }
-    },
+    }
+    ,
 
-    // helper function to rename icon with '3x-' prefix
+// helper function to rename icon with '3x-' prefix
     bigImage(url) {
       const splits = url.split("/");
       const name = "3x-" + splits.pop();
       splits.push(name);
       return splits.join("/");
-    },
+    }
+    ,
 
-    //  get language icon based on language state
+//  get language icon based on language state
     getLanguageIcon() {
       return this.language === 'cn' ? china : uk;
-    },
+    }
+    ,
 
-    // get mut icon based on mute state
+// get mut icon based on mute state
     getMuteIcon() {
       return this.mute ? mute : sound;
-    },
+    }
+    ,
 
-    // on QR-code detection
+// on QR-code detection
     async onDecode(code) {
       const prefix = "https://duck.forkingpark.cn/duck/";
       if (code.startsWith(prefix)) {
@@ -483,7 +547,8 @@ export default {
         this.scanning = false;
         await this.scanDuck(duckId);
       }
-    },
+    }
+    ,
 
     buildHelpText() {
       let text = "";
@@ -492,9 +557,10 @@ export default {
       text += this.language === "cn" ? "<h3>展览介绍</h3>" : "<h3>Intro</h3>"
       text += help.sign[this.language]
       return text;
-    },
+    }
+    ,
 
-    // compose the story html based on database content
+// compose the story html based on database content
     getStory(shownDuck) {
       let story = shownDuck.story[this.language];
       // hint next location
