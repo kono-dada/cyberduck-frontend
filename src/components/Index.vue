@@ -78,7 +78,7 @@
         style="margin: 0; padding: 0"
     >
       <v-container class="fill-height unselectable no-whitespace">
-        <v-layout column class="fill-height unselectable" style="padding:0;background-color:white;">
+        <v-layout column class="fill-height unselectable" style="background-color:white;padding: 0 0 10px;">
           <v-flex class="flex shrink unselectable">
             <h3 class="col-10 unselectable"
                 style="font-family: Chinese_pixel, serif; margin-left: 10px; margin-top: 30px; margin-right: 50px;">
@@ -88,14 +88,14 @@
                  style="position: absolute; right: 5%; top: 3%; z-index: 5">
           </v-flex>
           <v-flex
-              class="white flex overflow-auto"
-              style="padding-left: 10px; padding-right: 20px"
+              class="white overflow-auto flex-fill"
+              style="padding-left: 20px; padding-right: 20px; text-align: center"
           >
             <v-container
-                class="nes-container is-rounded col-12 col-sm-6"
+                class="nes-container is-rounded col-12 col-sm-5"
                 v-for="duck in Object.values(duckStates)"
                 :key="'duck-list-item' + duck.id"
-                style="margin: 5px; padding: 5px"
+                style="margin: 5px; padding: 5px; display:inline-block"
             >
               <v-row style="height: 60px">
                 <v-col class="col-3">
@@ -103,8 +103,8 @@
                       :src="bigImage(duck.info.duckIconUrl)"
                       :key="'duck-profile' + duck.id"
                       style="image-rendering: pixelated"
-                      aspect-ratio="1"
                       height="50px"
+                      width="50px"
                   ></v-img>
                 </v-col>
                 <v-col class="col-9"
