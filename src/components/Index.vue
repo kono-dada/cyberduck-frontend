@@ -196,7 +196,7 @@
     <div id="map" class="no-whitespace unselectable" style="height: max-content; width: max-content;">
       <div class="no-whitespace unselectable" style="height: 2044px; width: 3267px;">
         <v-img src="https://parklife-1303545624.cos.ap-guangzhou.myqcloud.com/map.png" alt="map"
-               style="height: 2044px; width: 3267px; padding: 0; margin: 0"></v-img>
+               style="height: 2044px; width: 3267px; padding: 0; margin: 0; position: absolute; left: 0; top: 0"></v-img>
       </div>
       <v-img
           :src="duck.info.duckIconUrl"
@@ -333,6 +333,10 @@ export default {
         this.restartDialog = false;
       }
     },
+
+    // moveMapTo(x, y) {
+    //   this.panzoom.zoomToPoint();
+    // },
 
     // when duck gets clicked
     duckClicked(duck) {
