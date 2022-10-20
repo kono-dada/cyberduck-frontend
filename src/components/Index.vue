@@ -78,7 +78,8 @@
         style="margin: 0; padding: 0"
     >
       <div class="fill-height unselectable no-whitespace">
-        <v-layout column class="fill-height unselectable" style="background-color:white;padding: 0 0 10px;max-width: none">
+        <v-layout column class="fill-height unselectable"
+                  style="background-color:white;padding: 0 0 10px;max-width: none">
           <v-flex class="flex shrink unselectable">
             <h3 class="col-10 unselectable"
                 style="font-family: Chinese_pixel, serif; font-size: xx-large; margin-left: 10px; margin-top: 30px; margin-right: 50px;">
@@ -187,9 +188,7 @@
             {{ shownDuck.title[language] }}
           </h3>
         </v-card-title>
-        <v-card-text class="font-weight-bold text-left"
-                     v-html="getStory(shownDuck)"
-                     style="background: #ffffff; width: 100%;height: 72%;font-size: medium;font-family: Chinese_pixel, serif; overflow-y: scroll;"></v-card-text>
+        <v-card-text class="font-weight-bold text-left help" v-html="getStory(shownDuck)"></v-card-text>
       </v-card>
     </v-dialog>
     <div id="map" class="no-whitespace unselectable" style="height: max-content; width: max-content;">
@@ -486,11 +485,13 @@ export default {
         if (this.language === "cn") {
           story += "<br /><br />相关展品：";
           story += relatedExhibit.title[this.language];
+          story += "<v-divider></v-divider>";
           story += "<br />展品位置：";
           story += relatedExhibit.location[this.language];
         } else {
           story += "<br /><br />Related Exhibit：";
           story += relatedExhibit.title[this.language];
+          story += "<v-divider></v-divider>";
           story += "<br />Exhibit Location：";
           story += relatedExhibit.location[this.language];
         }
@@ -545,6 +546,16 @@ html * {
   font-family: Chinese_pixel, serif;
   font-weight: bolder;
   padding: 0.2rem 1.5rem;
+}
+
+.help {
+  background: #ffffff;
+  width: 100%;
+  height: 72%;
+  font-size: medium;
+  line-height: 2rem;
+  font-family: Chinese_pixel, serif;
+  overflow-y: scroll;
 }
 
 @font-face {
