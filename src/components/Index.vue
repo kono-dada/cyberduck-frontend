@@ -96,7 +96,7 @@
                 :key="'duck-list-item' + duck.id"
                 style="margin: 5px; padding: 5px; display:inline-block"
             >
-              <v-row style="height: 60px" @click="showDuckList=false;moveMapToDuck(duck);">
+              <v-row style="height: 60px" @click="showDuckIfNotHidden(duck)">
                 <v-col class="col-3">
                   <v-img
                       :src="bigImage(duck.info.duckIconUrl)"
@@ -108,7 +108,11 @@
                 </v-col>
                 <v-col class="col-9"
                        style="text-align: left; padding: 20px; font-family: Chinese_pixel, serif; font-size: large">
-                  {{ duck.info.title[language] }}
+                  {{
+                    (duck.isHidden && !duck.isFound) ?
+                        (language === "cn" ? "隐藏鸭" : "Hidden Duck")
+                        : duck.info.title[language]
+                  }}
                 </v-col>
               </v-row>
             </v-container>
@@ -244,8 +248,8 @@ function computePan(mapX, mapY, scale) {
   const halfWindowSize = [window.innerWidth / 2, window.innerHeight / 2];
   const halfMapSize = [mapWidth / 2, mapHeight / 2];
   return {
-    x: - halfMapSize[0] / scale * (1 - scale) + halfWindowSize[0] / scale - mapX,
-    y: - halfMapSize[1] / scale * (1 - scale) + halfWindowSize[1] / scale - mapY,
+    x: -halfMapSize[0] / scale * (1 - scale) + halfWindowSize[0] / scale - mapX,
+    y: -halfMapSize[1] / scale * (1 - scale) + halfWindowSize[1] / scale - mapY,
   }
 }
 
@@ -332,6 +336,14 @@ export default {
       const duck = Object.values(this.duckStates).find(d => d.info.id === duckId);
       this.moveMapToDuck(duck);
       this.duckClicked(duck);
+    },
+
+    // show duck position only if duck is not hidden or has been found
+    showDuckIfNotHidden(duck) {
+      if (!duck.isHidden || duck.isFound) {
+        this.showDuckList = false;
+        this.moveMapToDuck(duck);
+      }
     },
 
     moveMapToDuck(duck) {
