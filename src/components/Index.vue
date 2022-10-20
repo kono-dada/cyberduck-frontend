@@ -316,9 +316,7 @@ export default {
     // scanning duck in two ways
     async scanDuck(duckId) {
       await this.fetchBackendApi("https://sso.forkingpark.cn/api/find-duck/" + duckId);
-      const duck = Object.values(this.duckStates).find(d => d.info.id === duckId);
-      this.panzoom.pan(duck.coordinate.x, duck.coordinate.y);
-      this.duckClicked(duck);
+      this.duckClicked(Object.values(this.duckStates).find(d => d.info.id === duckId));
     },
 
     async restartGame() {
