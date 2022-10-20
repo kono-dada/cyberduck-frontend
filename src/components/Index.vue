@@ -78,7 +78,7 @@
         style="margin: 0; padding: 0"
     >
       <div class="fill-height unselectable no-whitespace">
-        <v-layout column class="fill-height unselectable" style="background-color:white;padding: 0 0 10px;">
+        <v-layout column class="fill-height unselectable" style="background-color:white;padding: 0 0 10px;max-width: none">
           <v-flex class="flex shrink unselectable">
             <h3 class="col-10 unselectable"
                 style="font-family: Chinese_pixel, serif; font-size: xx-large; margin-left: 10px; margin-top: 30px; margin-right: 50px;">
@@ -88,8 +88,8 @@
                  style="position: absolute; right: 5%; top: 3%; z-index: 5">
           </v-flex>
           <v-flex
-              class="white flex-fill"
-              style="padding-left: 10px; padding-right: 10px; text-align: center; overflow-y: scroll"
+              class="white flex"
+              style="padding-left: 10px; padding-right: 20px; text-align: center; overflow-y: scroll; overflow-x: clip"
           >
             <v-container
                 class="nes-container is-rounded col-12 col-sm-5"
@@ -536,7 +536,7 @@ html * {
 .collection-progress {
   position: fixed;
   right: 5%;
-  top:85%;
+  top: 85%;
   z-index: 5;
   background: #ffffff;
   text-align: center;
