@@ -23,6 +23,7 @@
     <div id="collection_progress"
          style="position: fixed; right: 5%; top:85%;z-index: 5;background: #ffffff;text-align: center; font-family: Chinese_pixel,serif;padding: 0.2rem 1.5rem;"
          class="nes-container is-rounded elevation-10"
+         @click="showDuckList=true"
     >
       <p>{{ Object.values(duckStates).filter(_ => _.isFound).length }}/10</p>
     </div>
@@ -69,10 +70,53 @@
       </v-card>
     </v-dialog>
 
+    <!--    duck list-->
+    <v-dialog
+        v-model="showDuckList"
+        hide-overlay
+        style="background: #ffffff"
+        fullscreen
+        transition="dialog-bottom-transition"
+    >
+      <img class="switches" alt="mute" @click="showDuckList=false" src="../assets/close.png"
+           style="position: absolute; right: 5%; top: 3%; z-index: 5">
+      <h3 style="font-family: Chinese_pixel, serif; margin-top: 50px; margin-right: 80px;">
+        {{ language === 'cn' ? "鸭鸭家族" : "The Duck Family" }}
+      </h3>
+      <v-img
+          :src="duck.info.duckIconUrl"
+          @click="duckClicked(duck)"
+          :style="{'position': 'absolute', 'left': duck.coordinate.x, 'top': duck.coordinate.y}"
+          v-for="duck in Object.values(duckStates).filter(_ => (!_.isHidden) || _.isFound)"
+          :key="duck.id"
+          height="80px"
+          width="80px"
+      ></v-img>
+      <div style="overflow-y: scroll">
+        <v-row
+            class="nes-container"
+            v-for="duck in Object.values(duckStates)"
+            :key="'duck-list-item' + duck.id"
+        >
+          <v-col class="col-3">
+            <v-img
+                :src="bigImage(duck.info.duckIconUrl)"
+                :key="'duck-profile' + duck.id"
+                height="80px"
+                width="80px"
+            ></v-img>
+          </v-col>
+          <v-col class="col-9" style="text-align: left; padding: 15px">
+            {{duck.info.title[language]}}
+          </v-col>
+        </v-row>
+      </div>
+    </v-dialog>
+
     <!--    restart game dialog-->
     <v-dialog
         v-model="restartDialog"
-        style="background: transparent; padding: 10px; margin: 0px"
+        style="background: transparent; padding: 10px; margin: 0"
         hide-overlay
     >
       <v-card
@@ -199,6 +243,7 @@ export default {
       shownDuck: null,
       duckStates: {},
       scanning: false,
+      showDuckList: false,
       language: 'cn',
       restartDialog: false,
       helpText: help,
