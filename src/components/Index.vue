@@ -223,6 +223,7 @@ export default {
     // remember last time position
     const map_transform = localStorage.getItem("MAP_TRANSFORM");
     if (map_transform) {
+      console.log("map transform restored to: " + map_transform);
       document.getElementById("map").style.transform = map_transform;
     }
 
