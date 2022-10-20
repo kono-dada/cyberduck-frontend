@@ -321,13 +321,11 @@ export default {
         clientX: parseInt(duck.coordinate.x.slice(0, -2)),
         clientY: parseInt(duck.coordinate.y.slice(0, -2)),
       }
-      setTimeout(() => {
-        this.panzoom.zoomToPoint(
-            0.8,
-            point,
-            {force: true}
-        );
-      });
+      this.panzoom.zoomToPoint(
+          0.8,
+          point,
+          {force: true, animate: true}
+      );
       this.duckClicked(duck);
     },
 
