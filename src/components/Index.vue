@@ -76,18 +76,20 @@
         hide-overlay
         fullscreen
         transition="dialog-bottom-transition"
+        style="margin: 0; padding: 0"
     >
-      <v-container class="fill-height">
-        <v-layout column class="fill-height">
-          <v-flex class="white--text blue flex shrink darken-3">
-            <h3 class="col-10" style="font-family: Chinese_pixel, serif; margin-top: 50px; margin-right: 80px;">
+      <v-container class="fill-height unselectable">
+        <v-layout column class="fill-height unselectable" style="padding:0;background-color:white;">
+          <v-flex class="flex shrink unselectable">
+            <h3 class="col-10 unselectable" style="font-family: Chinese_pixel, serif; margin-left: 10px; margin-top: 30px; margin-right: 50px;">
               {{ language === 'cn' ? "鸭鸭家族" : "The Duck Family" }}
             </h3>
-            <img class="switches col-2" alt="mute" @click="showDuckList=false" src="../assets/close.png"
+            <img class="switches" alt="mute" @click="showDuckList=false" src="../assets/close.png"
                  style="position: absolute; right: 5%; top: 3%; z-index: 5">
           </v-flex>
           <v-flex
               class="white flex overflow-auto"
+              style="padding-left: 10px; padding-right: 20px"
           >
             <v-container
                 class="nes-container is-rounded col-12 col-sm-6"
@@ -106,7 +108,7 @@
                   ></v-img>
                 </v-col>
                 <v-col class="col-9"
-                       style="text-align: left; padding: 15px; font-family: Chinese_pixel, serif; font-size: large">
+                       style="text-align: left; padding: 20px; font-family: Chinese_pixel, serif; font-size: large">
                   {{ duck.info.title[language] }}
                 </v-col>
               </v-row>
