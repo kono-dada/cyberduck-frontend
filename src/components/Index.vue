@@ -21,7 +21,7 @@
     </v-col>
 
     <div id="collection_progress"
-         class="nes-container is-rounded elevation-10 collection-progress"
+         class="nes-container is-rounded collection-progress"
          @click="showDuckList=true"
     >
       <p>{{ Object.values(duckStates).filter(_ => _.isFound).length }}/{{ Object.values(duckStates).length }}</p>
