@@ -478,7 +478,7 @@ export default {
 
     //  get language icon based on language state
     getLanguageIcon() {
-      return this.language === 'cn' ? china : uk;
+      return this.language === 'cn' ? uk : china;
     },
 
     // get mut icon based on mute state
