@@ -94,7 +94,7 @@
                 class="nes-container is-rounded col-12 col-sm-5"
                 v-for="duck in Object.values(duckStates)"
                 :key="'duck-list-item' + duck.id"
-                style="margin: 5px; padding: 5px; display:inline-block"
+                style="margin: 10px 5px;padding: 5px; display:inline-block"
             >
               <v-row style="height: 60px" @click="showDuckIfNotHidden(duck)">
                 <v-col class="col-3">
