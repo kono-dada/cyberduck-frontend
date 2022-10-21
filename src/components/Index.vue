@@ -2,22 +2,22 @@
   <div
       class="no-whitespace unselectable full-screen"
   >
-    <img src="../assets/scan.png" alt="help"
+    <img src="../assets/scan.svg" alt="help"
          style="position: absolute; z-index: 5; top: 3%; left: 5%;"
          class="switches"
          @click="scanning = true"
          @init="onInit"
     >
     <v-col style="position: absolute; z-index: 5; top: 3%; right: 5%; width: 48px; margin: 0; padding: 0">
-      <img src="../assets/help-circle.png" alt="help"
+      <img src="../assets/questionmark.svg" alt="help"
            class="switches"
            @click="showHelp = true;">
       <img class="switches" alt="languages" @click="language = language==='cn'?'en':'cn'"
-           :src="this.getLanguageIcon()" style="padding: 5px">
+           :src="this.getLanguageIcon()">
       <img class="switches" alt="mute" @click="switchMute()"
-           :src="this.getMuteIcon()" style="padding: 5px">
+           :src="this.getMuteIcon()">
       <img class="switches" alt="restart" @click="restartDialog=true;"
-           src="../assets/refresh.png" style="padding: 5px">
+           src="../assets/refresh.svg">
     </v-col>
 
     <div id="collection_progress"
@@ -35,7 +35,7 @@
         transition="dialog-bottom-transition"
     >
       <img class="switches" alt="mute" @click="scanning=false" src="../assets/close.svg"
-           style="position: absolute; right: 5%; top: 3%; z-index: 5; padding: 5px">
+           style="position: absolute; right: 5%; top: 3%; z-index: 5;">
       <qrcode-stream :key="_uid" @decode="onDecode"></qrcode-stream>
     </v-dialog>
 
@@ -57,9 +57,9 @@
           alignment="center"
       >
         <img class="switches" alt="mute" @click="showHelp=false" src="../assets/close.svg"
-             style="position: absolute; right: 5%; top: 3%; z-index: 5; padding: 5px">
+             style="position: absolute; right: 5%; top: 3%; z-index: 5;">
         <v-card-title>
-          <h3 style="font-family: Chinese_pixel, serif; margin-top: 50px; margin-right: 80px;">
+          <h3 style="font-family: Chinese_pixel, serif; padding-top: 0; margin-top: 3%; margin-right: 80px;">
             {{ helpText.title[language] }}
           </h3>
         </v-card-title>
@@ -84,7 +84,7 @@
               {{ language === 'cn' ? "鸭鸭家族" : "The Duck Family" }}
             </h3>
             <img class="switches" alt="mute" @click="showDuckList=false" src="../assets/close.svg"
-                 style="position: absolute; right: 5%; top: 3%; z-index: 5; padding: 5px">
+                 style="position: absolute; right: 5%; top: 3%; z-index: 5;">
           </v-flex>
           <v-flex
               class="white flex"
@@ -221,10 +221,10 @@ import Panzoom from "@panzoom/panzoom"
 import axios from "axios"
 import {QrcodeStream} from 'vue-qrcode-reader'
 
-const china = require("@/assets/china.png");
-const uk = require("@/assets/united-kingdom.png");
-const sound = require("@/assets/sound.png");
-const mute = require("@/assets/mute.png");
+const china = require("@/assets/cn.svg");
+const uk = require("@/assets/en.svg");
+const sound = require("@/assets/vol.svg");
+const mute = require("@/assets/voldown.svg");
 const help = require("@/assets/help.json");
 const bgm = [
   "https://parklife-1303545624.cos.ap-guangzhou.myqcloud.com/bgm2.mp3",
@@ -569,9 +569,10 @@ html * {
 .switches {
   height: 48px;
   width: 48px;
-  filter: drop-shadow(2px 2px 2px gray);
+  /*filter: drop-shadow(2px 2px 2px gray);*/
   elevation: above;
-  image-rendering: pixelated
+  image-rendering: pixelated;
+  padding: 5px;
 }
 
 .collection-progress {
