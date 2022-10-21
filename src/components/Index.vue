@@ -80,7 +80,7 @@
                   style="background-color:white;padding: 0 0 10px;max-width: none">
           <v-flex class="flex shrink unselectable">
             <h3 class="col-10 unselectable"
-                style="font-family: Chinese_pixel, serif; font-size: xx-large; margin-left: 10px; margin-top: 30px; margin-right: 50px;">
+                style="font-family: Chinese_pixel, serif; font-size: xx-large; margin-left: 10px; margin-top: 3%; padding-top: 0; margin-right: 50px;">
               {{ language === 'cn' ? "鸭鸭家族" : "The Duck Family" }}
             </h3>
             <img class="switches" alt="mute" @click="showDuckList=false" src="../assets/close.svg"
