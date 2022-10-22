@@ -170,6 +170,7 @@
         v-model="duckCardDialog"
         style="background: transparent"
         hide-overlay
+        fullscreen
         v-if="shownDuck != null"
     >
       <v-card
