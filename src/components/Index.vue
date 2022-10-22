@@ -36,7 +36,7 @@
     >
       <img class="switches" alt="close" @click="scanning=false" :src="closeIcon()"
            style="position: absolute; right: 5%; top: 3%; z-index: 5;" rel="prefetch">
-      <img alt="happyDuck" :src="happyDuckIcon()" @click="refreshDuckPosition()"
+      <img class="switches" alt="happyDuck" :src="happyDuckIcon()" @click="refreshDuckPosition()"
            style="position: absolute; z-index: 5;"
            :style="happyDuckPosition" rel="prefetch">
       <qrcode-stream :key="_uid" @decode="onDecode"></qrcode-stream>
