@@ -171,13 +171,17 @@
         v-model="duckCardDialog"
         style="background: transparent"
         hide-overlay
+        height="90%"
         v-if="shownDuck != null"
     >
       <v-card
           class="mx-2 nes-container is-rounded"
           color="#ffffffff"
-          :style="duckCardPositioning"
+          :height="shownDuck.title.cn === '未知鸭子' ? '200px' : '380px'"
+          width="95%"
+          style="margin-top: 150px; padding: 0"
           elevation="10"
+          alignment="center"
       >
         <v-img :src="bigImage(shownDuck.duckIconUrl)"
                style="position: absolute; left: 50%; transform: translateX(-50%); top: -120px; image-rendering: pixelated"
@@ -189,12 +193,11 @@
             {{ shownDuck.title[language] }}
           </h3>
         </v-card-title>
-        <div
-            class="font-weight-bold text-left"
-            style="background: #ffffff; padding: 5px; font-size: medium;font-family: Chinese_pixel, serif; overflow-y: scroll;"
-            v-html="getStory(shownDuck)"
-            :style="duckCardTextHeight"
-        ></div>
+        <v-card-text class="font-weight-bold text-left"
+                     v-html="getStory(shownDuck)"
+                     style="background: #ffffff; width: 100%;font-size: medium;font-family: Chinese_pixel, serif; overflow-y: scroll;"
+                     :style="shownDuck.title.cn === '未知鸭子' ? 'height: 50%' : 'height: 72%'"
+        ></v-card-text>
       </v-card>
     </v-dialog>
     <div id="map" class="no-whitespace unselectable" style="height: max-content; width: max-content;">
