@@ -2,7 +2,7 @@
   <div
       class="no-whitespace unselectable full-screen"
   >
-    <img :src="scanIcon()" rel="prefetch" alt="help"
+    <img :src="scanIcon()" rel="prefetch" alt="scan"
          style="position: absolute; z-index: 5; top: 3%; left: 5%;"
          class="switches"
          @click="scanning = true"
@@ -34,8 +34,11 @@
         fullscreen
         transition="dialog-bottom-transition"
     >
-      <img class="switches" alt="mute" @click="scanning=false" :src="closeIcon()"
+      <img class="switches" alt="close" @click="scanning=false" :src="closeIcon()"
            style="position: absolute; right: 5%; top: 3%; z-index: 5;" rel="prefetch">
+      <img alt="happyDuck" :src="happyDuckIcon()" @click="refreshDuckPosition()"
+           style="position: absolute; z-index: 5;"
+           :style="happyDuckPosition" rel="prefetch">
       <qrcode-stream :key="_uid" @decode="onDecode"></qrcode-stream>
     </v-dialog>
 
@@ -56,7 +59,7 @@
           elevation="10"
           alignment="center"
       >
-        <img class="switches" alt="mute" @click="showHelp=false" :src="closeIcon()"
+        <img class="switches" alt="close" @click="showHelp=false" :src="closeIcon()"
              style="position: absolute; right: 5%; top: 3%; z-index: 5;" rel="prefetch">
         <v-card-title>
           <h3 style="font-family: Chinese_pixel, serif; padding-top: 0; margin-top: 3%; margin-right: 80px;">
@@ -83,7 +86,7 @@
                 style="font-family: Chinese_pixel, serif; font-size: xx-large; margin-left: 10px; margin-top: 3%; padding-top: 5px; margin-right: 50px;">
               {{ language === 'cn' ? "鸭鸭家族" : "The Duck Family" }}
             </h3>
-            <img class="switches" alt="mute" @click="showDuckList=false" :src="closeIcon()"
+            <img class="switches" alt="close" @click="showDuckList=false" :src="closeIcon()"
                  style="position: absolute; right: 5%; top: 3%; z-index: 5;" rel="prefetch">
           </v-flex>
           <v-flex
@@ -231,6 +234,7 @@ import questionMark from "@/assets/questionmark.svg";
 import help from "@/assets/help.json";
 import unknownDuckSound from "@/assets/unknown-duck.mp3";
 import foundDuckSound from "@/assets/found-duck.mp3";
+import happyDuck from "@/assets/happyDuck.gif";
 
 const bgm = [
   "https://parklife-1303545624.cos.ap-guangzhou.myqcloud.com/bgm2.mp3",
@@ -265,6 +269,11 @@ export default {
     QrcodeStream
   },
   props: {},
+  computed: {
+    happyDuckPosition() {
+      return "left: " + this.happyDuckPos[0] + "px;" + "top: " + this.happyDuckPos[1] + "px;";
+    }
+  },
   data() {
     return {
       panzoom: null,
@@ -277,6 +286,7 @@ export default {
       language: 'cn',
       restartDialog: false,
       helpText: help,
+      happyDuckPos: this.randomHappyDuckPosition(),
       mute: false,
     }
   },
@@ -396,13 +406,21 @@ export default {
       this.shownDuck = duck.info
       if (!this.mute) {
         if (duck.isFound) {
-          const sound = new Audio(foundDuckSound);
-          sound.play();
+          this.playFoundDuckSound();
         } else {
-          const sound = new Audio(unknownDuckSound);
-          sound.play();
+          this.playUnknownDuckSound();
         }
       }
+    },
+
+    playFoundDuckSound() {
+      const sound = new Audio(foundDuckSound);
+      sound.play();
+    },
+
+    playUnknownDuckSound() {
+      const sound = new Audio(unknownDuckSound);
+      sound.play();
     },
 
     queryMapTransform() {
@@ -506,6 +524,27 @@ export default {
     // get mut icon based on mute state
     getMuteIcon() {
       return this.mute ? mute : sound;
+    },
+
+    happyDuckIcon() {
+      return happyDuck;
+    },
+
+    refreshDuckPosition() {
+      this.playFoundDuckSound();
+      this.happyDuckPos = this.randomHappyDuckPosition();
+    },
+
+    randomHappyDuckPosition() {
+      const topMost = 0.05 * window.innerHeight + 60;
+      const bottomMost = window.innerHeight - 50;
+      const leftMost = 50;
+      const rightMost = window.innerWidth - 50;
+      const randX = Math.random();
+      const randY = Math.random();
+      const x = randX * leftMost + (1 - randX) * rightMost;
+      const y = randY * topMost + (1 - randY) * bottomMost;
+      return [x, y];
     },
 
     // on QR-code detection
