@@ -33,11 +33,11 @@
         fullscreen
         transition="dialog-bottom-transition"
     >
-      <img class="switches" alt="close" @click="scanning=false;scanReady=false" :src="closeIcon()" v-if="scanReady"
-           style="position: absolute; right: 5%; top: 3%; z-index: 5;" rel="prefetch">
-      <img class="switches" alt="happyDuck" :src="happyDuckIcon()" @click="refreshDuckPosition()"
-           style="position: absolute; z-index: 5; transform: translate(-50%, -50%)"
-           :style="happyDuckPosition" rel="prefetch" v-if="scanReady">
+      <img id="scanClose" class="switches" alt="close" @click="scanning=false" :src="closeIcon()"
+           style="position: absolute; right: 5%; top: 3%; z-index: 5; display: none" rel="prefetch">
+      <img id="scanDuck" class="switches" alt="happyDuck" :src="happyDuckIcon()" @click="refreshDuckPosition()"
+           style="position: absolute; z-index: 5; transform: translate(-50%, -50%); display: none"
+           :style="happyDuckPosition" rel="prefetch">
       <qrcode-stream :key="_uid" @decode="onDecode" @init="onInit"></qrcode-stream>
     </v-dialog>
 
@@ -309,7 +309,6 @@ export default {
       language: 'cn',
       restartDialog: false,
       helpText: help,
-      scanReady: false,
       windowWidth: window.innerWidth,
       windowHeight: window.innerHeight,
       happyDuckPos: this.randomHappyDuckPosition(),
@@ -506,7 +505,8 @@ export default {
     async onInit(promise) {
       try {
         await promise
-        this.scanReady = true;
+        document.getElementById("scanClose").style.display = "inline-block";
+        document.getElementById("scanDuck").style.display = "inline-block";
         // successfully initialized
       } finally {
         // close scanner on error
