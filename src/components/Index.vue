@@ -278,9 +278,9 @@ export default {
       const top = topRemaining > 100 ? (this.windowHeight - height - 130 - 15) / 2 : topRemaining;
       return {
         left: left,
-        top: top,
-        width: width,
-        height: height,
+        top: top + 'px',
+        width: width + 'px',
+        height: height + 'px',
       };
     },
     duckCardTextHeight() {
@@ -290,9 +290,9 @@ export default {
       const width = containerWidth - margin * 2;
       const textHeight = cardHeight - 8 - 76 - 20;
       return {
-        width: width,
-        height: textHeight,
-        margin: margin,
+        width: width + 'px',
+        height: textHeight + 'px',
+        margin: margin + 'px',
       };
     },
   },
