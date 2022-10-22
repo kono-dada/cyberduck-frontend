@@ -190,11 +190,13 @@
             {{ shownDuck.title[language] }}
           </h3>
         </v-card-title>
-        <v-card-text class="font-weight-bold text-left"
-                     v-html="getStory(shownDuck)"
-                     style="background: #ffffff; width: 100%;font-size: medium;font-family: Chinese_pixel, serif; overflow-y: scroll;"
-                     :style="duckCardTextHeight"
-        ></v-card-text>
+        <div style="position: relative;" class="no-whitespace">
+          <v-card-text class="font-weight-bold text-left"
+                       v-html="getStory(shownDuck)"
+                       style="background: #ffffff; width: 100%;font-size: medium;font-family: Chinese_pixel, serif; overflow-y: scroll;"
+                       :style="duckCardTextHeight"
+          ></v-card-text>
+        </div>
       </v-card>
     </v-dialog>
     <div id="map" class="no-whitespace unselectable" style="height: max-content; width: max-content;">
@@ -269,7 +271,7 @@ export default {
       return "left: " + this.happyDuckPos[0] + "px;" + "top: " + this.happyDuckPos[1] + "px;";
     },
     duckCardPositioning() {
-      const height = Math.max(Math.min(Math.round(this.windowHeight * 0.85) - 230 - 15, 500), 100);
+      const height = Math.max(Math.min(Math.round(this.windowHeight * 0.85) - 230 - 15, 500), 200);
       const width = Math.min(Math.round(this.windowWidth * 0.90) - 16, 500 - 16);
       const left = (this.windowWidth - width - 16) / 2;
       const topRemaining = this.windowHeight * 0.85 - height - 130 - 15;
