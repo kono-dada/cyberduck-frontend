@@ -2,14 +2,14 @@
   <div
       class="no-whitespace unselectable full-screen"
   >
-    <img src="https://parklife-1303545624.cos.ap-guangzhou.myqcloud.com/scan.svg" rel="prefetch" alt="help"
+    <img :src="scanIcon()" rel="prefetch" alt="help"
          style="position: absolute; z-index: 5; top: 3%; left: 5%;"
          class="switches"
          @click="scanning = true"
          @init="onInit"
     >
     <v-col style="position: absolute; z-index: 5; top: 3%; right: 5%; width: 48px; margin: 0; padding: 0">
-      <img src="https://parklife-1303545624.cos.ap-guangzhou.myqcloud.com/questionmark.svg" rel="prefetch" alt="help"
+      <img :src="questionMarkIcon()" rel="prefetch" alt="help"
            class="switches"
            @click="showHelp = true;">
       <img class="switches" alt="languages" @click="language = language==='cn'?'en':'cn'"
@@ -17,7 +17,7 @@
       <img class="switches" alt="mute" @click="switchMute()"
            :src="this.getMuteIcon()" rel="prefetch">
       <img class="switches" alt="restart" @click="restartDialog=true;"
-           src="https://parklife-1303545624.cos.ap-guangzhou.myqcloud.com/refresh.svg" rel="prefetch">
+           :src="refreshIcon()" rel="prefetch">
     </v-col>
 
     <div id="collection_progress"
@@ -34,7 +34,7 @@
         fullscreen
         transition="dialog-bottom-transition"
     >
-      <img class="switches" alt="mute" @click="scanning=false" src="https://parklife-1303545624.cos.ap-guangzhou.myqcloud.com/close.svg"
+      <img class="switches" alt="mute" @click="scanning=false" :src="closeIcon()"
            style="position: absolute; right: 5%; top: 3%; z-index: 5;" rel="prefetch">
       <qrcode-stream :key="_uid" @decode="onDecode"></qrcode-stream>
     </v-dialog>
@@ -56,7 +56,7 @@
           elevation="10"
           alignment="center"
       >
-        <img class="switches" alt="mute" @click="showHelp=false" src="https://parklife-1303545624.cos.ap-guangzhou.myqcloud.com/close.svg"
+        <img class="switches" alt="mute" @click="showHelp=false" :src="closeIcon()"
              style="position: absolute; right: 5%; top: 3%; z-index: 5;" rel="prefetch">
         <v-card-title>
           <h3 style="font-family: Chinese_pixel, serif; padding-top: 0; margin-top: 3%; margin-right: 80px;">
@@ -83,7 +83,7 @@
                 style="font-family: Chinese_pixel, serif; font-size: xx-large; margin-left: 10px; margin-top: 3%; padding-top: 5px; margin-right: 50px;">
               {{ language === 'cn' ? "鸭鸭家族" : "The Duck Family" }}
             </h3>
-            <img class="switches" alt="mute" @click="showDuckList=false" src="https://parklife-1303545624.cos.ap-guangzhou.myqcloud.com/close.svg"
+            <img class="switches" alt="mute" @click="showDuckList=false" :src="closeIcon()"
                  style="position: absolute; right: 5%; top: 3%; z-index: 5;" rel="prefetch">
           </v-flex>
           <v-flex
@@ -220,11 +220,17 @@
 import Panzoom from "@panzoom/panzoom"
 import axios from "axios"
 import {QrcodeStream} from 'vue-qrcode-reader'
+import close from "@/assets/close.svg";
 import china from "@/assets/cn.svg";
 import uk from "@/assets/en.svg";
 import sound from "@/assets/vol.svg";
 import mute from "@/assets/voldown.svg";
+import scan from "@/assets/scan.svg";
+import refresh from "@/assets/refresh.svg";
+import questionMark from "@/assets/questionmark.svg";
 import help from "@/assets/help.json";
+import unknownDuckSound from "@/assets/unknown-duck.mp3";
+import foundDuckSound from "@/assets/found-duck.mp3";
 
 const bgm = [
   "https://parklife-1303545624.cos.ap-guangzhou.myqcloud.com/bgm2.mp3",
@@ -346,6 +352,22 @@ export default {
       }
     },
 
+    closeIcon() {
+      return close;
+    },
+
+    scanIcon() {
+      return scan;
+    },
+
+    refreshIcon() {
+      return refresh;
+    },
+
+    questionMarkIcon() {
+      return questionMark;
+    },
+
     moveMapToDuck(duck) {
       const mapX = parseInt(duck.coordinate.x.slice(0, -2));
       const mapY = parseInt(duck.coordinate.y.slice(0, -2));
@@ -374,10 +396,10 @@ export default {
       this.shownDuck = duck.info
       if (!this.mute) {
         if (duck.isFound) {
-          const sound = new Audio("https://parklife-1303545624.cos.ap-guangzhou.myqcloud.com/found-duck.m4a");
+          const sound = new Audio(foundDuckSound);
           sound.play();
         } else {
-          const sound = new Audio("https://parklife-1303545624.cos.ap-guangzhou.myqcloud.com/unknown-duck.m4a");
+          const sound = new Audio(unknownDuckSound);
           sound.play();
         }
       }
