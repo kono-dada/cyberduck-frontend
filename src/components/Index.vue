@@ -508,7 +508,7 @@ export default {
         document.getElementById("scanClose").style.display = "inline-block";
         document.getElementById("scanDuck").style.display = "inline-block";
         // successfully initialized
-      } finally {
+      } catch (e) {
         // close scanner on error
         this.scanning = false;
       }
