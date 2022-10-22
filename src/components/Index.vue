@@ -195,7 +195,7 @@
         <v-card-text class="font-weight-bold text-left"
                      v-html="getStory(shownDuck)"
                      style="background: #ffffff; width: 100%;font-size: medium;font-family: Chinese_pixel, serif; overflow-y: scroll;"
-                     :style="'height: ' + duckCardTextHeight.height"
+                     :style="{'height: ': duckCardTextHeight.height}"
         ></v-card-text>
       </v-card>
     </v-dialog>
