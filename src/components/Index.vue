@@ -232,8 +232,6 @@ import scan from "@/assets/scan.svg";
 import refresh from "@/assets/refresh.svg";
 import questionMark from "@/assets/questionmark.svg";
 import help from "@/assets/help.json";
-import unknownDuckSound from "@/assets/unknown-duck.mp3";
-import foundDuckSound from "@/assets/found-duck.mp3";
 import happyDuck from "@/assets/happyDuck.gif";
 
 const bgm = [
