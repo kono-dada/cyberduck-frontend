@@ -285,7 +285,7 @@ export default {
           + "width: " + width + "px;");
     },
     duckCardTextHeight() {
-      const cardHeight = Math.max(Math.min(Math.round(this.windowHeight * 0.85) - 230 - 15, 500), 100);
+      const cardHeight = Math.max(Math.min(Math.round(this.windowHeight * 0.85) - 230 - 15, 500), 200);
       const textHeight = cardHeight - 8 - 76 - 20;
       return "height: " + textHeight + "px;";
     },
