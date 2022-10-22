@@ -176,7 +176,7 @@
       <v-card
           class="mx-2 nes-container is-rounded"
           color="#ffffffff"
-          :height="shownDuck.title.cn === '未知鸭子' ? '200px' : '380px'"
+          :height="duckCardPositioning.height"
           width="95%"
           style="margin-top: 150px; padding: 0"
           elevation="10"
@@ -195,7 +195,7 @@
         <v-card-text class="font-weight-bold text-left"
                      v-html="getStory(shownDuck)"
                      style="background: #ffffff; width: 100%;font-size: medium;font-family: Chinese_pixel, serif; overflow-y: scroll;"
-                     :style="shownDuck.title.cn === '未知鸭子' ? 'height: 50%' : 'height: 72%'"
+                     :style="'height: ' + duckCardTextHeight.height"
         ></v-card-text>
       </v-card>
     </v-dialog>
@@ -276,13 +276,12 @@ export default {
       const left = (this.windowWidth - width - 16) / 2;
       const topRemaining = this.windowHeight * 0.85 - height - 130 - 15;
       const top = topRemaining > 100 ? (this.windowHeight - height - 130 - 15) / 2 : topRemaining;
-      return ("position: absolute;"
-          + "margin-top: 130px;"
-          + "padding: 0;"
-          + "top: " + top + "px;"
-          + "height: " + height + "px;"
-          + "left: " + left + "px;"
-          + "width: " + width + "px;");
+      return {
+        left: left,
+        top: top,
+        width: width,
+        height: height,
+      };
     },
     duckCardTextHeight() {
       const cardHeight = Math.max(Math.min(Math.round(this.windowHeight * 0.85) - 230 - 15, 500), 200);
@@ -290,11 +289,11 @@ export default {
       const margin = 10;
       const width = containerWidth - margin * 2;
       const textHeight = cardHeight - 8 - 76 - 20;
-      return ("height: " + textHeight + "px;"
-          + "width: " + width + "px;"
-          + "margin-left: " + margin + "px"
-          + "margin-right: " + margin + "px"
-      );
+      return {
+        width: width,
+        height: textHeight,
+        margin: margin,
+      };
     },
   },
   data() {
