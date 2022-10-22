@@ -170,15 +170,15 @@
         v-model="duckCardDialog"
         style="background: transparent"
         hide-overlay
-        height="90%"
         v-if="shownDuck != null"
     >
       <v-card
           class="mx-2 nes-container is-rounded"
           color="#ffffffff"
           :height="duckCardPositioning.height"
-          width="95%"
-          style="margin-top: 150px; padding: 0"
+          :width="duckCardPositioning.width"
+          style="margin-top: 130px; padding: 0"
+          :style="{position: 'absolute', top: duckCardPositioning.top, left: duckCardPositioning.left}"
           elevation="10"
           alignment="center"
       >
@@ -195,7 +195,7 @@
         <v-card-text class="font-weight-bold text-left"
                      v-html="getStory(shownDuck)"
                      style="background: #ffffff; width: 100%;font-size: medium;font-family: Chinese_pixel, serif; overflow-y: scroll;"
-                     :style="{'height': duckCardTextHeight.height+'px'}"
+                     :style="{'height': duckCardTextHeight.height}"
         ></v-card-text>
       </v-card>
     </v-dialog>
