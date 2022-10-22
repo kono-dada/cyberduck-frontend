@@ -171,7 +171,6 @@
         v-model="duckCardDialog"
         style="background: transparent"
         hide-overlay
-        height="90%"
         v-if="shownDuck != null"
     >
       <v-card
