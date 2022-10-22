@@ -414,12 +414,12 @@ export default {
     },
 
     playFoundDuckSound() {
-      const sound = new Audio(foundDuckSound);
+      const sound = new Audio("https://parklife-1303545624.cos.ap-guangzhou.myqcloud.com/found-duck.m4a");
       sound.play();
     },
 
     playUnknownDuckSound() {
-      const sound = new Audio(unknownDuckSound);
+      const sound = new Audio("https://parklife-1303545624.cos.ap-guangzhou.myqcloud.com/unknown-duck.m4a");
       sound.play();
     },
 
