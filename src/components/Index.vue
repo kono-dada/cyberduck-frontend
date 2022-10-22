@@ -171,8 +171,6 @@
         v-model="duckCardDialog"
         style="background: transparent"
         hide-overlay
-        height="90%"
-        v-if="shownDuck != null"
     >
       <v-card
           class="mx-2 nes-container is-rounded"
@@ -269,11 +267,13 @@ export default {
       return "left: " + this.happyDuckPos[0] + "px;" + "top: " + this.happyDuckPos[1] + "px;";
     },
     duckCardPositioning() {
-      const height = Math.max(Math.min(Math.round(this.windowHeight * 0.85) - 230 - 15, 500), 100);
-      const width = Math.min(Math.round(this.windowWidth * 0.90) - 16, 500 - 16);
-      const left = (this.windowWidth - width - 16) / 2;
-      const topRemaining = this.windowHeight * 0.85 - height - 130 - 15;
-      const top = topRemaining > 100 ? (this.windowHeight - height - 130 - 15) / 2 : topRemaining;
+      const windowHeight = window.innerHeight;
+      const windowWidth = window.innerWidth;
+      const height = Math.max(Math.min(Math.round(windowHeight * 0.85) - 230 - 15, 500), 100);
+      const width = Math.min(Math.round(windowWidth * 0.90) - 16, 500 - 16);
+      const left = (windowWidth - width - 16) / 2;
+      const topRemaining = windowHeight * 0.85 - height - 130 - 15;
+      const top = topRemaining > 100 ? (windowHeight - height - 130 - 15) / 2 : topRemaining;
       return ("position: absolute;"
           + "margin-top: 130px;"
           + "padding: 0;"
@@ -283,7 +283,8 @@ export default {
           + "width: " + width + "px;");
     },
     duckCardTextHeight() {
-      const cardHeight = Math.max(Math.min(Math.round(this.windowHeight * 0.85) - 230 - 15, 500), 200);
+      const windowHeight = window.innerHeight;
+      const cardHeight = Math.max(Math.min(Math.round(windowHeight * 0.85) - 230 - 15, 500), 200);
       const textHeight = cardHeight - 8 - 76 - 20;
       return "height: " + textHeight + "px;";
     },
@@ -300,8 +301,6 @@ export default {
       language: 'cn',
       restartDialog: false,
       helpText: help,
-      windowWidth: window.innerWidth,
-      windowHeight: window.innerHeight,
       happyDuckPos: this.randomHappyDuckPosition(),
       mute: false,
     }
@@ -360,11 +359,6 @@ export default {
     setInterval(() => {
       this.queryMapTransform();
     }, 500);
-
-    window.addEventListener('resize', () => {
-      this.windowWidth = window.innerWidth
-      this.windowHeight = window.innerHeight
-    })
   },
   methods: {
     // scanning duck in two ways
