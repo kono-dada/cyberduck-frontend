@@ -189,11 +189,12 @@
             {{ shownDuck.title[language] }}
           </h3>
         </v-card-title>
-        <v-card-text class="font-weight-bold text-left"
-                     v-html="getStory(shownDuck)"
-                     :style="duckCardTextHeight"
-                     style="background: #ffffff; font-size: medium;font-family: Chinese_pixel, serif; overflow-y: scroll;"
-        ></v-card-text>
+        <div
+            class="font-weight-bold text-left"
+            style="background: #ffffff; padding: 5px; font-size: medium;font-family: Chinese_pixel, serif; overflow-y: scroll;"
+            v-html="getStory(shownDuck)"
+            :style="duckCardTextHeight"
+        ></div>
       </v-card>
     </v-dialog>
     <div id="map" class="no-whitespace unselectable" style="height: max-content; width: max-content;">
@@ -283,9 +284,15 @@ export default {
     },
     duckCardTextHeight() {
       const cardHeight = Math.max(Math.min(Math.round(this.windowHeight * 0.85) - 230 - 15, 500), 200);
-      const width = Math.min(Math.round(this.windowWidth * 0.90) - 16, 500 - 16);
+      const containerWidth = Math.min(Math.round(this.windowWidth * 0.90) - 16, 500 - 16);
+      const margin = 10;
+      const width = containerWidth - margin * 2;
       const textHeight = cardHeight - 8 - 76 - 20;
-      return "height: " + textHeight + "px;" + "width: " + width + "px;";
+      return ("height: " + textHeight + "px;"
+          + "width: " + width + "px;"
+          + "margin-left: " + margin + "px"
+          + "margin-right: " + margin + "px"
+      );
     },
   },
   data() {
