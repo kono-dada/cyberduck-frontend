@@ -177,11 +177,8 @@
       <v-card
           class="mx-2 nes-container is-rounded"
           color="#ffffffff"
-          :height="shownDuck.title.cn === '未知鸭子' ? '200px' : '380px'"
-          width="85%"
           :style="duckCardPositioning"
           elevation="10"
-          alignment="center"
       >
         <v-img :src="bigImage(shownDuck.duckIconUrl)"
                style="position: absolute; left: 50%; transform: translateX(-50%); top: -120px; image-rendering: pixelated"
