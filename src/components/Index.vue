@@ -2,22 +2,22 @@
   <div
       class="no-whitespace unselectable full-screen"
   >
-    <img src="../assets/scan.svg" alt="help"
+    <img src="https://parklife-1303545624.cos.ap-guangzhou.myqcloud.com/scan.svg" rel="prefetch" alt="help"
          style="position: absolute; z-index: 5; top: 3%; left: 5%;"
          class="switches"
          @click="scanning = true"
          @init="onInit"
     >
     <v-col style="position: absolute; z-index: 5; top: 3%; right: 5%; width: 48px; margin: 0; padding: 0">
-      <img src="../assets/questionmark.svg" alt="help"
+      <img src="https://parklife-1303545624.cos.ap-guangzhou.myqcloud.com/questionmark.svg" rel="prefetch" alt="help"
            class="switches"
            @click="showHelp = true;">
       <img class="switches" alt="languages" @click="language = language==='cn'?'en':'cn'"
-           :src="this.getLanguageIcon()">
+           :src="this.getLanguageIcon()" rel="prefetch">
       <img class="switches" alt="mute" @click="switchMute()"
-           :src="this.getMuteIcon()">
+           :src="this.getMuteIcon()" rel="prefetch">
       <img class="switches" alt="restart" @click="restartDialog=true;"
-           src="../assets/refresh.svg">
+           src="https://parklife-1303545624.cos.ap-guangzhou.myqcloud.com/refresh.svg" rel="prefetch">
     </v-col>
 
     <div id="collection_progress"
@@ -34,8 +34,8 @@
         fullscreen
         transition="dialog-bottom-transition"
     >
-      <img class="switches" alt="mute" @click="scanning=false" src="../assets/close.svg"
-           style="position: absolute; right: 5%; top: 3%; z-index: 5;">
+      <img class="switches" alt="mute" @click="scanning=false" src="https://parklife-1303545624.cos.ap-guangzhou.myqcloud.com/close.svg"
+           style="position: absolute; right: 5%; top: 3%; z-index: 5;" rel="prefetch">
       <qrcode-stream :key="_uid" @decode="onDecode"></qrcode-stream>
     </v-dialog>
 
@@ -56,8 +56,8 @@
           elevation="10"
           alignment="center"
       >
-        <img class="switches" alt="mute" @click="showHelp=false" src="../assets/close.svg"
-             style="position: absolute; right: 5%; top: 3%; z-index: 5;">
+        <img class="switches" alt="mute" @click="showHelp=false" src="https://parklife-1303545624.cos.ap-guangzhou.myqcloud.com/close.svg"
+             style="position: absolute; right: 5%; top: 3%; z-index: 5;" rel="prefetch">
         <v-card-title>
           <h3 style="font-family: Chinese_pixel, serif; padding-top: 0; margin-top: 3%; margin-right: 80px;">
             {{ helpText.title[language] }}
@@ -83,8 +83,8 @@
                 style="font-family: Chinese_pixel, serif; font-size: xx-large; margin-left: 10px; margin-top: 3%; padding-top: 5px; margin-right: 50px;">
               {{ language === 'cn' ? "鸭鸭家族" : "The Duck Family" }}
             </h3>
-            <img class="switches" alt="mute" @click="showDuckList=false" src="../assets/close.svg"
-                 style="position: absolute; right: 5%; top: 3%; z-index: 5;">
+            <img class="switches" alt="mute" @click="showDuckList=false" src="https://parklife-1303545624.cos.ap-guangzhou.myqcloud.com/close.svg"
+                 style="position: absolute; right: 5%; top: 3%; z-index: 5;" rel="prefetch">
           </v-flex>
           <v-flex
               class="white flex"
@@ -220,12 +220,12 @@
 import Panzoom from "@panzoom/panzoom"
 import axios from "axios"
 import {QrcodeStream} from 'vue-qrcode-reader'
+import china from "@/assets/refresh.svg";
+import uk from "@/assets/en.svg";
+import sound from "@/assets/vol.svg";
+import mute from "@/assets/voldown.svg";
+import help from "@/assets/help.json";
 
-const china = require("@/assets/cn.svg");
-const uk = require("@/assets/en.svg");
-const sound = require("@/assets/vol.svg");
-const mute = require("@/assets/voldown.svg");
-const help = require("@/assets/help.json");
 const bgm = [
   "https://parklife-1303545624.cos.ap-guangzhou.myqcloud.com/bgm2.mp3",
   "https://parklife-1303545624.cos.ap-guangzhou.myqcloud.com/bgm1.mp3",
