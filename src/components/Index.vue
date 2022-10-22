@@ -274,12 +274,13 @@ export default {
     duckCardPositioning() {
       const windowHeight = window.innerHeight;
       const windowWidth = window.innerWidth;
-      const height = Math.min([Math.round(windowHeight * 0.85) - 230 - 15, 500]);
-      const width = Math.min([Math.round(windowWidth * 0.90) - 16, 500 - 16]);
-      const left = Math.min([Math.round(windowWidth * 0.05), 500 / 0.09 * 0.05]);
+      const height = Math.max(Math.min(Math.round(windowHeight * 0.85) - 230 - 15, 500), 100);
+      const width = Math.min(Math.round(windowWidth * 0.90) - 16, 500 - 16);
+      const left = Math.min(Math.round(windowWidth * 0.05), 500 / 0.09 * 0.05);
+      const top = windowHeight * 0.85 - height - 130;
       return ("margin-top: 130px;"
           + "padding: 0;"
-          + "top: 100px;"
+          + "top: " + top + "px;"
           + "height: " + height + "px;"
           + "left: " + left + "px;"
           + "width: " + width + "px;");
