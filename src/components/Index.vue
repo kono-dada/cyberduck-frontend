@@ -6,7 +6,6 @@
          style="position: absolute; z-index: 5; top: 3%; left: 5%;"
          class="switches"
          @click="scanning = true"
-         @init="onInit"
     >
     <v-col style="position: absolute; z-index: 5; top: 3%; right: 5%; width: 48px; margin: 0; padding: 0">
       <img :src="questionMarkIcon()" rel="prefetch" alt="help"
@@ -39,7 +38,7 @@
       <img class="switches" alt="happyDuck" :src="happyDuckIcon()" @click="refreshDuckPosition()"
            style="position: absolute; z-index: 5; transform: translate(-50%, -50%)"
            :style="happyDuckPosition" rel="prefetch" v-if="scanReady">
-      <qrcode-stream :key="_uid" @decode="onDecode"></qrcode-stream>
+      <qrcode-stream :key="_uid" @decode="onDecode" @init="onInit"></qrcode-stream>
     </v-dialog>
 
     <!--    help-->
