@@ -78,7 +78,7 @@
         transition="dialog-bottom-transition"
         style="margin: 0; padding: 0"
     >
-      <div class="fill-height unselectable no-whitespace">
+      <div class="full-screen unselectable no-whitespace">
         <v-layout column class="fill-height unselectable"
                   style="background-color:white;padding: 0 0 10px;max-width: none">
           <v-flex class="flex shrink unselectable">
@@ -190,13 +190,11 @@
             {{ shownDuck.title[language] }}
           </h3>
         </v-card-title>
-        <div style="position: relative;" class="no-whitespace">
-          <v-card-text class="font-weight-bold text-left"
-                       v-html="getStory(shownDuck)"
-                       style="background: #ffffff; width: 100%;font-size: medium;font-family: Chinese_pixel, serif; overflow-y: scroll;"
-                       :style="duckCardTextHeight"
-          ></v-card-text>
-        </div>
+        <v-card-text class="font-weight-bold text-left"
+                     v-html="getStory(shownDuck)"
+                     :style="duckCardTextHeight"
+                     style="background: #ffffff; width: 100%;font-size: medium;font-family: Chinese_pixel, serif; overflow-y: scroll;"
+        ></v-card-text>
       </v-card>
     </v-dialog>
     <div id="map" class="no-whitespace unselectable" style="height: max-content; width: max-content;">
