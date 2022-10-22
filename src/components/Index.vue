@@ -275,8 +275,8 @@ export default {
       const height = Math.max(Math.min(Math.round(this.windowHeight * 0.85) - 230 - 15, 500), 100);
       const width = Math.min(Math.round(this.windowWidth * 0.90) - 16, 500 - 16);
       const left = Math.min(Math.round(this.windowWidth * 0.05), 500 / 0.09 * 0.05);
-      const topRemaining = this.windowHeight * 0.85 - height - 130;
-      const top = topRemaining > 100 ? (this.windowHeight - height - 130) / 2 : topRemaining;
+      const topRemaining = this.windowHeight * 0.85 - height - 130 - 15;
+      const top = topRemaining > 100 ? (this.windowHeight - height - 130 - 15) / 2 : topRemaining;
       return ("position: absolute;"
           + "margin-top: 130px;"
           + "padding: 0;"
