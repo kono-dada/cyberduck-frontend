@@ -192,7 +192,7 @@
         <v-card-text class="font-weight-bold text-left"
                      v-html="getStory(shownDuck)"
                      :style="duckCardTextHeight"
-                     style="background: #ffffff; width: 100%;font-size: medium;font-family: Chinese_pixel, serif; overflow-y: scroll;"
+                     style="background: #ffffff; font-size: medium;font-family: Chinese_pixel, serif; overflow-y: scroll;"
         ></v-card-text>
       </v-card>
     </v-dialog>
