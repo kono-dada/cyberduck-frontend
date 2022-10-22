@@ -283,8 +283,9 @@ export default {
     },
     duckCardTextHeight() {
       const cardHeight = Math.max(Math.min(Math.round(this.windowHeight * 0.85) - 230 - 15, 500), 200);
+      const width = Math.min(Math.round(this.windowWidth * 0.90) - 16, 500 - 16);
       const textHeight = cardHeight - 8 - 76 - 20;
-      return "height: " + textHeight + "px;";
+      return "height: " + textHeight + "px;" + "width: " + width + "px;";
     },
   },
   data() {
