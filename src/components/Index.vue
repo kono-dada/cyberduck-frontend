@@ -361,7 +361,7 @@ export default {
     if ("id" in params) {
       await this.scanDuck(params.id);
     } else {
-      await this.fetchBackendApi("https://sso.forkingpark.cn/api/user-info");
+      await this.fetchBackendApi("https://cyberduck-backend.sunneversets.cn/api/user-info");
     }
 
     // log transform string
@@ -377,7 +377,7 @@ export default {
   methods: {
     // scanning duck in two ways
     async scanDuck(duckId) {
-      await this.fetchBackendApi("https://sso.forkingpark.cn/api/find-duck/" + duckId);
+      await this.fetchBackendApi("https://cyberduck-backend.sunneversets.cn/api/find-duck/" + duckId);
       const duck = Object.values(this.duckStates).find(d => d.info.id === duckId);
       this.moveMapToDuck(duck);
       this.duckClicked(duck);
@@ -417,13 +417,13 @@ export default {
     async restartGame() {
       try {
         await axios.delete(
-            "https://sso.forkingpark.cn/api/user-info",
+            "https://cyberduck-backend.sunneversets.cn/api/user-info",
             {withCredentials: true}
         );
         this.duckStates = {};
         localStorage.clear();
         await this.loadPreview();
-        await this.fetchBackendApi("https://sso.forkingpark.cn/api/user-info");
+        await this.fetchBackendApi("https://cyberduck-backend.sunneversets.cn/api/user-info");
       } finally {
         this.restartDialog = false;
       }
@@ -474,7 +474,7 @@ export default {
 
     // loading preview before fetching user info
     async loadPreview() {
-      const duckList = await axios.get("https://sso.forkingpark.cn/api/preview-ducks");
+      const duckList = await axios.get("https://cyberduck-backend.sunneversets.cn/api/preview-ducks");
 
       // load ducks from the preview-duck, only the found ducks have detailed info
       duckList.data.forEach(
@@ -529,10 +529,10 @@ export default {
         // on 401 error, go to login page
         if (e.response && e.response.status === 401) {
           const current_url = window.location.href;
-          window.location.href = "https://sso.forkingpark.cn/login?redirect_url=" + current_url;
+          window.location.href = "https://cyberduck-backend.sunneversets.cn/login?redirect_url=" + current_url;
         } else if (e.response && e.response.status === 404) {
           console.error("404 not found: " + e);
-          window.location.href = "https://duck.forkingpark.cn";
+          window.location.href = "https://cyberduck.sunneversets.cn";
         } else {
           console.error("unexpected error: " + e);
         }
@@ -580,7 +580,7 @@ export default {
 
     // on QR-code detection
     async onDecode(code) {
-      const prefix = "https://duck.forkingpark.cn/duck/";
+      const prefix = "https://cyberduck.sunneversets.cn/duck/";
       if (code.startsWith(prefix)) {
         const duckId = code.substring(prefix.length);
         this.scanning = false;
