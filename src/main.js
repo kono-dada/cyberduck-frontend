@@ -8,8 +8,6 @@ import Index from './components/Index'
 Vue.config.productionTip = false;
 Vue.use(VueRouter);
 
-screen.orientation.lock("portrait").then(() => {});
-
 const router = new VueRouter({
     mode: 'history',
     routes: [
