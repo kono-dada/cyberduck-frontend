@@ -29,8 +29,9 @@
     <!--    qr scanner-->
     <v-dialog
         v-model="scanning"
-        hide-overlay
         fullscreen
+        overlay-color="black"
+        overlay-opacity="50%"
         transition="dialog-bottom-transition"
     >
       <img id="scanClose" class="switches" alt="close" @click="scanning=false" :src="closeIcon()"
@@ -126,8 +127,9 @@
     <!--    restart game dialog-->
     <v-dialog
         v-model="restartDialog"
+        overlay-color="black"
+        overlay-opacity="50%"
         style="background: transparent; padding: 10px; margin: 0"
-        hide-overlay
     >
       <v-card
           class="nes-container is-rounded"
@@ -168,13 +170,11 @@
     <!--    duck card-->
     <v-dialog
         v-model="duckCardDialog"
-        hide-overlay
         height="90%"
+        overlay-color="black"
+        overlay-opacity="50%"
         v-if="shownDuck != null"
     >
-      <div class="full-screen"
-           style="background-color: rgba(0, 0, 0, 0); animation-name: darken; animation-duration: 0.5s; z-index: -1">
-      </div>
       <v-card
           class="mx-2 nes-container is-rounded"
           color="#ffffffff"
