@@ -178,7 +178,7 @@
           color="#ffffffff"
           :height="duckCardPositioning.height"
           width="95%"
-          style="margin-top: 150px; padding: 0"
+          style="margin-top: 130px; padding: 0"
           elevation="10"
           alignment="center"
       >
