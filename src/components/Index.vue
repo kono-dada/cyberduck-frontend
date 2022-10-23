@@ -29,7 +29,6 @@
     <!--    qr scanner-->
     <v-dialog
         v-model="scanning"
-        hide-overlay
         fullscreen
         transition="dialog-bottom-transition"
     >
@@ -127,7 +126,6 @@
     <v-dialog
         v-model="restartDialog"
         style="background: transparent; padding: 10px; margin: 0"
-        hide-overlay
     >
       <v-card
           class="nes-container is-rounded"
@@ -168,8 +166,6 @@
     <!--    duck card-->
     <v-dialog
         v-model="duckCardDialog"
-        style="background-color: rgba(0, 0, 0, 0.5);"
-        hide-overlay
         height="90%"
         v-if="shownDuck != null"
     >
@@ -692,5 +688,14 @@ html * {
 @font-face {
   font-family: "Chinese_pixel";
   src: url("https://parklife-1303545624.cos.ap-guangzhou.myqcloud.com/Chinese_pixel.ttf");
+}
+
+@keyframes darken {
+  from {
+    background-color: rgba(0, 0, 0, 0);
+  }
+  to {
+    background-color: rgba(0, 0, 0, 0.5);
+  }
 }
 </style>
