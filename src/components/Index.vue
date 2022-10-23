@@ -168,7 +168,7 @@
     <!--    duck card-->
     <v-dialog
         v-model="duckCardDialog"
-        style="background: transparent"
+        style="background-color: rgba(0, 0, 0, 0.5);"
         hide-overlay
         height="90%"
         v-if="shownDuck != null"
