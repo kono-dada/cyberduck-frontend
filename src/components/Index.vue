@@ -168,11 +168,11 @@
     <!--    duck card-->
     <v-dialog
         v-model="duckCardDialog"
-        style="background-color: rgba(0, 0, 0, 0.5);"
         hide-overlay
         height="90%"
         v-if="shownDuck != null"
     >
+      <div class="full-screen" style="background-color: rgba(0, 0, 0, 0.5); z-index: -1"></div>
       <v-card
           class="mx-2 nes-container is-rounded"
           color="#ffffffff"
