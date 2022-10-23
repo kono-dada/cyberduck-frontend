@@ -172,7 +172,9 @@
         height="90%"
         v-if="shownDuck != null"
     >
-      <div class="full-screen" style="background-color: rgba(0, 0, 0, 0.5); z-index: -1"></div>
+      <div class="full-screen"
+           style="background-color: rgba(0, 0, 0, 0); animation-name: darken; animation-duration: 0.5s; z-index: -1">
+      </div>
       <v-card
           class="mx-2 nes-container is-rounded"
           color="#ffffffff"
@@ -692,5 +694,14 @@ html * {
 @font-face {
   font-family: "Chinese_pixel";
   src: url("https://parklife-1303545624.cos.ap-guangzhou.myqcloud.com/Chinese_pixel.ttf");
+}
+
+@keyframes darken {
+  from {
+    background-color: rgba(0, 0, 0, 0);
+  }
+  to {
+    background-color: rgba(0, 0, 0, 0.5);
+  }
 }
 </style>
