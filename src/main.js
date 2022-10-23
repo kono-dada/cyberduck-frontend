@@ -5,8 +5,10 @@ import "nes.css/css/nes.min.css"
 import VueRouter from "vue-router"
 import Index from './components/Index'
 
-Vue.config.productionTip = false
-Vue.use(VueRouter)
+Vue.config.productionTip = false;
+Vue.use(VueRouter);
+
+screen.orientation.lock("portrait").then(() => {});
 
 const router = new VueRouter({
     mode: 'history',
