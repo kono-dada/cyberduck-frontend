@@ -180,6 +180,7 @@
           style="margin-top: 130px; padding: 0"
           :style="{'position': 'absolute', 'top': duckCardPositioning.top, 'left': duckCardPositioning.left}"
           elevation="10"
+          alignment="center"
       >
         <v-img :src="bigImage(shownDuck.duckIconUrl)"
                style="position: absolute; left: 50%; transform: translateX(-50%); top: -120px; image-rendering: pixelated"
