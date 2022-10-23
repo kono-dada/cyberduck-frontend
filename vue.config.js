@@ -4,7 +4,7 @@ module.exports = {
   ],
   devServer: {
     allowedHosts: [
-      "duck.forkingpark.cn"
+      "cyberduck.sunneversets.cn"
     ]
   }
 }
