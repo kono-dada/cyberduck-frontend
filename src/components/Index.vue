@@ -178,7 +178,7 @@
           :height="duckCardPositioning.height"
           :width="duckCardPositioning.width"
           style="margin-top: 130px; padding: 0"
-          :style="{'position': 'absolute', 'top': duckCardPositioning.top, 'left': duckCardPositioning.left}"
+          :style="{position: 'absolute', top: duckCardPositioning.top, left: duckCardPositioning.left}"
           elevation="10"
           alignment="center"
       >
