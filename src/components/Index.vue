@@ -155,7 +155,7 @@
           <v-spacer></v-spacer>
           <v-btn
               class="nes-btn error"
-              style="font-family: Chinese_pixel,serif"
+              style="font-family: Chinese_pixel,serif; padding: 2px"
               @click="restartGame()"
           >Confirm
           </v-btn>
