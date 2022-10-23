@@ -148,7 +148,7 @@
         <v-card-actions>
           <v-btn
               class="nes-btn primary"
-              style="font-family: Chinese_pixel,serif"
+              style="font-family: Chinese_pixel,serif; padding: 2px"
               @click="restartDialog = false"
           >Cancel
           </v-btn>
