@@ -30,8 +30,6 @@
     <v-dialog
         v-model="scanning"
         fullscreen
-        overlay-color="black"
-        overlay-opacity="50%"
         transition="dialog-bottom-transition"
     >
       <img id="scanClose" class="switches" alt="close" @click="scanning=false" :src="closeIcon()"
@@ -127,8 +125,6 @@
     <!--    restart game dialog-->
     <v-dialog
         v-model="restartDialog"
-        overlay-color="black"
-        overlay-opacity="50%"
         style="background: transparent; padding: 10px; margin: 0"
     >
       <v-card
@@ -171,8 +167,6 @@
     <v-dialog
         v-model="duckCardDialog"
         height="90%"
-        overlay-color="black"
-        overlay-opacity="50%"
         v-if="shownDuck != null"
     >
       <v-card
