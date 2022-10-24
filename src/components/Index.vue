@@ -9,14 +9,16 @@
     >
     <v-col style="position: absolute; z-index: 5; top: 3%; right: 5%; width: 48px; margin: 0; padding: 0">
       <img :src="questionMarkIcon()" rel="prefetch" alt="help"
-           class="switches"
-           @click="showHelp = true;">
+           class="switches" @click="showHelp = true;">
       <img class="switches" alt="languages" @click="language = language==='cn'?'en':'cn'"
            :src="this.getLanguageIcon()" rel="prefetch">
       <img class="switches" alt="mute" @click="switchMute()"
            :src="this.getMuteIcon()" rel="prefetch">
       <img class="switches" alt="restart" @click="restartDialog=true;"
-           :src="refreshIcon()" rel="prefetch">
+           :src="this.refreshIcon()" rel="prefetch">
+      <a href="https://parklife-1303545624.cos.ap-guangzhou.myqcloud.com/qrduck.png">
+        <img class="switches" alt="share" :src="shareIcon()" rel="prefetch">
+      </a>
     </v-col>
 
     <div id="collection_progress"
@@ -150,14 +152,14 @@
               class="nes-btn primary"
               style="font-family: Chinese_pixel,serif; padding: 2px"
               @click="restartDialog = false"
-          >Cancel
+          >{{ language === 'cn' ? '取消' : 'Cancel' }}
           </v-btn>
           <v-spacer></v-spacer>
           <v-btn
               class="nes-btn error"
               style="font-family: Chinese_pixel,serif; padding: 2px"
               @click="restartGame()"
-          >Confirm
+          >{{ language === 'cn' ? '确认' : 'Confirm' }}
           </v-btn>
         </v-card-actions>
       </v-card>
@@ -184,9 +186,9 @@
                :aspect-ratio="1"></v-img>
         <i @click="duckCardDialog=false" class="nes-icon close" style="position: absolute; right: 10px; top: 10px"></i>
         <v-card-title>
-          <h3 style="font-family: Chinese_pixel, serif; margin-top: 10px">
+          <h4 style="font-family: Chinese_pixel, serif; padding-top: 10px" id="duck-card-title">
             {{ shownDuck.title[language] }}
-          </h3>
+          </h4>
         </v-card-title>
         <v-card-text class="font-weight-bold text-left"
                      v-html="getStory(shownDuck)"
@@ -227,6 +229,7 @@ import scan from "@/assets/scan.svg";
 import refresh from "@/assets/refresh.svg";
 import questionMark from "@/assets/questionmark.svg";
 import help from "@/assets/help.json";
+import share from "@/assets/refresh.svg";
 import happyDuck from "@/assets/happyDuck.gif";
 
 const bgm = [
@@ -283,8 +286,9 @@ export default {
       const cardHeight = Math.max(Math.min(Math.round(this.windowHeight * 0.85) - 230 - 15, 500), 200);
       const containerWidth = Math.min(Math.round(this.windowWidth * 0.90) - 16, 500 - 16);
       const margin = 10;
+      const titleHeight = 76;
       const width = containerWidth - margin * 2;
-      const textHeight = cardHeight - 8 - 76 - 20;
+      const textHeight = cardHeight - 8 - titleHeight - 20;
       return {
         width: width,
         height: textHeight,
@@ -397,6 +401,10 @@ export default {
 
     refreshIcon() {
       return refresh;
+    },
+
+    shareIcon() {
+      return share;
     },
 
     questionMarkIcon() {
@@ -590,6 +598,7 @@ export default {
       text += help.abstract[this.language]
       text += this.language === "cn" ? "<h3>展览介绍</h3>" : "<h3>Intro</h3>"
       text += help.sign[this.language]
+      text += help.thanks[this.language]
       return text;
     },
 
