@@ -16,7 +16,7 @@
            :src="this.getMuteIcon()" rel="prefetch">
       <img class="switches" alt="restart" @click="restartDialog=true;"
            :src="this.refreshIcon()" rel="prefetch">
-      <a href="/qrduck.png" download="qrduck">
+      <a href="https://parklife-1303545624.cos.ap-guangzhou.myqcloud.com/map.png">
         <img class="switches" alt="share" :src="shareIcon()" rel="prefetch">
       </a>
     </v-col>
@@ -186,9 +186,9 @@
                :aspect-ratio="1"></v-img>
         <i @click="duckCardDialog=false" class="nes-icon close" style="position: absolute; right: 10px; top: 10px"></i>
         <v-card-title>
-          <h3 style="font-family: Chinese_pixel, serif; padding-top: 10px" id="duck-card-title">
+          <h4 style="font-family: Chinese_pixel, serif; padding-top: 10px" id="duck-card-title">
             {{ shownDuck.title[language] }}
-          </h3>
+          </h4>
         </v-card-title>
         <v-card-text class="font-weight-bold text-left"
                      v-html="getStory(shownDuck)"
