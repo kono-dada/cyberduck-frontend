@@ -16,9 +16,9 @@
            :src="this.getMuteIcon()" rel="prefetch">
       <img class="switches" alt="restart" @click="restartDialog=true;"
            :src="this.refreshIcon()" rel="prefetch">
-      <a href="https://parklife-1303545624.cos.ap-guangzhou.myqcloud.com/qrduck.png">
-        <img class="switches" alt="share" :src="shareIcon()" rel="prefetch">
-      </a>
+<!--      <a href="https://parklife-1303545624.cos.ap-guangzhou.myqcloud.com/qrduck.png">-->
+<!--        <img class="switches" alt="share" :src="shareIcon()" rel="prefetch">-->
+<!--      </a>-->
     </v-col>
 
     <div id="collection_progress"
