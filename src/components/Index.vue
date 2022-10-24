@@ -286,7 +286,7 @@ export default {
       const cardHeight = Math.max(Math.min(Math.round(this.windowHeight * 0.85) - 230 - 15, 500), 200);
       const containerWidth = Math.min(Math.round(this.windowWidth * 0.90) - 16, 500 - 16);
       const margin = 10;
-      const titleHeight = document.getElementById("duck-card-title").offsetHeight;
+      const titleHeight = 76;
       const width = containerWidth - margin * 2;
       const textHeight = cardHeight - 8 - titleHeight - 20;
       return {
