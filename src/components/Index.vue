@@ -185,7 +185,7 @@
                width="150px"
                :aspect-ratio="1"></v-img>
         <i @click="duckCardDialog=false" class="nes-icon close is-small"
-           style="position: absolute; right: 10px; top: 10px;"></i>
+           style="position: absolute; right: 10px; top: 10px; transform-origin: right top; transform: scale(1.5)"></i>
         <v-card-title>
           <h4 style="font-family: Chinese_pixel, serif; padding-top: 10px" id="duck-card-title">
             {{ shownDuck.title[language] }}
