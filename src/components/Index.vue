@@ -150,14 +150,14 @@
               class="nes-btn primary"
               style="font-family: Chinese_pixel,serif; padding: 2px"
               @click="restartDialog = false"
-          >Cancel
+          >{{ language === 'cn' ? '取消' : 'Cancel' }}
           </v-btn>
           <v-spacer></v-spacer>
           <v-btn
               class="nes-btn error"
               style="font-family: Chinese_pixel,serif; padding: 2px"
               @click="restartGame()"
-          >Confirm
+          >{{ language === 'cn' ? '确认' : 'Confirm' }}
           </v-btn>
         </v-card-actions>
       </v-card>
@@ -590,6 +590,8 @@ export default {
       text += help.abstract[this.language]
       text += this.language === "cn" ? "<h3>展览介绍</h3>" : "<h3>Intro</h3>"
       text += help.sign[this.language]
+      text += this.language === "cn" ? "<h3>鸭子饲养员</h3>" : "<h3>Fathers and Mothers of Our Ducks</h3>"
+      text += help.thanks[this.language]
       return text;
     },
 
