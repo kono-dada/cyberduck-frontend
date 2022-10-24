@@ -9,15 +9,14 @@
     >
     <v-col style="position: absolute; z-index: 5; top: 3%; right: 5%; width: 48px; margin: 0; padding: 0">
       <img :src="questionMarkIcon()" rel="prefetch" alt="help"
-           class="switches"
-           @click="showHelp = true;">
+           class="switches" @click="showHelp = true;">
       <img class="switches" alt="languages" @click="language = language==='cn'?'en':'cn'"
            :src="this.getLanguageIcon()" rel="prefetch">
       <img class="switches" alt="mute" @click="switchMute()"
            :src="this.getMuteIcon()" rel="prefetch">
       <img class="switches" alt="restart" @click="restartDialog=true;"
            :src="refreshIcon()" rel="prefetch">
-      <a href="https://parklife-1303545624.cos.ap-guangzhou.myqcloud.com/qrduck.png" download>
+      <a href="/public/qrduck.png" download="qrduck">
         <img class="switches" alt="share" :src="shareIcon()" rel="prefetch">
       </a>
     </v-col>
