@@ -590,7 +590,6 @@ export default {
       text += help.abstract[this.language]
       text += this.language === "cn" ? "<h3>展览介绍</h3>" : "<h3>Intro</h3>"
       text += help.sign[this.language]
-      text += this.language === "cn" ? "<h3>鸭子饲养员</h3>" : "<h3>Fathers and Mothers of Our Ducks</h3>"
       text += help.thanks[this.language]
       return text;
     },
