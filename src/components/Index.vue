@@ -17,6 +17,9 @@
            :src="this.getMuteIcon()" rel="prefetch">
       <img class="switches" alt="restart" @click="restartDialog=true;"
            :src="refreshIcon()" rel="prefetch">
+      <a href="https://parklife-1303545624.cos.ap-guangzhou.myqcloud.com/qrduck.png" download>
+        <img class="switches" alt="share" :src="shareIcon()" rel="prefetch">
+      </a>
     </v-col>
 
     <div id="collection_progress"
@@ -227,6 +230,7 @@ import scan from "@/assets/scan.svg";
 import refresh from "@/assets/refresh.svg";
 import questionMark from "@/assets/questionmark.svg";
 import help from "@/assets/help.json";
+import share from "@/assets/refresh.svg";
 import happyDuck from "@/assets/happyDuck.gif";
 
 const bgm = [
@@ -397,6 +401,10 @@ export default {
 
     refreshIcon() {
       return refresh;
+    },
+
+    shareIcon() {
+      return share;
     },
 
     questionMarkIcon() {
