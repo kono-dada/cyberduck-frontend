@@ -143,7 +143,7 @@
           {{
             language === "cn" ?
                 "你希望清除记录，重启游戏吗？不可恢复" :
-                "Do you wish to restart game and clear your data? This is irrevocable."
+                "Do you wish to restart the game and clear your data? This is irrevocable."
           }}
         </v-card-text>
         <v-divider></v-divider>
