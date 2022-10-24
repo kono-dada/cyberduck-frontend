@@ -16,9 +16,9 @@
            :src="this.getMuteIcon()" rel="prefetch">
       <img class="switches" alt="restart" @click="restartDialog=true;"
            :src="this.refreshIcon()" rel="prefetch">
-<!--      <a href="https://parklife-1303545624.cos.ap-guangzhou.myqcloud.com/qrduck.png">-->
-<!--        <img class="switches" alt="share" :src="shareIcon()" rel="prefetch">-->
-<!--      </a>-->
+      <a href="https://parklife-1303545624.cos.ap-guangzhou.myqcloud.com/qrduck.png">
+        <img class="switches" alt="share" :src="shareIcon()" rel="prefetch">
+      </a>
     </v-col>
 
     <div id="collection_progress"
@@ -229,8 +229,10 @@ import scan from "@/assets/scan.svg";
 import refresh from "@/assets/refresh.svg";
 import questionMark from "@/assets/questionmark.svg";
 import help from "@/assets/help.json";
-import share from "@/assets/refresh.svg";
+import share from "@/assets/share.svg";
 import happyDuck from "@/assets/happyDuck.gif";
+import foundDuck from "@/assets/found-duck.mp3";
+import unknownDuck from "@/assets/unknown-duck.mp3";
 
 const bgm = [
   "https://parklife-1303545624.cos.ap-guangzhou.myqcloud.com/bgm2.mp3",
@@ -447,12 +449,12 @@ export default {
     },
 
     playFoundDuckSound() {
-      const sound = new Audio("https://parklife-1303545624.cos.ap-guangzhou.myqcloud.com/found-duck.m4a");
+      const sound = new Audio(foundDuck);
       sound.play();
     },
 
     playUnknownDuckSound() {
-      const sound = new Audio("https://parklife-1303545624.cos.ap-guangzhou.myqcloud.com/unknown-duck.m4a");
+      const sound = new Audio(foundDuck);
       sound.play();
     },
 
