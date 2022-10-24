@@ -186,7 +186,7 @@
                width="150px"
                :aspect-ratio="1"></v-img>
         <i @click="duckCardDialog=false" class="nes-icon close" style="position: absolute; right: 10px; top: 10px"></i>
-        <v-card-title>
+        <v-card-title id="duck-card-title">
           <h3 style="font-family: Chinese_pixel, serif; margin-top: 10px">
             {{ shownDuck.title[language] }}
           </h3>
@@ -287,8 +287,9 @@ export default {
       const cardHeight = Math.max(Math.min(Math.round(this.windowHeight * 0.85) - 230 - 15, 500), 200);
       const containerWidth = Math.min(Math.round(this.windowWidth * 0.90) - 16, 500 - 16);
       const margin = 10;
+      const titleHeight = document.getElementById("duck-card-title").offsetHeight;
       const width = containerWidth - margin * 2;
-      const textHeight = cardHeight - 8 - 76 - 20;
+      const textHeight = cardHeight - 8 - titleHeight - 20;
       return {
         width: width,
         height: textHeight,
