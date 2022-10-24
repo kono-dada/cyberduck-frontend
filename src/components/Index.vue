@@ -454,7 +454,7 @@ export default {
     },
 
     playUnknownDuckSound() {
-      const sound = new Audio(foundDuck);
+      const sound = new Audio(unknownDuck);
       sound.play();
     },
 
