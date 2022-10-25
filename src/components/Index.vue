@@ -90,7 +90,7 @@
           <p>
             {{ language === 'cn' ? '恭喜你' : 'Congratulations!' }}
             <br/>
-            {{ language === 'cn' ? ('成为第' + userRanking + '个找齐鸭子的人') : ('You are the #' + userRanking + 'person to have found all ducks') }}
+            {{ language === 'cn' ? ('成为第<span style="font-size: larger">' + userRanking + '</span>个找齐鸭子的人') : ('You are the <span style="font-size: larger">#' + userRanking + '</span>person to have found all ducks') }}
           </p>
         </v-card-text>
       </v-card>
