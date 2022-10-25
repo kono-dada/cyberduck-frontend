@@ -23,10 +23,10 @@
 
     <div id="collection_progress"
          class="nes-container is-rounded collection-progress"
-         :style="{backgroundColor: userRanking && totalDuckCount === foundDuckCount ? '#fef251' : '#ffffff'}"
+         :style="{backgroundColor: userRanking && Object.values(duckStates).filter(_ => _.isFound).length === Object.values(duckStates).length ? '#fef251' : '#ffffff'}"
          @click="showDuckListTrue()"
     >
-      <p>{{ foundDuckCount }}/{{ totalDuckCount }}</p>
+      <p>{{ Object.values(duckStates).filter(_ => _.isFound).length }}/{{ Object.values(duckStates).length }}</p>
     </div>
 
     <!--    qr scanner-->
@@ -87,7 +87,7 @@
           鸭王
         </v-card-subtitle>
         <v-card-text>
-          恭喜你<br />成为第{{userRanking}}个找齐鸭子的人
+          恭喜你<br/>成为第{{ userRanking }}个找齐鸭子的人
         </v-card-text>
       </v-card>
     </v-dialog>
@@ -291,12 +291,6 @@ export default {
   },
   props: {},
   computed: {
-    totalDuckCount() {
-      return Object.values(this.duckStates).length;
-    },
-    foundDuckCount() {
-      return Object.values(this.duckStates).filter(_ => _.isFound).length;
-    },
     happyDuckPosition() {
       return "left: " + this.happyDuckPos[0] + "px;" + "top: " + this.happyDuckPos[1] + "px;";
     },
