@@ -82,24 +82,23 @@
       >
         <img class="switches" alt="close" @click="showRanking=false;showDuckList=true;" :src="closeIcon()"
              style="position: absolute; right: 5%; top: 3%; z-index: 5;">
-        <v-card-title style="alignment: center">
-          <img
-              src="https://parklife-1303545624.cos.ap-guangzhou.myqcloud.com/ducking.png"
-              alt="duck-king"
-          >
-        </v-card-title>
-        <v-card-subtitle style="padding-top: 25px; line-height: 2rem">
+        <img
+            src="https://parklife-1303545624.cos.ap-guangzhou.myqcloud.com/ducking.png"
+            style="position: absolute; left: 50%; transform: translateX(-50%); top: 20px; image-rendering: pixelated"
+            alt="duck-king"
+        >
+        <v-card-title style="margin-top: 275px; line-height: 2rem">
           <h1>{{ language === 'cn' ? '鸭王' : 'King of Ducks' }}</h1>
-        </v-card-subtitle>
+        </v-card-title>
         <v-card-text>
           <p style="font-size: larger">
             {{ language === 'cn' ? '恭喜你' : 'Congratulations!' }}
             <br/>
-            {{language === 'cn' ? "成为第" : "You are the "}}
+            {{ language === 'cn' ? "成为第" : "You are the " }}
             <span style='font-size: xx-large; font-weight: bolder'>
-              {{language === 'cn' ? userRanking : '#' + userRanking}}
+              {{ language === 'cn' ? userRanking : '#' + userRanking }}
             </span>
-            {{language === 'cn' ? "个找齐鸭子的人" : " person to have found all ducks."}}
+            {{ language === 'cn' ? "个找齐鸭子的人" : " person to have found all ducks." }}
           </p>
         </v-card-text>
       </v-card>
