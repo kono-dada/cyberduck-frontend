@@ -39,7 +39,7 @@
       <img id="scanDuck" class="switches" alt="happyDuck" :src="happyDuckIcon()" @click="refreshDuckPosition()"
            style="position: absolute; z-index: 5; transform: translate(-50%, -50%); display: none"
            :style="happyDuckPosition" rel="prefetch">
-      <qrcode-stream v-if="scanning" @decode="onDecode" @init="onInit"></qrcode-stream>
+      <qrcode-stream :key="_uid" v-if="scanning" @decode="onDecode" @init="onInit"></qrcode-stream>
     </v-dialog>
 
     <!--    help-->
