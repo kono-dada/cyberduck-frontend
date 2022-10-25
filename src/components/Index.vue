@@ -21,11 +21,13 @@
       </a>
     </v-col>
 
-    <Progress
-        :show-duck-list-true="showDuckListTrue"
-        :duck-states="duckStates"
-        :ranking="userRanking"
-    />
+    <div id="collection_progress"
+         class="nes-container is-rounded collection-progress"
+         :style="{backgroundColor: userRanking && totalDuckCount === foundDuckCount ? '#fef251' : '#ffffff'}"
+         @click="showDuckListTrue()"
+    >
+      <p>{{ foundDuckCount }}/{{ totalDuckCount }}</p>
+    </div>
 
     <!--    qr scanner-->
     <v-dialog
@@ -254,7 +256,6 @@ import share from "@/assets/share.svg";
 import happyDuck from "@/assets/happyDuck.gif";
 import foundDuck from "@/assets/found-duck.mp3";
 import unknownDuck from "@/assets/unknown-duck.mp3";
-import Progress from "@/components/Progress";
 
 const bgm = [
   "https://parklife-1303545624.cos.ap-guangzhou.myqcloud.com/bgm2.mp3",
@@ -287,10 +288,15 @@ export default {
   name: 'HelloWorld',
   components: {
     QrcodeStream,
-    Progress,
   },
   props: {},
   computed: {
+    totalDuckCount() {
+      return Object.values(this.duckStates).length;
+    },
+    foundDuckCount() {
+      return Object.values(this.duckStates).filter(_ => _.isFound).length;
+    },
     happyDuckPosition() {
       return "left: " + this.happyDuckPos[0] + "px;" + "top: " + this.happyDuckPos[1] + "px;";
     },
@@ -724,6 +730,17 @@ html * {
   line-height: 2rem;
   font-family: Chinese_pixel, serif;
   overflow-y: scroll;
+}
+
+.collection-progress {
+  position: fixed;
+  right: 5%;
+  top: 85%;
+  z-index: 5;
+  text-align: center;
+  font-family: Chinese_pixel, serif;
+  font-weight: bolder;
+  padding: 0.2rem 1.5rem;
 }
 
 @font-face {
