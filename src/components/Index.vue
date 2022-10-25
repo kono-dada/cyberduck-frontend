@@ -21,12 +21,11 @@
       </a>
     </v-col>
 
-    <div id="collection_progress"
-         class="nes-container is-rounded collection-progress"
-         @click="showDuckList=true"
-    >
-      <p>{{ Object.values(duckStates).filter(_ => _.isFound).length }}/{{ Object.values(duckStates).length }}</p>
-    </div>
+    <Progress
+        :show-duck-list-true="showDuckListTrue"
+        :duck-states="duckStates"
+        :ranking="userRanking"
+    />
 
     <!--    qr scanner-->
     <v-dialog
@@ -67,6 +66,27 @@
           </h3>
         </v-card-title>
         <v-card-text class="font-weight-bold text-left help" v-html="buildHelpText()"></v-card-text>
+      </v-card>
+    </v-dialog>
+
+    <!--    ranking display-->
+    <v-dialog
+        v-model="showRanking"
+    >
+      <v-card
+          style="text-align: center"
+      >
+        <img class="switches" alt="close" @click="showRanking=false;showDuckList=true;" :src="closeIcon()"
+             style="position: absolute; right: 5%; top: 3%; z-index: 5;">
+        <v-card-title>
+          <img src="https://parklife-1303545624.cos.ap-guangzhou.myqcloud.com/ducking.png" alt="duck-king">
+        </v-card-title>
+        <v-card-subtitle>
+          鸭王
+        </v-card-subtitle>
+        <v-card-text>
+          恭喜你<br />成为第{{userRanking}}个找齐鸭子的人
+        </v-card-text>
       </v-card>
     </v-dialog>
 
@@ -234,6 +254,7 @@ import share from "@/assets/share.svg";
 import happyDuck from "@/assets/happyDuck.gif";
 import foundDuck from "@/assets/found-duck.mp3";
 import unknownDuck from "@/assets/unknown-duck.mp3";
+import Progress from "@/components/Progress";
 
 const bgm = [
   "https://parklife-1303545624.cos.ap-guangzhou.myqcloud.com/bgm2.mp3",
@@ -265,7 +286,8 @@ function computePan(mapX, mapY, scale) {
 export default {
   name: 'HelloWorld',
   components: {
-    QrcodeStream
+    QrcodeStream,
+    Progress,
   },
   props: {},
   computed: {
@@ -306,7 +328,9 @@ export default {
       showHelp: false,
       shownDuck: null,
       duckStates: {},
+      userRanking: null,
       scanning: false,
+      showRanking: false,
       showDuckList: false,
       language: 'cn',
       restartDialog: false,
@@ -391,6 +415,17 @@ export default {
       if (!duck.isHidden || duck.isFound) {
         this.showDuckList = false;
         this.moveMapToDuck(duck);
+      }
+    },
+
+    showDuckListTrue() {
+      const states = Object.values(this.duckStates);
+      const foundCount = states.filter(_ => _.isFound).length;
+      const total = states.length;
+      if (this.ranking && foundCount === total) {
+        this.showRanking = true;
+      } else {
+        this.showDuckList = true;
       }
     },
 
@@ -531,6 +566,9 @@ export default {
           this.duckStates[duck.location.id].isFound = true;
           this.duckStates[duck.location.id].info = duck;
         });
+        if (response.data.ranking) {
+          this.userRanking = response.data.ranking.ranking;
+        }
         this.$forceUpdate();
       } catch (e) {
         // on 401 error, go to login page
@@ -676,18 +714,6 @@ html * {
   elevation: above;
   image-rendering: pixelated;
   padding: 5px;
-}
-
-.collection-progress {
-  position: fixed;
-  right: 5%;
-  top: 85%;
-  z-index: 5;
-  background: #ffffff;
-  text-align: center;
-  font-family: Chinese_pixel, serif;
-  font-weight: bolder;
-  padding: 0.2rem 1.5rem;
 }
 
 .help {
