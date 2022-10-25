@@ -78,7 +78,7 @@
       <v-card
           style="text-align: center"
           class="mx-2 nes-container is-rounded"
-          width="90%"
+          width="95%"
       >
         <img class="switches" alt="close" @click="showRanking=false;showDuckList=true;" :src="closeIcon()"
              style="position: absolute; right: 5%; top: 3%; z-index: 5;">
