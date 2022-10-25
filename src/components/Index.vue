@@ -422,7 +422,7 @@ export default {
       const states = Object.values(this.duckStates);
       const foundCount = states.filter(_ => _.isFound).length;
       const total = states.length;
-      if (this.ranking && foundCount === total) {
+      if (this.userRanking && foundCount === total) {
         this.showRanking = true;
       } else {
         this.showDuckList = true;
