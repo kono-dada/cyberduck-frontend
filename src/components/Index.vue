@@ -80,14 +80,18 @@
       >
         <img class="switches" alt="close" @click="showRanking=false;showDuckList=true;" :src="closeIcon()"
              style="position: absolute; right: 5%; top: 3%; z-index: 5;">
-        <v-card-title>
+        <v-card-title style="text-align: center">
           <img src="https://parklife-1303545624.cos.ap-guangzhou.myqcloud.com/ducking.png" alt="duck-king">
         </v-card-title>
-        <v-card-subtitle>
-          鸭王
+        <v-card-subtitle style="padding-top: 20px">
+          <h1>{{ language === 'cn' ? '鸭王' : 'King of the Ducks' }}</h1>
         </v-card-subtitle>
         <v-card-text>
-          恭喜你<br/>成为第{{ userRanking }}个找齐鸭子的人
+          <p>
+            {{ language === 'cn' ? '恭喜你' : 'Congratulations!' }}
+            <br/>
+            {{ language === 'cn' ? ('成为第' + userRanking + '个找齐鸭子的人') : ('You are the #' + userRanking + 'person to have found all ducks') }}
+          </p>
         </v-card-text>
       </v-card>
     </v-dialog>
