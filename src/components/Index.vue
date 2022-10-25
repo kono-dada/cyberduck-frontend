@@ -2,22 +2,22 @@
   <div
       class="no-whitespace unselectable full-screen"
   >
-    <img :src="scanIcon()" rel="prefetch" alt="scan"
+    <img :src="scanIcon()" alt="scan"
          style="position: absolute; z-index: 5; top: 3%; left: 5%;"
          class="switches"
          @click="scanning = true"
     >
     <v-col style="position: absolute; z-index: 5; top: 3%; right: 5%; width: 48px; margin: 0; padding: 0">
-      <img :src="questionMarkIcon()" rel="prefetch" alt="help"
+      <img :src="questionMarkIcon()" alt="help"
            class="switches" @click="showHelp = true;">
       <img class="switches" alt="languages" @click="language = language==='cn'?'en':'cn'"
-           :src="this.getLanguageIcon()" rel="prefetch">
+           :src="this.getLanguageIcon()">
       <img class="switches" alt="mute" @click="switchMute()"
-           :src="this.getMuteIcon()" rel="prefetch">
+           :src="this.getMuteIcon()">
       <img class="switches" alt="restart" @click="restartDialog=true;"
-           :src="this.refreshIcon()" rel="prefetch">
+           :src="this.refreshIcon()">
       <a href="https://parklife-1303545624.cos.ap-guangzhou.myqcloud.com/qrduck.jpg">
-        <img class="switches" alt="share" :src="shareIcon()" rel="prefetch">
+        <img class="switches" alt="share" :src="shareIcon()">
       </a>
     </v-col>
 
@@ -35,10 +35,10 @@
         transition="dialog-bottom-transition"
     >
       <img id="scanClose" class="switches" alt="close" @click="scanning=false" :src="closeIcon()"
-           style="position: absolute; right: 5%; top: 3%; z-index: 5; display: none" rel="prefetch">
+           style="position: absolute; right: 5%; top: 3%; z-index: 5; display: none">
       <img id="scanDuck" class="switches" alt="happyDuck" :src="happyDuckIcon()" @click="refreshDuckPosition()"
            style="position: absolute; z-index: 5; transform: translate(-50%, -50%); display: none"
-           :style="happyDuckPosition" rel="prefetch">
+           :style="happyDuckPosition">
       <qrcode-stream :key="_uid" v-if="scanning" @decode="onDecode" @init="onInit"></qrcode-stream>
     </v-dialog>
 
@@ -60,7 +60,7 @@
           alignment="center"
       >
         <img class="switches" alt="close" @click="showHelp=false" :src="closeIcon()"
-             style="position: absolute; right: 5%; top: 3%; z-index: 5;" rel="prefetch">
+             style="position: absolute; right: 5%; top: 3%; z-index: 5;">
         <v-card-title>
           <h3 style="font-family: Chinese_pixel, serif; padding-top: 0; margin-top: 3%; margin-right: 80px;">
             {{ helpText.title[language] }}
@@ -87,7 +87,7 @@
               {{ language === 'cn' ? "鸭鸭家族" : "The Duck Family" }}
             </h3>
             <img class="switches" alt="close" @click="showDuckList=false" :src="closeIcon()"
-                 style="position: absolute; right: 5%; top: 3%; z-index: 5;" rel="prefetch">
+                 style="position: absolute; right: 5%; top: 3%; z-index: 5;">
           </v-flex>
           <v-flex
               class="white flex"
