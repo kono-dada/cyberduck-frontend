@@ -601,7 +601,7 @@ export default {
       text += help.abstract[this.language]
       text += this.language === "cn" ? "<h3>展览介绍</h3>" : "<h3>Intro</h3>"
       text += help.sign[this.language]
-      text += ("<div><a href='https://mp.weixin.qq.com/s/aW2I3r1D8SVhBtJJRDcgiA'>"
+      text += ("<div style='margin-bottom: 10px'><a href='https://mp.weixin.qq.com/s/aW2I3r1D8SVhBtJJRDcgiA'>"
           + (this.language === "cn" ? "<u>点我查看更多</u>" : "<u>Click me for more</u>")
           + "</a></div>")
       text += help.thanks[this.language]
