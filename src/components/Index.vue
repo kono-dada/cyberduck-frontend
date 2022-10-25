@@ -77,21 +77,25 @@
     >
       <v-card
           style="text-align: center"
+          class="nes-container is-rounded"
       >
         <img class="switches" alt="close" @click="showRanking=false;showDuckList=true;" :src="closeIcon()"
              style="position: absolute; right: 5%; top: 3%; z-index: 5;">
-        <v-card-title style="text-align: center">
-          <img src="https://parklife-1303545624.cos.ap-guangzhou.myqcloud.com/ducking.png" alt="duck-king">
+        <v-card-title style="alignment: center">
+          <img
+              src="https://parklife-1303545624.cos.ap-guangzhou.myqcloud.com/ducking.png"
+              alt="duck-king"
+          >
         </v-card-title>
-        <v-card-subtitle style="padding-top: 20px">
-          <h1>{{ language === 'cn' ? '鸭王' : 'King of the Ducks' }}</h1>
+        <v-card-subtitle style="padding-top: 25px; line-height: 2rem">
+          <h1>{{ language === 'cn' ? '鸭王' : 'King of Ducks' }}</h1>
         </v-card-subtitle>
         <v-card-text>
-          <p>
+          <p style="font-size: larger">
             {{ language === 'cn' ? '恭喜你' : 'Congratulations!' }}
             <br/>
             {{language === 'cn' ? "成为第" : "You are the "}}
-            <span style='font-size: larger'>
+            <span style='font-size: xx-large; font-weight: bolder'>
               {{language === 'cn' ? userRanking : '#' + userRanking}}
             </span>
             {{language === 'cn' ? "个找齐鸭子的人" : " person to have found all ducks."}}
