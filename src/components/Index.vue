@@ -76,7 +76,7 @@
         v-model="showRanking"
     >
       <v-card
-          style="text-align: center"
+          style="text-align: center; padding: 3%"
           class="mx-2 nes-container is-rounded"
           width="95%"
       >
@@ -87,16 +87,16 @@
             style="position: absolute; left: 50%; transform: translateX(-50%); top: 20px; image-rendering: pixelated"
             alt="duck-king"
         >
-        <v-card-title style="margin-top: 275px; line-height: 2rem">
+        <v-card-title style="margin-top: 275px; line-height: 2rem; text-align: center">
           <h1>{{ language === 'cn' ? '鸭王' : 'King of Ducks' }}</h1>
         </v-card-title>
-        <v-card-text>
+        <v-card-text style="text-align: center">
           <p style="font-size: larger">
             {{ language === 'cn' ? '恭喜你' : 'Congratulations!' }}
             <br/>
-            {{ language === 'cn' ? "成为第" : "You are the " }}
+            {{ language === 'cn' ? "成为第 " : "You are the " }}
             <span style='font-size: xx-large; font-weight: bolder'>
-              {{ language === 'cn' ? userRanking : '#' + userRanking }}
+              {{ language === 'cn' ? '' + userRanking : '#' + userRanking }}
             </span>
             {{ language === 'cn' ? "个找齐鸭子的人" : " person to have found all ducks." }}
           </p>
