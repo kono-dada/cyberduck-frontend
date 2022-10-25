@@ -2,22 +2,22 @@
   <div
       class="no-whitespace unselectable full-screen"
   >
-    <img :src="scanIcon()" rel="prefetch" alt="scan"
+    <img :src="scanIcon()" alt="scan"
          style="position: absolute; z-index: 5; top: 3%; left: 5%;"
          class="switches"
          @click="scanning = true"
     >
     <v-col style="position: absolute; z-index: 5; top: 3%; right: 5%; width: 48px; margin: 0; padding: 0">
-      <img :src="questionMarkIcon()" rel="prefetch" alt="help"
+      <img :src="questionMarkIcon()" alt="help"
            class="switches" @click="showHelp = true;">
       <img class="switches" alt="languages" @click="language = language==='cn'?'en':'cn'"
-           :src="this.getLanguageIcon()" rel="prefetch">
+           :src="this.getLanguageIcon()">
       <img class="switches" alt="mute" @click="switchMute()"
-           :src="this.getMuteIcon()" rel="prefetch">
+           :src="this.getMuteIcon()">
       <img class="switches" alt="restart" @click="restartDialog=true;"
-           :src="this.refreshIcon()" rel="prefetch">
-      <a href="https://parklife-1303545624.cos.ap-guangzhou.myqcloud.com/qrduck.png">
-        <img class="switches" alt="share" :src="shareIcon()" rel="prefetch">
+           :src="this.refreshIcon()">
+      <a href="https://parklife-1303545624.cos.ap-guangzhou.myqcloud.com/qrduck.jpg">
+        <img class="switches" alt="share" :src="shareIcon()">
       </a>
     </v-col>
 
@@ -35,11 +35,11 @@
         transition="dialog-bottom-transition"
     >
       <img id="scanClose" class="switches" alt="close" @click="scanning=false" :src="closeIcon()"
-           style="position: absolute; right: 5%; top: 3%; z-index: 5; display: none" rel="prefetch">
+           style="position: absolute; right: 5%; top: 3%; z-index: 5; display: none">
       <img id="scanDuck" class="switches" alt="happyDuck" :src="happyDuckIcon()" @click="refreshDuckPosition()"
            style="position: absolute; z-index: 5; transform: translate(-50%, -50%); display: none"
-           :style="happyDuckPosition" rel="prefetch">
-      <qrcode-stream :key="_uid" @decode="onDecode" @init="onInit"></qrcode-stream>
+           :style="happyDuckPosition">
+      <qrcode-stream :key="_uid" v-if="scanning" @decode="onDecode" @init="onInit"></qrcode-stream>
     </v-dialog>
 
     <!--    help-->
@@ -60,7 +60,7 @@
           alignment="center"
       >
         <img class="switches" alt="close" @click="showHelp=false" :src="closeIcon()"
-             style="position: absolute; right: 5%; top: 3%; z-index: 5;" rel="prefetch">
+             style="position: absolute; right: 5%; top: 3%; z-index: 5;">
         <v-card-title>
           <h3 style="font-family: Chinese_pixel, serif; padding-top: 0; margin-top: 3%; margin-right: 80px;">
             {{ helpText.title[language] }}
@@ -87,7 +87,7 @@
               {{ language === 'cn' ? "鸭鸭家族" : "The Duck Family" }}
             </h3>
             <img class="switches" alt="close" @click="showDuckList=false" :src="closeIcon()"
-                 style="position: absolute; right: 5%; top: 3%; z-index: 5;" rel="prefetch">
+                 style="position: absolute; right: 5%; top: 3%; z-index: 5;">
           </v-flex>
           <v-flex
               class="white flex"
@@ -143,7 +143,7 @@
           {{
             language === "cn" ?
                 "你希望清除记录，重启游戏吗？不可恢复" :
-                "Do you wish to restart game and clear your data? This is irrevocable."
+                "Do you wish to restart the game and clear your data? This is irrevocable."
           }}
         </v-card-text>
         <v-divider></v-divider>
@@ -184,7 +184,8 @@
                style="position: absolute; left: 50%; transform: translateX(-50%); top: -120px; image-rendering: pixelated"
                width="150px"
                :aspect-ratio="1"></v-img>
-        <i @click="duckCardDialog=false" class="nes-icon close" style="position: absolute; right: 10px; top: 10px"></i>
+        <i @click="duckCardDialog=false" class="nes-icon close is-small"
+           style="position: absolute; right: 10px; top: 10px; transform-origin: right top; transform: scale(1.5)"></i>
         <v-card-title>
           <h4 style="font-family: Chinese_pixel, serif; padding-top: 10px" id="duck-card-title">
             {{ shownDuck.title[language] }}
@@ -229,8 +230,10 @@ import scan from "@/assets/scan.svg";
 import refresh from "@/assets/refresh.svg";
 import questionMark from "@/assets/questionmark.svg";
 import help from "@/assets/help.json";
-import share from "@/assets/refresh.svg";
+import share from "@/assets/share.svg";
 import happyDuck from "@/assets/happyDuck.gif";
+import foundDuck from "@/assets/found-duck.mp3";
+import unknownDuck from "@/assets/unknown-duck.mp3";
 
 const bgm = [
   "https://parklife-1303545624.cos.ap-guangzhou.myqcloud.com/bgm2.mp3",
@@ -361,7 +364,7 @@ export default {
     if ("id" in params) {
       await this.scanDuck(params.id);
     } else {
-      await this.fetchBackendApi("https://sso.forkingpark.cn/api/user-info");
+      await this.fetchBackendApi("https://cyberduck-backend.sunneversets.cn/api/user-info");
     }
 
     // log transform string
@@ -377,7 +380,7 @@ export default {
   methods: {
     // scanning duck in two ways
     async scanDuck(duckId) {
-      await this.fetchBackendApi("https://sso.forkingpark.cn/api/find-duck/" + duckId);
+      await this.fetchBackendApi("https://cyberduck-backend.sunneversets.cn/api/find-duck/" + duckId);
       const duck = Object.values(this.duckStates).find(d => d.info.id === duckId);
       this.moveMapToDuck(duck);
       this.duckClicked(duck);
@@ -421,13 +424,13 @@ export default {
     async restartGame() {
       try {
         await axios.delete(
-            "https://sso.forkingpark.cn/api/user-info",
+            "https://cyberduck-backend.sunneversets.cn/api/user-info",
             {withCredentials: true}
         );
         this.duckStates = {};
         localStorage.clear();
         await this.loadPreview();
-        await this.fetchBackendApi("https://sso.forkingpark.cn/api/user-info");
+        await this.fetchBackendApi("https://cyberduck-backend.sunneversets.cn/api/user-info");
       } finally {
         this.restartDialog = false;
       }
@@ -447,12 +450,12 @@ export default {
     },
 
     playFoundDuckSound() {
-      const sound = new Audio("https://parklife-1303545624.cos.ap-guangzhou.myqcloud.com/found-duck.m4a");
+      const sound = new Audio(foundDuck);
       sound.play();
     },
 
     playUnknownDuckSound() {
-      const sound = new Audio("https://parklife-1303545624.cos.ap-guangzhou.myqcloud.com/unknown-duck.m4a");
+      const sound = new Audio(unknownDuck);
       sound.play();
     },
 
@@ -478,7 +481,7 @@ export default {
 
     // loading preview before fetching user info
     async loadPreview() {
-      const duckList = await axios.get("https://sso.forkingpark.cn/api/preview-ducks");
+      const duckList = await axios.get("https://cyberduck-backend.sunneversets.cn/api/preview-ducks");
 
       // load ducks from the preview-duck, only the found ducks have detailed info
       duckList.data.forEach(
@@ -533,10 +536,10 @@ export default {
         // on 401 error, go to login page
         if (e.response && e.response.status === 401) {
           const current_url = window.location.href;
-          window.location.href = "https://sso.forkingpark.cn/login?redirect_url=" + current_url;
+          window.location.href = "https://cyberduck-backend.sunneversets.cn/login?redirect_url=" + current_url;
         } else if (e.response && e.response.status === 404) {
           console.error("404 not found: " + e);
-          window.location.href = "https://duck.forkingpark.cn";
+          window.location.href = "https://cyberduck.sunneversets.cn";
         } else {
           console.error("unexpected error: " + e);
         }
@@ -584,7 +587,7 @@ export default {
 
     // on QR-code detection
     async onDecode(code) {
-      const prefix = "https://duck.forkingpark.cn/duck/";
+      const prefix = "https://cyberduck.sunneversets.cn/duck/";
       if (code.startsWith(prefix)) {
         const duckId = code.substring(prefix.length);
         this.scanning = false;
@@ -598,6 +601,9 @@ export default {
       text += help.abstract[this.language]
       text += this.language === "cn" ? "<h3>展览介绍</h3>" : "<h3>Intro</h3>"
       text += help.sign[this.language]
+      text += ("<div style='margin-bottom: 10px'><a href='https://mp.weixin.qq.com/s/aW2I3r1D8SVhBtJJRDcgiA'>"
+          + (this.language === "cn" ? "<u>点我查看更多</u>" : "<u>Click me for more</u>")
+          + "</a></div>")
       text += help.thanks[this.language]
       return text;
     },
