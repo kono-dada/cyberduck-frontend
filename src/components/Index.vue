@@ -87,15 +87,15 @@
             style="position: absolute; left: 50%; transform: translateX(-50%); top: 20px; image-rendering: pixelated"
             alt="duck-king"
         >
-        <v-card-title style="margin-top: 275px; line-height: 2rem; text-align: center">
-          <h1>{{ language === 'cn' ? '鸭王' : 'King of Ducks' }}</h1>
+        <v-card-title style="position: relative; margin-top: 275px; line-height: 2rem; text-align: center">
+          <h2>{{ language === 'cn' ? '鸭王' : 'King of Ducks' }}</h2>
         </v-card-title>
         <v-card-text style="text-align: center">
           <p style="font-size: larger">
             {{ language === 'cn' ? '恭喜你' : 'Congratulations!' }}
             <br/>
             {{ language === 'cn' ? "成为第 " : "You are the " }}
-            <span style='font-size: xx-large; font-weight: bolder'>
+            <span style='font-size: xx-large; font-weight: bolder; transform-origin: center'>
               {{ language === 'cn' ? '' + userRanking : '#' + userRanking }}
             </span>
             {{ language === 'cn' ? "个找齐鸭子的人" : " person to have found all ducks." }}
