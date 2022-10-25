@@ -87,9 +87,9 @@
             style="position: absolute; left: 50%; transform: translateX(-50%); top: 20px; image-rendering: pixelated"
             alt="duck-king"
         >
-        <v-card-title style="position: relative; margin-top: 275px; line-height: 2rem; text-align: center">
+        <v-card-subtitle style="position: relative; margin-top: 275px; line-height: 2rem; text-align: center">
           <h2>{{ language === 'cn' ? '鸭王' : 'King of Ducks' }}</h2>
-        </v-card-title>
+        </v-card-subtitle>
         <v-card-text style="text-align: center">
           <p style="font-size: larger">
             {{ language === 'cn' ? '恭喜你' : 'Congratulations!' }}
