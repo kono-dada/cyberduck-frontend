@@ -23,7 +23,7 @@
 
     <div id="collection_progress"
          class="nes-container is-rounded collection-progress"
-         :style="{backgroundColor: userRanking && Object.values(duckStates).filter(_ => _.isFound).length === Object.values(duckStates).length ? '#fef251' : '#ffffff'}"
+         :style="{backgroundColor: Object.values(duckStates).filter(_ => _.isFound).length === Object.values(duckStates).length ? '#fef251' : '#ffffff'}"
          @click="showDuckListTrue()"
     >
       <p>{{ Object.values(duckStates).filter(_ => _.isFound).length }}/{{ Object.values(duckStates).length }}</p>
