@@ -82,16 +82,14 @@
       >
         <img class="switches" alt="close" @click="showRanking=false;showDuckList=true;" :src="closeIcon()"
              style="position: absolute; right: 5%; top: 3%; z-index: 5;">
-        <v-card-title>
-          <img
-              src="https://parklife-1303545624.cos.ap-guangzhou.myqcloud.com/ducking.png"
-              style="position: absolute; left: 50%; transform: translateX(-50%); top: 25px; image-rendering: pixelated"
-              alt="duck-king"
-          >
-        </v-card-title>
-        <v-card-subtitle style="alignment: center; line-height: 2rem; padding-top: 25px">
+        <img
+            src="https://parklife-1303545624.cos.ap-guangzhou.myqcloud.com/ducking.png"
+            style="position: absolute; left: 50%; transform: translateX(-50%); top: 25px; image-rendering: pixelated"
+            alt="duck-king"
+        >
+        <v-card-title style="alignment: center; line-height: 2rem; padding-top: 25px">
           <h1>{{ language === 'cn' ? '鸭王' : 'King of Ducks' }}</h1>
-        </v-card-subtitle>
+        </v-card-title>
         <v-card-text>
           <p style="font-size: larger">
             {{ language === 'cn' ? '恭喜你' : 'Congratulations!' }}
