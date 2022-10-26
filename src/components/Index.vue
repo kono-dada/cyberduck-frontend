@@ -88,7 +88,7 @@
             alt="duck-king"
         >
         <v-card-subtitle style="position: relative; margin-top: 275px; line-height: 2rem; text-align: center">
-          <h2>{{ language === 'cn' ? '鸭鸭收集官' : 'Duck Collector' }}</h2>
+          <h2>{{ language === 'cn' ? '鸭鸭之友' : 'Duck Collector' }}</h2>
         </v-card-subtitle>
         <v-card-text style="text-align: center">
           <p style="font-size: larger">
@@ -98,7 +98,7 @@
             <span style='font-size: xx-large; font-weight: bolder; transform-origin: center'>
               {{ language === 'cn' ? '' + userRanking : '#' + userRanking }}
             </span>
-            {{ language === 'cn' ? "个找齐鸭子的人" : " person to have found all ducks." }}
+            {{ language === 'cn' ? "集齐鸭鸭故事的人" : " person to have heard all duck stories." }}
           </p>
         </v-card-text>
       </v-card>
