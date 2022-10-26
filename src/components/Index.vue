@@ -98,7 +98,7 @@
             <span style='font-size: xx-large; font-weight: bolder; transform-origin: center'>
               {{ language === 'cn' ? '' + userRanking : '#' + userRanking }}
             </span>
-            {{ language === 'cn' ? "集齐鸭鸭故事的人" : " person to have heard all duck stories." }}
+            {{ language === 'cn' ? "个集齐鸭鸭故事的人" : " person to have heard all duck stories." }}
           </p>
         </v-card-text>
       </v-card>
