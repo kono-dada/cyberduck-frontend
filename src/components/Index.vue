@@ -23,7 +23,7 @@
 
     <div id="collection_progress"
          class="nes-container is-rounded collection-progress"
-         :style="{backgroundColor: Object.values(duckStates).filter(_ => _.isFound).length === Object.values(duckStates).length ? '#fef251' : '#ffffff'}"
+         :style="{backgroundColor: (Object.values(duckStates).length > 0 && Object.values(duckStates).filter(_ => _.isFound).length === Object.values(duckStates).length) ? '#fef251' : '#ffffff'}"
          @click="showDuckListTrue()"
     >
       <p>{{ Object.values(duckStates).filter(_ => _.isFound).length }}/{{ Object.values(duckStates).length }}</p>
@@ -53,7 +53,7 @@
     >
       <v-card
           class="mx-2 nes-container is-rounded"
-          color="#ffffffff"
+          color="#ffffff"
           height="95%"
           width="95%"
           style="padding: 5%; margin: 3%"
@@ -165,7 +165,7 @@
     >
       <v-card
           class="nes-container is-rounded"
-          color="#ffffffff"
+          color="#ffffff"
           elevation="10"
           style="left: 50%; transform: translateX(-50%); width: 250px; padding: 5px; margin: 5px"
       >
@@ -207,7 +207,7 @@
     >
       <v-card
           class="mx-2 nes-container is-rounded"
-          color="#ffffffff"
+          color="#ffffff"
           :height="duckCardPositioning.height"
           width="95%"
           style="margin-top: 130px; padding: 0"
