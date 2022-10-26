@@ -88,7 +88,7 @@
             alt="duck-king"
         >
         <v-card-subtitle style="position: relative; margin-top: 275px; line-height: 2rem; text-align: center">
-          <h2>{{ language === 'cn' ? '鸭王' : 'King of Ducks' }}</h2>
+          <h2>{{ language === 'cn' ? '鸭鸭收集官' : 'Duck Collector' }}</h2>
         </v-card-subtitle>
         <v-card-text style="text-align: center">
           <p style="font-size: larger">
