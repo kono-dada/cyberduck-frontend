@@ -23,7 +23,8 @@
 
     <div id="collection_progress"
          class="nes-container is-rounded collection-progress"
-         @click="showDuckList=true"
+         :style="{backgroundColor: Object.values(duckStates).filter(_ => _.isFound).length === Object.values(duckStates).length ? '#fef251' : '#ffffff'}"
+         @click="showDuckListTrue()"
     >
       <p>{{ Object.values(duckStates).filter(_ => _.isFound).length }}/{{ Object.values(duckStates).length }}</p>
     </div>
@@ -67,6 +68,39 @@
           </h3>
         </v-card-title>
         <v-card-text class="font-weight-bold text-left help" v-html="buildHelpText()"></v-card-text>
+      </v-card>
+    </v-dialog>
+
+    <!--    ranking display-->
+    <v-dialog
+        v-model="showRanking"
+    >
+      <v-card
+          style="text-align: center; padding: 3%"
+          class="mx-2 nes-container is-rounded"
+          width="95%"
+      >
+        <img class="switches" alt="close" @click="showRanking=false;showDuckList=true;" :src="closeIcon()"
+             style="position: absolute; right: 5%; top: 3%; z-index: 5;">
+        <img
+            src="https://parklife-1303545624.cos.ap-guangzhou.myqcloud.com/ducking.png"
+            style="position: absolute; left: 50%; transform: translateX(-50%); top: 20px; image-rendering: pixelated"
+            alt="duck-king"
+        >
+        <v-card-subtitle style="position: relative; margin-top: 275px; line-height: 2rem; text-align: center">
+          <h2>{{ language === 'cn' ? '鸭鸭之友' : 'Duck Collector' }}</h2>
+        </v-card-subtitle>
+        <v-card-text style="text-align: center">
+          <p style="font-size: larger">
+            {{ language === 'cn' ? '恭喜你' : 'Congratulations!' }}
+            <br/>
+            {{ language === 'cn' ? "成为第 " : "You are the " }}
+            <span style='font-size: xx-large; font-weight: bolder; transform-origin: center'>
+              {{ language === 'cn' ? '' + userRanking : '#' + userRanking }}
+            </span>
+            {{ language === 'cn' ? "个集齐鸭鸭故事的人" : " person to have heard all duck stories." }}
+          </p>
+        </v-card-text>
       </v-card>
     </v-dialog>
 
@@ -265,7 +299,7 @@ function computePan(mapX, mapY, scale) {
 export default {
   name: 'HelloWorld',
   components: {
-    QrcodeStream
+    QrcodeStream,
   },
   props: {},
   computed: {
@@ -306,7 +340,9 @@ export default {
       showHelp: false,
       shownDuck: null,
       duckStates: {},
+      userRanking: null,
       scanning: false,
+      showRanking: false,
       showDuckList: false,
       language: 'cn',
       restartDialog: false,
@@ -391,6 +427,17 @@ export default {
       if (!duck.isHidden || duck.isFound) {
         this.showDuckList = false;
         this.moveMapToDuck(duck);
+      }
+    },
+
+    showDuckListTrue() {
+      const states = Object.values(this.duckStates);
+      const foundCount = states.filter(_ => _.isFound).length;
+      const total = states.length;
+      if (this.userRanking && foundCount === total) {
+        this.showRanking = true;
+      } else {
+        this.showDuckList = true;
       }
     },
 
@@ -531,6 +578,9 @@ export default {
           this.duckStates[duck.location.id].isFound = true;
           this.duckStates[duck.location.id].info = duck;
         });
+        if (response.data.ranking) {
+          this.userRanking = response.data.ranking.ranking;
+        }
         this.$forceUpdate();
       } catch (e) {
         // on 401 error, go to login page
@@ -678,18 +728,6 @@ html * {
   padding: 5px;
 }
 
-.collection-progress {
-  position: fixed;
-  right: 5%;
-  top: 85%;
-  z-index: 5;
-  background: #ffffff;
-  text-align: center;
-  font-family: Chinese_pixel, serif;
-  font-weight: bolder;
-  padding: 0.2rem 1.5rem;
-}
-
 .help {
   background: #ffffff;
   width: 100%;
@@ -698,6 +736,17 @@ html * {
   line-height: 2rem;
   font-family: Chinese_pixel, serif;
   overflow-y: scroll;
+}
+
+.collection-progress {
+  position: fixed;
+  right: 5%;
+  top: 85%;
+  z-index: 5;
+  text-align: center;
+  font-family: Chinese_pixel, serif;
+  font-weight: bolder;
+  padding: 0.2rem 1.5rem;
 }
 
 @font-face {
