@@ -23,7 +23,7 @@
 
     <div id="collection_progress"
          class="nes-container is-rounded collection-progress"
-         :style="{backgroundColor: (Object.values(duckStates).length > 0 && Object.values(duckStates).filter(_ => _.isFound).length === Object.values(duckStates).length) ? '#fef251' : '#ffffff'}"
+         :style="{backgroundColor: hasFinished() ? '#fef251' : '#ffffff'}"
          @click="showDuckListTrue()"
     >
       <p>{{ Object.values(duckStates).filter(_ => _.isFound).length }}/{{ Object.values(duckStates).length }}</p>
@@ -643,6 +643,11 @@ export default {
         this.scanning = false;
         await this.scanDuck(duckId);
       }
+    },
+
+    hasFinished() {
+      const states = Object.values(this.duckStates);
+      return states.length > 0 && states.filter(_ => _.isFound).length === states.length
     },
 
     buildHelpText() {
